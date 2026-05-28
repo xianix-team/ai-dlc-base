@@ -68,17 +68,40 @@ Onboarding AI-DLC into an existing codebase requires three preparatory phases be
 - Extract: naming conventions, error handling style, ORM usage, API response shapes, authentication patterns, test patterns and coverage conventions
 - Document all extracted patterns — these go into the master rule file and the `rules/` folder before any Bolt is written
 
-#### M1.3 — Debt and Gap Mapping
+#### M1.3 — Due Diligence Audit
 
-Classify all identified work into three Bolt types:
+Before classifying work, audit the existing codebase for defects and structural problems that new AI-generated code could inherit. This step must complete before any Bolt is planned.
+
+**What to look for:**
+
+| Category | Examples |
+|---|---|
+| **Logic defects** | Incorrect business logic, off-by-one errors, wrong conditional branches, silent data loss |
+| **Design violations** | Responsibilities mixed across layers, circular dependencies, God classes or functions doing too much |
+| **Security gaps** | Unvalidated input, missing auth checks, secrets in code, direct DB calls from the wrong layer |
+| **Fragile patterns** | Catch-all error suppression, hardcoded values that should be config, mutable shared state |
+| **Test blind spots** | Code paths with no test coverage; tests that assert implementation details rather than behaviour |
+| **Consistency breaks** | Naming or structural conventions that differ across modules with no documented reason |
+
+**Output:** A ranked list of findings. For each finding, record:
+- Location (file/module/function)
+- Category from the table above
+- Impact if inherited by new code
+- Recommended correction (fix-in-place, quarantine, or encode as a prohibition in the master rule file)
+
+Present the list to the engineer and agree on which items must be corrected before the first Bolt runs and which can be logged as Remediation Bolts.
+
+#### M1.4 — Debt and Gap Mapping
+
+Classify all identified work — including findings from M1.3 — into three Bolt types:
 
 | Bolt Type | Description |
 |---|---|
 | **Enhancement Bolt** | New capabilities not yet in the system |
-| **Remediation Bolt** | Tech debt, coverage gaps, refactoring |
+| **Remediation Bolt** | Tech debt, coverage gaps, refactoring, and defects found in M1.3 |
 | **Migration Bolt** | Architectural changes that enable future work |
 
-**Prioritisation order:** Enhancement first (shows value) → Remediation second (earns trust) → Migration last.
+**Prioritisation order:** Remediation of blocking defects found in M1.3 first → Enhancement (shows value) → Remediation of non-blocking debt → Migration last.
 
 ---
 
