@@ -553,7 +553,21 @@ Covers: git branching conventions, environment isolation, secrets management, ba
 Each template file defines the structure for its artifact type. The key templates:
 
 ### `ops/inception/intents/_template.md`
-Fields: Status, Date, Owner, What, Why, Success Looks Like, Assumptions, Open Questions, Out of Scope, Elaboration Sessions, Extracted Units.
+Fields: Status, Date, Owner, What, Why, Success Looks Like, Assumptions, Open Questions, Out of Scope, Elaboration Sessions, Extracted Units, Implementation Summary.
+
+The **Implementation Summary** section is written by the AI once all units under the intent have been delivered and merged. It must not be filled in earlier. It contains four subsections:
+
+1. **What Was Built** — user-facing description of every feature delivered under the intent; one paragraph per distinct feature
+2. **How It Works (Key Design Decisions)** — data model choices, API contracts, edge cases explicitly handled, and non-obvious implementation facts a future engineer must know before modifying the feature
+3. **Scope Delivered vs. Original Intent** — any deviations from the original intent (descoped items, changed assumptions, additions); write "Delivered as specified" if none
+4. **Known Limitations and Future Considerations** — constraints the current implementation imposes on future changes; write "None identified" if none
+
+When the last unit of an intent is confirmed done, the AI must:
+1. Set the intent status to **Implemented**
+2. Write the Implementation Summary by reading the elaboration session files, unit files, and bolt retros for this intent
+3. Ask the engineer to review the summary before closing the intent
+
+The Implementation Summary is the authoritative reference for future Bolts that modify or extend this feature. Any Bolt touching a feature covered by an intent must read its Implementation Summary before elaboration begins.
 
 ### `ops/build/units/_template.md`
 Fields: Status, Intent link, Elaboration link, Bolt link, Priority, Context, Acceptance Criteria, Scope (in/out), Dependencies, Pre-generation Checks, Edge Cases to Handle, Definition of Done, Prompt Log link, Notes.

@@ -1,6 +1,6 @@
 # Intent: [Name]
 
-**Status:** Draft | Ready | In Elaboration | Elaborated | Deferred | Cancelled
+**Status:** Draft | Ready | In Elaboration | Elaborated | In Progress | Implemented | Deferred | Cancelled
 **Date:** YYYY-MM-DD
 **Owner:** [Engineer name]
 
@@ -48,3 +48,31 @@
 | Unit | Status | Bolt |
 |---|---|---|
 | [unit-name](../../build/units/[unit-file].md) | Open | — |
+
+---
+
+## Implementation Summary
+
+> **Complete this section when all units under this intent have been delivered and merged. Do not fill it in until the intent status is set to Implemented.**
+
+### What Was Built
+
+[Describe the features delivered under this intent from the user's perspective — what they can now do that they could not before. Write one paragraph per distinct feature if the intent contained multiple. Do not describe implementation details.]
+
+### How It Works (Key Design Decisions)
+
+[Explain the key design decisions made during elaboration and build that a future engineer must understand before modifying this feature. Include: data model choices, API contract decisions, edge cases that were explicitly handled, and anything non-obvious about the implementation.]
+
+### Scope Delivered vs. Original Intent
+
+[State any deviations from the original intent: features descoped, assumptions that changed, or out-of-scope items that were included. If the implementation matches the intent exactly, write "Delivered as specified."]
+
+### Known Limitations and Future Considerations
+
+[List anything deliberately left out that may need to be addressed later, or constraints the current implementation imposes on future changes. If none, write "None identified."]
+
+### Bolts That Delivered This Intent
+
+| Bolt | Completed | Retro |
+|---|---|---|
+| [bolt-name](../../build/bolts/[bolt-file].md) | YYYY-MM-DD | [retro](../../operate/retros/[retro-file].md) |
