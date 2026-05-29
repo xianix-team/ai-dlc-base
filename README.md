@@ -105,6 +105,26 @@ After onboarding, your target repo will contain:
 
 ---
 
+## AI-DLC Reviewer
+
+For teams already running AI-DLC, the `ai-dlc-reviewer/` folder provides a complementary **pull** mode — a structured role-playing audit session that validates an existing project's artifacts and practice against AI-DLC principles.
+
+| File | Purpose |
+|---|---|
+| `ai-dlc-reviewer/role-play.md` | Bootstrap trigger. Copy into the target repo and read it to the AI to start a review session. |
+| `ai-dlc-reviewer/review-guide.md` | Full review protocol — five domains, rubrics for every artifact type, scoring system, and report format. |
+
+**How to use:**
+
+1. Copy the `ai-dlc-reviewer/` folder into the root of the project repo being audited.
+2. Open your AI assistant inside that repo.
+3. Say: `"Read ai-dlc-reviewer/role-play.md and follow the instructions inside it."`
+4. The AI adopts the reviewer persona and runs through the five review domains — Foundation, Inception, Build, Operate, and Process Adherence — requesting artifacts, scoring them against rubrics, and delivering a structured report with prioritised recommendations.
+
+The reviewer never generates code or creates files unprompted. It is a diagnostic tool, not an onboarding tool.
+
+---
+
 ## How to Update This Repository
 
 When any 99x project completes a retro and produces an improvement that changes a **generic rule** (one that should apply to all projects, not just that project's specific stack), bring it back here:
