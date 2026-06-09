@@ -5,7 +5,7 @@
 **Start date:** YYYY-MM-DD
 **Target date:** YYYY-MM-DD
 **Completed date:** —
-**Retrospective:** [ops/operate/retros/YYYY-MM-DD-[bolt-slug].md](../../operate/retros/YYYY-MM-DD-[bolt-slug].md)
+**Retrospective:** [ops/operate/retros/YYYY-MM-DD-<unix_timestamp>-[bolt-slug].md](../../operate/retros/YYYY-MM-DD-<unix_timestamp>-[bolt-slug].md)
 
 ---
 

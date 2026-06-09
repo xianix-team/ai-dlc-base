@@ -1,9 +1,9 @@
 # Unit: [name]
 
 **Status:** Open | Planned | In Progress | Done | Blocked | Deferred
-**Intent:** [ops/inception/intents/YYYY-MM-DD-[slug].md](../../inception/intents/YYYY-MM-DD-[slug].md)
-**Elaboration:** [ops/inception/elaborations/YYYY-MM-DD-[slug]-session-N.md](../../inception/elaborations/YYYY-MM-DD-[slug]-session-N.md)
-**Bolt:** [ops/build/bolts/YYYY-MM-DD-[bolt-slug].md](../bolts/YYYY-MM-DD-[bolt-slug].md)
+**Intent:** [ops/inception/intents/YYYY-MM-DD-<unix_timestamp>-[slug].md](../../inception/intents/YYYY-MM-DD-<unix_timestamp>-[slug].md)
+**Elaboration:** [ops/inception/elaborations/YYYY-MM-DD-<unix_timestamp>-[slug]-session-N.md](../../inception/elaborations/YYYY-MM-DD-<unix_timestamp>-[slug]-session-N.md)
+**Bolt:** [ops/build/bolts/YYYY-MM-DD-<unix_timestamp>-[bolt-slug].md](../bolts/YYYY-MM-DD-<unix_timestamp>-[bolt-slug].md)
 **Priority:** High | Medium | Low
 
 ---

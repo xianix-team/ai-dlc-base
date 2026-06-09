@@ -113,7 +113,7 @@ For any Fail or Partial result, ask the engineer:
 
 > "Step [N] failed / was partial. Should I log this as a new unit in the backlog (a bug fix or gap), or is this already tracked elsewhere?"
 
-If the engineer confirms a new unit is needed, create a draft unit file at `ai-dlc/ops/build/units/YYYY-MM-DD-uat-[description].md` with:
+If the engineer confirms a new unit is needed, create a draft unit file at `ai-dlc/ops/build/units/YYYY-MM-DD-<unix_timestamp>-uat-[description].md` with:
 - Status: Open
 - Context: populated from the UAT failure description
 - Acceptance Criteria: the step's expected outcome restated as a Given/When/Then AC

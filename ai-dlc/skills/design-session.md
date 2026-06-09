@@ -153,7 +153,7 @@ Provisional:     [anything marked unsure, or "none"]
 Shall I record this as the design artifact and move to unit decomposition?
 ```
 
-If the engineer confirms, create the design artifact at `ai-dlc/ops/inception/designs/YYYY-MM-DD-[intent-slug]-design.md` and link it from the intent file under a `Design:` field in the intent header.
+If the engineer confirms, create the design artifact at `ai-dlc/ops/inception/designs/YYYY-MM-DD-<unix_timestamp>-[intent-slug]-design.md` and link it from the intent file under a `Design:` field in the intent header.
 
 The artifact uses this structure:
 

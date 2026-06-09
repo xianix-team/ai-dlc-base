@@ -723,7 +723,7 @@ Copy this file verbatim from the base repo (`ai-dlc/skills/root-cause-analysis.m
 
 The design-session skill runs as Phase 0 of mob elaboration to establish an agreed design foundation — API contracts, data model sketch, and architectural pattern decisions — before any units are proposed. Mob elaboration inherits the design as binding constraints, so ACs are written against a concrete interface rather than a vague description.
 
-The skill works through three optional areas (API contract, data model, architectural patterns) based on the intent's scope. It produces a `ops/inception/designs/YYYY-MM-DD-[slug]-design.md` artifact and links it back to the intent file. Any new architectural patterns agreed during the session are written to `ai-dlc/rules/architecture.md` as ADRs immediately.
+The skill works through three optional areas (API contract, data model, architectural patterns) based on the intent's scope. It produces a `ops/inception/designs/YYYY-MM-DD-<unix_timestamp>-[slug]-design.md` artifact and links it back to the intent file. Any new architectural patterns agreed during the session are written to `ai-dlc/rules/architecture.md` as ADRs immediately.
 
 Copy this file verbatim from the base repo (`ai-dlc/skills/design-session.md`). No customization is needed — it is called by mob-elab-prompts.md, not invoked separately.
 
@@ -978,7 +978,7 @@ Whenever the master rule file is updated, all mirror files must be updated in th
 
 1. Copy `ops/build/backlog.md` from the base repo — it already contains the empty status sections and the Reference Link Registry comment at the bottom.
 2. Copy `ops/inception/dependency-map.md` from the base repo — it contains the empty map structure and update log.
-3. Identify the first capability to build and write an intent: `ops/inception/intents/YYYY-MM-DD-<slug>.md`
+3. Identify the first capability to build and write an intent: `ops/inception/intents/YYYY-MM-DD-<unix_timestamp>-<slug>.md`
 4. Say to your AI assistant: "Run a mob elaboration for the [intent name] intent"
 5. After sign-off, the AI creates unit files, updates the backlog, and updates the dependency map. **When adding any unit or bolt to the backlog, the AI must use reference-style links** — write the display text as `[Unit-name][unit-slug]` in the table and add the path definition to the Reference Link Registry at the bottom of the file. Never use inline URLs in backlog tables.
 6. Say: "Plan a bolt from the open units in the backlog" — before creating the bolt file, the AI reads `ops/inception/dependency-map.md` and flags any prerequisite intents that are not yet Implemented, or any units that touch a shared interface owned by a different intent.

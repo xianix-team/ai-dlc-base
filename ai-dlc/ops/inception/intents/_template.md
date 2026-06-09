@@ -39,7 +39,7 @@
 
 | Session | Date | File |
 |---|---|---|
-| 1 | YYYY-MM-DD | [elaborations/YYYY-MM-DD-[slug]-session-1.md](../elaborations/YYYY-MM-DD-[slug]-session-1.md) |
+| 1 | YYYY-MM-DD | [elaborations/YYYY-MM-DD-<unix_timestamp>-[slug]-session-1.md](../elaborations/YYYY-MM-DD-<unix_timestamp>-[slug]-session-1.md) |
 
 ---
 
