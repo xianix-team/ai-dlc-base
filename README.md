@@ -166,6 +166,10 @@ The remaining files (most of `rules/`, all of `guidelines/`, and the master rule
 
 ### Onboarding a new project
 
+This is a two-session process. The onboarding agent runs in the first session and creates the framework. The experience agent runs in every subsequent session.
+
+**Session 1 — Onboarding agent**
+
 1. **Copy the `ai-dlc/` folder** from this repo into the root of your target repository.
 
 2. **Open your AI assistant** (Claude Code, Cursor, or GitHub Copilot) inside the target repo.
@@ -176,6 +180,14 @@ The remaining files (most of `rules/`, all of `guidelines/`, and the master rule
 4. The agent will ask you which AI tool you're using and whether the project is fresh or mature, then run the onboarding process end to end — including a nine-question interview (fresh projects) or a phased codebase archaeology (mature projects) — creating all framework files, populating the master rule file, and delivering a completion report.
 
 5. **Review the completion report.** Fill in any sections the agent flagged as requiring engineer input before the first Bolt runs.
+
+6. **Close this session.** The onboarding conversation has served its purpose. Do not continue working in it — it carries accumulated context (interview history, archaeology findings, file creation logs) that is no longer needed and will interfere with the experience agent.
+
+**Session 2 onwards — Experience agent**
+
+7. **Open a brand new session** inside the project repository using your AI tool. The tool will automatically load your master rule file (`CLAUDE.md` for Claude Code, `.cursorrules` for Cursor, or `.github/copilot-instructions.md` for GitHub Copilot) at the start of the session.
+
+8. **Begin your first feature:** say `"Run a mob elaboration for [first intent name]"` — this is the experience agent's entry point. Every session from here is a normal working session governed by the master rule file.
 
 ### What the agent creates in your project repo
 

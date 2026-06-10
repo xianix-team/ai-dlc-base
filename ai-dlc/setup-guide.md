@@ -1019,9 +1019,29 @@ List every section or field in the master rule file that the agent could not pop
 Any ambiguity the agent encountered that the engineer must resolve — e.g., conflicting patterns found in the codebase, modules where ownership was unclear, or test coverage below the gate threshold.
 
 ### 4. First Recommended Action
-One sentence: what the engineer should do next (e.g., "Review the domain glossary placeholders in Section 4 of the master rule file, then run a mob elaboration for the first intent in the backlog.").
+One sentence: what the engineer should do next before starting the experience agent (e.g., "Review the domain glossary placeholders in Section 4 of the master rule file, then start a new session to begin the first mob elaboration.").
 
-> The agent must not mark onboarding as complete until all checklist items below are checked and this report has been presented.
+### 5. How to Start the Experience Agent
+
+This is the final and mandatory step. After the report is presented, the agent must say:
+
+---
+
+> **Onboarding is complete. The experience agent is now embedded in your `[master rule file name]`.**
+>
+> **This session is now finished. Do not continue working in this conversation.** The onboarding session has accumulated context — interview answers, archaeology findings, file creation history — that is no longer needed and will slow down and distort future AI sessions.
+>
+> **To start the experience agent:**
+> 1. Close or end this conversation entirely.
+> 2. Open a brand new session inside your project repository using your AI tool ([Claude Code / Cursor / GitHub Copilot]).
+> 3. Your AI tool will automatically load `[master rule file path]` at the start of the session.
+> 4. Say: **"[first action from item 4 above]"**
+>
+> From that point forward, every session in this repository is an experience agent session. The onboarding agent is not needed again unless you are onboarding a new project.
+
+---
+
+> The agent must not mark onboarding as complete until all checklist items below are checked and this report — including the handoff instruction — has been presented to the engineer.
 
 ---
 

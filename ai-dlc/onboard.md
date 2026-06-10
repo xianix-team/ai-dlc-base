@@ -80,9 +80,11 @@ Once all nine questions are answered, execute Steps 1–9 of the setup guide in 
 9. Create the backlog and the first intent from interview question 8.
 10. Create mirror files for any additional tools the engineer wants to support.
 
-### Step 5-F — Deliver the completion report
+### Step 5-F — Deliver the completion report and hand off
 
 Present the completion report defined in `ai-dlc/setup-guide.md` under **Onboarding Completion**.
+
+The completion report includes a mandatory handoff instruction (Section 5 of the report) telling the engineer to close this session and start a new one. **The onboarding agent's job ends here.** Do not continue beyond the handoff instruction.
 
 ---
 
@@ -121,6 +123,8 @@ Phases to execute:
 2. Ask the engineer: *"What feature flag mechanism does this project use, or should we establish one?"* Record the answer in the master rule file Code Rules section.
 3. Confirm the default AC *"All integration tests for [affected module] pass without modification"* has been added to the master rule file Section 6 and to `ai-dlc/rules/code-standards.md`.
 
-### Step 6-M — Deliver the completion report
+### Step 6-M — Deliver the completion report and hand off
 
 Present the completion report defined in `ai-dlc/setup-guide.md` under **Onboarding Completion**.
+
+The completion report includes a mandatory handoff instruction (Section 5 of the report) telling the engineer to close this session and start a new one. **The onboarding agent's job ends here.** Do not continue beyond the handoff instruction.
