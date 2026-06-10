@@ -185,21 +185,12 @@ flowchart TD
         DESIGN --> ELABORATION["Mob Elaboration\nOne unit proposed per turn\nACs confirmed → Edge cases → Observability\nSign-off before any file is written"]
     end
 
-    ELABORATION -->|"Produces N units\nBacklog updated\nDependency map updated"| BACKLOG
-
-    subgraph BACKLOG ["Backlog"]
-        direction LR
-        U1["Unit\n─────────────\nContext · ACs\nScope · Observability\nPre-gen checks"]
-        U2["Unit\n─────────────\nContext · ACs\nScope · Observability\nPre-gen checks"]
-        U3["Unit\n─────────────\nContext · ACs\nScope · Observability\nPre-gen checks"]
-    end
-
-    BACKLOG -->|"Bolt Planning reads\nbacklog + dependency map"| BUILD
+    ELABORATION -->|"Units created · Dependency map updated"| BUILD
 
     subgraph BUILD ["Build"]
         direction TB
         BOLT["Bolt\n─────────────────\nOrdered batch of units\nRisk Assessment · Blast radius\nRollback plan · Feature flag decision"]
-        BOLT --> EXECUTE["Execute units one at a time\nReview output before proceeding to next\nCircuit breaker if output fails 3× in a row"]
+        BOLT --> EXECUTE["Execute units one at a time\nReview output before proceeding to next\nCircuit breaker after 3 consecutive failures"]
     end
 
     EXECUTE -->|"All units Done"| CLOSE_INTENT
@@ -217,7 +208,19 @@ flowchart TD
         RETRO --> IMPROVE["Post-Retro Improvement Workflow\nRule changes applied · Knowledge Promotion\nRule change impact checked against open units"]
     end
 
-    IMPROVE --->|"Tighter rules · Better conventions\nfor next bolt"| INCEPTION
+    IMPROVE --->|"Tighter rules for next bolt"| INCEPTION
+
+    CLOSE_INTENT -->|"Unit statuses recorded"| BACKLOG
+    CLOSE_BOLT -->|"Unit statuses recorded"| BACKLOG
+
+    subgraph BACKLOG ["Backlog — Running Unit Registry"]
+        direction LR
+        U1["Unit\n─────────────\nStatus: Open / In Progress / Done\nContext · ACs · Scope\nObservability · Pre-gen checks"]
+        U2["Unit\n─────────────\nStatus: Open / In Progress / Done\nContext · ACs · Scope\nObservability · Pre-gen checks"]
+        U3["Unit\n─────────────\nStatus: Open / In Progress / Done\nContext · ACs · Scope\nObservability · Pre-gen checks"]
+    end
+
+    BACKLOG -. "Bolt Planning reads status\n+ dependency map" .-> BUILD
 ```
 
 ---
