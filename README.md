@@ -185,11 +185,20 @@ flowchart TD
         DESIGN --> ELABORATION["Mob Elaboration\nOne unit proposed per turn\nACs confirmed → Edge cases → Observability\nSign-off before any file is written"]
     end
 
-    ELABORATION -->|"Produces N units\nDependency map updated"| BUILD
+    ELABORATION -->|"Produces N units\nBacklog updated\nDependency map updated"| BACKLOG
+
+    subgraph BACKLOG ["Backlog"]
+        direction LR
+        U1["Unit\n─────────────\nContext · ACs\nScope · Observability\nPre-gen checks"]
+        U2["Unit\n─────────────\nContext · ACs\nScope · Observability\nPre-gen checks"]
+        U3["Unit\n─────────────\nContext · ACs\nScope · Observability\nPre-gen checks"]
+    end
+
+    BACKLOG -->|"Bolt Planning reads\nbacklog + dependency map"| BUILD
 
     subgraph BUILD ["Build"]
         direction TB
-        BOLT["Bolt\n─────────────────\nOrdered batch of units\nReads backlog + dependency map\nRisk Assessment · Blast radius\nRollback plan · Feature flag decision"]
+        BOLT["Bolt\n─────────────────\nOrdered batch of units\nRisk Assessment · Blast radius\nRollback plan · Feature flag decision"]
         BOLT --> EXECUTE["Execute units one at a time\nReview output before proceeding to next\nCircuit breaker if output fails 3× in a row"]
     end
 
@@ -209,16 +218,6 @@ flowchart TD
     end
 
     IMPROVE --->|"Tighter rules · Better conventions\nfor next bolt"| INCEPTION
-
-    CLOSE_INTENT -->|"Unit statuses recorded"| BACKLOG
-    CLOSE_BOLT -->|"Unit statuses recorded"| BACKLOG
-
-    subgraph BACKLOG ["Backlog — Running Unit Registry"]
-        direction LR
-        U1["Unit\n─────────────\nContext · ACs\nScope · Observability\nPre-gen checks"]
-        U2["Unit\n─────────────\nContext · ACs\nScope · Observability\nPre-gen checks"]
-        U3["Unit\n─────────────\nContext · ACs\nScope · Observability\nPre-gen checks"]
-    end
 ```
 
 ---
