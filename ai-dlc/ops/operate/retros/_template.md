@@ -78,7 +78,22 @@ Present all proposals to the engineer as a numbered list — one proposal per fi
 
 ### Step 2 — Engineer review
 
-For each proposal, the engineer approves, rejects, or asks for revision. Record the decision next to each item. Do not proceed to Step 3 until all proposals have a decision.
+For each proposal, the engineer approves, rejects, or asks for revision. Record the decision next to each item. Do not proceed to Step 2.5 until all proposals have a decision.
+
+### Step 2.5 — Rule change impact check
+
+For each **approved** improvement, check whether any currently open units or planned bolts will be affected by the rule change before applying it.
+
+1. Read `ai-dlc/ops/build/backlog.md` and identify all units with status **Open** or **In Progress**.
+2. For each open unit, check whether its Pre-generation Checks, ACs, or referenced rule files mention the section or pattern the improvement will change.
+3. For planned or in-progress bolts, check whether any units that have not yet executed reference the section being changed.
+4. Present the impact list to the engineer:
+
+   > "Before I apply this change, [N] open units reference the section being modified: [unit names]. Their pre-generation checks or ACs may need updating after the improvement is applied. Do you want me to flag these units for review once the change is made?"
+
+5. Record the impact list in the improvement file under **Affected open units** (see improvement template). If no open units are affected, record "None."
+
+Do not proceed to Step 3 until the engineer has acknowledged the impact list.
 
 ### Step 3 — Create improvement files and apply changes
 

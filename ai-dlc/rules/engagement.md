@@ -37,3 +37,34 @@ If the engineer continues to give minimal responses after the intervention, say:
 Do not produce further artifacts until either:
 - The engineer gives a substantive response, or
 - They explicitly ask to continue and acknowledge the concern
+
+---
+
+## Failed Output Escalation (Circuit Breaker)
+
+When AI-generated output for a unit is rejected, the AI revises and tries again. This is expected. However, repeated failure on the same unit without convergence is a signal that the problem cannot be solved by iteration alone — it requires human diagnosis.
+
+**Trigger:** Output for the same unit is rejected **3 consecutive times**, where each rejection is based on the same type of failure (wrong approach, missing domain knowledge, constraint not understood).
+
+**What counts as a rejection:** The engineer explicitly says the output does not meet the ACs, asks for a fundamentally different approach, or marks the unit as failing review after generation.
+
+**What does not trigger the circuit breaker:** Minor corrections, formatting fixes, or partial revisions that move the output closer to the target — these are normal iteration, not consecutive failures.
+
+When the circuit breaker triggers, stop and say:
+
+> "This unit has had three rejected outputs with the same underlying issue. Continuing to iterate without understanding why the constraint isn't being met will consume time without improving the result. Before I try again, I need to understand: [ask one targeted diagnostic question — e.g. 'Is there domain context about how [X] works that isn't captured in the ACs or code standards?' or 'Is the acceptance criterion itself achievable given the current constraints?']"
+
+**After the diagnosis:**
+- If new context is provided → incorporate it and continue with a fresh generation (circuit breaker resets)
+- If the AC itself is found to be incorrect or unreachable → flag it for revision during the current session; do not generate code against an AC the engineer agrees is wrong
+- If the constraint is architectural and cannot be resolved in this session → log the unit as **Blocked**, record the blocking reason in the unit file, and surface it as a finding in the next retro
+
+**Record in the unit file** under the Prompt Log:
+```
+[Circuit breaker triggered — attempt 3]
+Failure pattern: [description of why each attempt failed]
+Diagnosis: [what was found]
+Resolution: [continued with new context / AC revised / unit blocked]
+```
+
+This record feeds directly into the retro's AI-Specific Observations — repeated circuit breaker triggers on a project are a signal that either the code standards need refinement or the quality gate is letting through under-specified prompts.

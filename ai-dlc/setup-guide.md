@@ -668,7 +668,7 @@ Add an ADR whenever a new cross-cutting decision is made — especially ones whe
 
 ### `rules/engagement.md`
 
-Copy this file verbatim from the base repo (`ai-dlc/rules/engagement.md`). It defines the signals of engineer disengagement, when to intervene, what to say, and how to handle continued non-engagement. The master rule file Section 6 routes to it with a single mandatory-read line — do not inline its contents.
+Copy this file verbatim from the base repo (`ai-dlc/rules/engagement.md`). It defines two monitoring protocols: (1) engineer disengagement signals — when to intervene, what to say, and how to handle continued non-engagement; (2) failed output circuit breaker — if AI output for the same unit is rejected 3 consecutive times with the same underlying failure, execution stops, a diagnostic question is asked, and the outcome is recorded in the unit's Prompt Log. The master rule file Section 6 routes to it with a single mandatory-read line — do not inline its contents.
 
 ---
 
@@ -877,7 +877,9 @@ Covers: git branching conventions, environment isolation, secrets management, ba
 Each template file defines the structure for its artifact type. The key templates:
 
 ### `ops/inception/intents/_template.md`
-Fields: Status, Date, Owner, What, Why, Success Looks Like, Assumptions, Open Questions, Out of Scope, Elaboration Sessions, Extracted Units, Implementation Summary.
+Fields: Status, Date, Owner, **AI Risk** (Minimal / Limited / High — see template for definitions), What, Why, Success Looks Like, Assumptions, Open Questions, Out of Scope, Elaboration Sessions, Extracted Units, UAT Sign-off, Implementation Summary.
+
+The **AI Risk** field gates the review level required: Minimal → standard review; Limited → named engineer sign-off on ACs before elaboration and on Implementation Summary before merge; High → senior engineer approval before any elaboration begins, plus all Limited controls.
 
 The **Implementation Summary** section is written by the AI once all units under the intent have been delivered and merged. It must not be filled in earlier. It contains four subsections:
 
@@ -905,10 +907,11 @@ Fields: Status, Goal, Start/Target/Completed dates, Units table, Execution Order
 Sections: What Went Well, What Didn't Go Well, AI-Specific Observations (prompts that worked / needed revision / quality gate failures / output accepted without enough review), Actions table, Improvements Triggered (**required** — cannot be left blank without a stated reason), New Intents Triggered, Post-Retro Improvement Workflow.
 
 **The Post-Retro Improvement Workflow is mandatory and AI-driven.** Immediately after the retro document is complete, the AI must:
-1. Synthesise every finding in "What Didn't Go Well" and "AI-Specific Observations" into concrete improvement proposals — one per finding — identifying the exact file and text to change
+1. Synthesize every finding in "What Didn't Go Well" and "AI-Specific Observations" into concrete improvement proposals — one per finding — identifying the exact file and text to change
 2. Present all proposals to the engineer for approval, rejection, or revision before touching any file
-3. For each approved proposal: create an improvement file, apply the change to the target file, and update mirror files if the master rule file was modified
-4. Mark each improvement Applied in the retro and close the retro only when all approved improvements are applied
+3. **For each approved proposal:** check which open or in-progress units reference the section being changed (Pre-generation Checks, ACs, or referenced rule files) and present the impact list to the engineer before applying. Record affected units in the improvement file.
+4. For each approved proposal: create an improvement file, apply the change to the target file, and update mirror files if the master rule file was modified
+5. Mark each improvement Applied in the retro and close the retro only when all approved improvements are applied
 
 The intent is that every retro automatically tightens the rules, skills, and guidelines that govern the next bolt. No finding should require the engineer to manually translate it into a file change.
 

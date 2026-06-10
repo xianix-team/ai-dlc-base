@@ -103,6 +103,7 @@ Note the location each file comes from in the Artifact Log. Review the intent fi
 | **Success Looks Like** | Observable, non-technical outcome | Technical metric used | Missing |
 | **Assumptions and Open Questions** | Specific and relevant | Generic or templated | Missing or empty |
 | **Out of Scope** | Explicit list of excluded items | Vague | Missing |
+| **AI Risk classification** | Field is set to Minimal, Limited, or High; not left blank | Present but appears defaulted without thought (all intents are Minimal) | Missing entirely |
 | **UAT Sign-off** | Status recorded (Passed / Passed with findings / Failed / Deferred / Not required) before intent marked Implemented | Status is still Pending on an Implemented intent | Missing entirely on an Implemented intent |
 | **Implementation Summary** | Completed for Implemented intents; not filled in for open intents | Partially filled | Missing on Implemented intents, or filled prematurely |
 | **Extracted Units** | Units listed with links | Present but unlinked | Missing |
@@ -122,6 +123,7 @@ Note the location each file comes from in the Artifact Log. Review the intent fi
 - ACs say "should" instead of "then" — "the system should X" is not a testable criterion
 - Unhappy paths are missing — every unit needs at least one failure-case AC
 - Elaboration session has no turn structure evidence — the AI proposed all units at once
+- AI Risk field is missing or all intents are marked Minimal regardless of whether they process personal data — risk classification was not applied
 - UAT Sign-off is missing or still Pending on intents marked Implemented — the acceptance loop was not closed
 - `ops/inception/dependency-map.md` was never updated after elaboration sign-off — cross-intent dependencies are invisible to bolt planning
 
@@ -197,6 +199,7 @@ Note the location each file comes from in the Artifact Log.
 | **Reason traces to the retro** | Explicit link and explanation | Link present, no explanation | Missing |
 | **Validation criteria set** | Observable signal defined | Generic | Missing |
 | **Status is Applied** | Change is applied; date recorded | Open for more than one bolt | Rejected without reason |
+| **Affected open units** | Field populated or "None" recorded; impact check was run before applying the change | Field missing on improvements that changed shared rules | Field absent from improvement template entirely |
 | **Knowledge Promotion** | Classified as Promoted, Project-specific, or Declined (with reason); not left as Pending | Pending on an Applied improvement older than one bolt | Field missing entirely |
 
 ### Incident File Rubric (if applicable)
@@ -249,7 +252,11 @@ Ask the following questions one at a time. Wait for each answer before continuin
 
    *Looking for:* awareness of systemic gaps; use of root-cause-analysis skill.
 
-7. > "When a feature is finished and all units are done, what happens before you mark the intent as Implemented? Is there a testing or acceptance step with the actual user or stakeholder?"
+7. > "Has the AI ever stopped mid-unit and said it couldn't proceed — either because output kept failing review or because it reached a decision it couldn't make without more context? What happened?"
+
+   *Looking for:* evidence the circuit breaker in `engagement.md` is firing correctly; units blocked with a recorded reason rather than endlessly retried; failure patterns surfaced in the retro.
+
+8. > "When a feature is finished and all units are done, what happens before you mark the intent as Implemented? Is there a testing or acceptance step with the actual user or stakeholder?"
 
    *Looking for:* UAT is conducted using the uat.md skill; sign-off status is recorded in the intent file before it is closed; intent is not marked Implemented solely because tests pass.
 
@@ -270,6 +277,8 @@ Ask the following questions one at a time. Wait for each answer before continuin
 - AC review is passive — the engineer accepts whatever the AI proposes
 - Improvements are filed but the target files are never actually updated
 - The retro is run but the Post-Retro Improvement Workflow is not — the loop does not close
+- Rule changes are applied without checking which open units reference the changed section — existing work is silently invalidated
+- The circuit breaker in `engagement.md` has never fired — either output quality is consistently high, or failing units are being endlessly retried without escalation
 - Intents are marked Implemented without UAT — tests passing is treated as sufficient, but the user outcome was never verified
 - No dependency audit has been run and no date is set — the project's security posture is unknown
 

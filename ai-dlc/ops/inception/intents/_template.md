@@ -3,6 +3,12 @@
 **Status:** Draft | Ready | In Elaboration | Elaborated | In Progress | Implemented | Deferred | Cancelled
 **Date:** YYYY-MM-DD
 **Owner:** [Engineer name]
+**AI Risk:** Minimal | Limited | High
+
+> **AI Risk definitions:**
+> - **Minimal** — feature does not process personal data, make automated decisions affecting users, or operate in a safety-critical context. Standard review applies.
+> - **Limited** — feature processes personal data, influences user-visible outcomes through AI, or integrates with external AI services. Requires named engineer sign-off on ACs before elaboration begins and on the Implementation Summary before merge.
+> - **High** — feature makes or directly influences automated decisions with significant user impact (financial, medical, access control, legal), or processes sensitive categories of personal data. Requires senior engineer approval on the intent before any elaboration begins, plus all Limited controls.
 
 ---
 
