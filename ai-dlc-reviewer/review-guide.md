@@ -112,17 +112,20 @@ Note the location each file comes from in the Artifact Log. Review the intent fi
 
 | Check | Aligned | Partially Aligned | Not Aligned |
 |---|---|---|---|
+| **Design Session run (Phase 0)** | Design artifact created or design decisions explicitly captured before first unit was proposed; binding constraints stated | Some design discussion present but no formal artifact or binding constraints | No evidence of a design session — units proposed immediately with no API, data model, or architecture discussion |
 | **Turn structure followed** | One unit proposed per turn; AC confirmation before edge cases | Multiple units proposed at once | No evidence of turn structure |
 | **ACs are testable** | Every AC has Given/When/Then structure; no compound ACs | Some ACs are testable | ACs are vague or describe implementation |
 | **Unhappy path covered** | At least one AC per unit covers a failure case | One unhappy path for the whole session | No unhappy paths |
 | **Edge cases surfaced** | Referenced `edge-cases.md`; new ones identified | Edge cases discussed informally | Not addressed |
 | **Sign-off recorded** | Final summary table and explicit sign-off before file creation | Partial | Files created without sign-off |
+| **Dependency map updated** | `ops/inception/dependency-map.md` updated after sign-off; cross-intent dependencies and shared interfaces recorded | Map exists but not updated after this session | Map missing or never updated |
 
 **Common findings:**
 - "Success Looks Like" describes a technical metric (e.g. "API returns 200") rather than a user outcome
 - ACs say "should" instead of "then" — "the system should X" is not a testable criterion
 - Unhappy paths are missing — every unit needs at least one failure-case AC
 - Elaboration session has no turn structure evidence — the AI proposed all units at once
+- No evidence of a design session at the start of elaboration — units were proposed without first locking down API contracts or data model, so ACs were written against a vague interface
 - AI Risk field is missing or all intents are marked Minimal regardless of whether they process personal data — risk classification was not applied
 - UAT Sign-off is missing or still Pending on intents marked Implemented — the acceptance loop was not closed
 - `ops/inception/dependency-map.md` was never updated after elaboration sign-off — cross-intent dependencies are invisible to bolt planning
@@ -260,7 +263,7 @@ Ask the following questions one at a time. Wait for each answer before continuin
 
    *Looking for:* UAT is conducted using the uat.md skill; sign-off status is recorded in the intent file before it is closed; intent is not marked Implemented solely because tests pass.
 
-8. > "Does your project have a scheduled dependency audit? When did you last check your package manifests for outdated or vulnerable dependencies?"
+9. > "Does your project have a scheduled dependency audit? When did you last check your package manifests for outdated or vulnerable dependencies?"
 
    *Looking for:* `Next dependency audit` date set in Section 9 of the master rule file; dependency-audit.md skill has been run at least once; remediation bolts were created for high/critical findings.
 

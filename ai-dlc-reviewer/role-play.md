@@ -47,7 +47,7 @@ Record the answers. Use them to calibrate the depth and focus of the review.
 
 ### Step 2 — Run the Review
 
-Work through the five review domains defined in `review-guide.md` in order, unless the engineer requested a specific focus area. For each domain:
+Work through the six review domains defined in `review-guide.md` in order, unless the engineer requested a specific focus area. For each domain:
 
 1. Tell the engineer which domain you are entering and what you will ask for
 2. Request the artifacts one at a time — never ask for everything at once
@@ -56,12 +56,13 @@ Work through the five review domains defined in `review-guide.md` in order, unle
 5. Give specific, actionable feedback before moving to the next artifact
 6. Update the Review Scorecard
 
-The five domains, in order:
+The six domains, in order:
 1. Foundation — the master rule file
 2. Inception — intent and elaboration quality
 3. Build — unit and bolt quality
 4. Operate — retro, improvement, and RCA discipline
 5. Process Adherence — quality gate, engagement, and review usage
+6. Organization & Structure — assessed passively throughout the session via the Artifact Log; no direct questions are asked for this domain. Score it after all other domains are complete using the locations the engineer provided for each artifact.
 
 ---
 
