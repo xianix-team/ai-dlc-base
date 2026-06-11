@@ -113,13 +113,13 @@ Present the report to the engineer and get explicit approval on each recommendat
 For each approved recommendation:
 
 **Redesign or technology mitigation:**
-1. Create a new intent file at `ai-dlc/ops/inception/intents/YYYY-MM-DD-rca-[slug].md`
+1. Create a new intent file at `ai-dlc/ops/inception/intents/YYYY-MM-DD-<unix_timestamp>-rca-[slug].md`
 2. Populate the "Why" section with the root cause statement from Step 3
 3. Populate "What" with the recommended design or technology change
 4. Add to the Open section of `ai-dlc/ops/build/backlog.md` using a reference-style link
 
 **Process fix:**
-1. Create an improvement file at `ai-dlc/ops/operate/improvements/YYYY-MM-DD-rca-[slug].md`
+1. Create an improvement file at `ai-dlc/ops/operate/improvements/YYYY-MM-DD-<unix_timestamp>-rca-[slug].md`
 2. Apply the change to the target file immediately (`rules/`, `skills/`, or `guidelines/`)
 3. Mark the improvement Applied
 

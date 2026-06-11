@@ -48,7 +48,7 @@
 
 | # | Improvement file | Target rule/guideline |
 |---|---|---|
-| 1 | [ops/operate/improvements/YYYY-MM-DD-[slug].md](../improvements/YYYY-MM-DD-[slug].md) | [ai-dlc/rules/...] |
+| 1 | [ops/operate/improvements/YYYY-MM-DD-<unix_timestamp>-[slug].md](../improvements/YYYY-MM-DD-<unix_timestamp>-[slug].md) | [ai-dlc/rules/...] |
 
 ---
 

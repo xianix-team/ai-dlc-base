@@ -1,6 +1,6 @@
 # Elaboration Session: [Intent Name] — Session [N]
 
-**Intent:** [intent/YYYY-MM-DD-[slug].md](../intents/YYYY-MM-DD-[slug].md)
+**Intent:** [intent/YYYY-MM-DD-<unix_timestamp>-[slug].md](../intents/YYYY-MM-DD-<unix_timestamp>-[slug].md)
 **Date:** YYYY-MM-DD
 **Participants:** [Engineer names]
 **Session goal:** [One sentence — what this session aimed to agree on]

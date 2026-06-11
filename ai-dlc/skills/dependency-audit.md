@@ -134,7 +134,7 @@ For each finding the engineer approved, create an intent and associated unit in 
 
 For each item:
 
-1. Create a unit file at `ai-dlc/ops/build/units/YYYY-MM-DD-dep-[package-slug].md` with:
+1. Create a unit file at `ai-dlc/ops/build/units/YYYY-MM-DD-<unix_timestamp>-dep-[package-slug].md` with:
    - **Status:** Open
    - **Context:** the dependency finding in plain language
    - **Acceptance Criteria:**

@@ -1,6 +1,6 @@
 # Retrospective: [Bolt name]
 
-**Bolt:** [ops/build/bolts/YYYY-MM-DD-[bolt-slug].md](../../build/bolts/YYYY-MM-DD-[bolt-slug].md)
+**Bolt:** [ops/build/bolts/YYYY-MM-DD-<unix_timestamp>-[bolt-slug].md](../../build/bolts/YYYY-MM-DD-<unix_timestamp>-[bolt-slug].md)
 **Date:** YYYY-MM-DD
 **Participants:** [Engineer names]
 
@@ -50,7 +50,7 @@
 
 | # | Improvement file | Target rule/guideline | Status |
 |---|---|---|---|
-| 1 | [ops/operate/improvements/YYYY-MM-DD-[slug].md](../improvements/YYYY-MM-DD-[slug].md) | [ai-dlc/rules/...] | Open |
+| 1 | [ops/operate/improvements/YYYY-MM-DD-<unix_timestamp>-[slug].md](../improvements/YYYY-MM-DD-<unix_timestamp>-[slug].md) | [ai-dlc/rules/...] | Open |
 
 ---
 
@@ -98,7 +98,7 @@ Do not proceed to Step 3 until the engineer has acknowledged the impact list.
 ### Step 3 — Create improvement files and apply changes
 
 For each approved proposal:
-1. Create an improvement file at `ops/operate/improvements/YYYY-MM-DD-[slug].md` using the template
+1. Create an improvement file at `ops/operate/improvements/YYYY-MM-DD-<unix_timestamp>-[slug].md` using the template
 2. Apply the change directly to the target file
 3. If the master rule file was changed, update all mirror files in the same pass (see Step 8 of the setup guide)
 4. Set the improvement status to **Applied** and record the date
