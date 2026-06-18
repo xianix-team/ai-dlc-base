@@ -486,6 +486,8 @@ Create this directory tree at the root of your repository:
 
 The master rule file is loaded automatically by your AI tool every session. See **Before You Begin** for the correct file name and location for your tool — the content is the same regardless of which tool you use. Every section below is required.
 
+> **Path substitution — critical:** Every template block below contains the placeholder `{FRAMEWORK_ROOT}`. When writing the actual master rule file, replace every occurrence of `{FRAMEWORK_ROOT}` with the real path determined in the Preliminary Step of `process-onboarding-agent/onboard.md`. For example, if `FRAMEWORK_ROOT` = `docs/process/intent-execution-framework`, then `{FRAMEWORK_ROOT}/rules/prompt-quality-gate.md` must be written as `docs/process/intent-execution-framework/rules/prompt-quality-gate.md`. The master rule file must contain real, resolvable paths — never the literal string `{FRAMEWORK_ROOT}`.
+
 ### Section 1 — Project Identity
 
 State what the system is and its technology stack. Be specific — the AI needs to know:
@@ -687,6 +689,8 @@ Copy this file verbatim from `process-onboarding-agent/rules/engagement.md` to `
 ---
 
 ## Step 4 — Write the Skills Files
+
+> **Path substitution — critical:** Any `{FRAMEWORK_ROOT}` placeholder that appears in the content descriptions below (or in "Wire into the master rule file" snippets) must be replaced with the actual resolved path before writing. This applies to generated skills files (`mob-elab-prompts.md`, `review-checklist.md`) and to any routing lines added to the master rule file Section 6. Skills files that are copied verbatim (compact-docs, root-cause-analysis, design-session, uat, etc.) do not contain `{FRAMEWORK_ROOT}` and require no substitution.
 
 ### `skills/mob-elab-prompts.md`
 

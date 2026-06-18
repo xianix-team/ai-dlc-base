@@ -12,6 +12,37 @@ Copy this file into the root of your target repository. Then say the following t
 
 You are about to onboard this repository to the AI-DLC framework. Read and follow `process-onboarding-agent/setup-guide.md` in full. The steps below tell you exactly how to execute it.
 
+### Session Brief — Present this to the engineer before asking anything
+
+Before asking any questions or taking any action, present the following overview to the engineer:
+
+> **AI-DLC Process Onboarding — Session Overview**
+>
+> This session installs the AI-DLC framework into your repository. By the end of it, your project will have a fully configured governance layer that governs how you and your AI work together on every feature from this point forward.
+>
+> **What will happen in this session:**
+> 1. I'll ask where your process documentation lives so I know where to install the framework.
+> 2. I'll check whether AI-DLC is already set up in this repo.
+> 3. I'll ask which AI coding tool you're using (Claude Code, Cursor, or GitHub Copilot).
+> 4. I'll ask whether this is a fresh project or a mature one with existing code — then run one of two paths:
+>    - **Fresh project:** A structured nine-question interview to capture your product identity, technology stack, domain language, and constraints — then I generate all framework files from your answers.
+>    - **Mature project:** A phased codebase archaeology (architecture mapping, pattern extraction, due diligence audit, debt classification) before generating a framework that inherits your existing conventions rather than overwriting them.
+>
+> **Expected outputs from this session:**
+> - A **master rule file** (`CLAUDE.md`, `.cursorrules`, or `.github/copilot-instructions.md`) at your repo root — loaded automatically by your AI tool at the start of every future session
+> - A complete **`intent-execution-framework/`** folder installed at your chosen process documentation path, containing:
+>   - Rules files (prompt quality gate, code standards, security, architecture, engagement)
+>   - Skills files (elaboration prompts, review checklist, UAT, bolt risk assessment, and more)
+>   - Guidelines files (domain glossary, edge cases, acceptance patterns, dev setup)
+>   - Ops templates (intents, units, bolts, retros, incidents, improvements)
+> - A **completion report** listing every file created and flagging anything that needs your review before the first feature bolt runs
+>
+> **When this session ends:** Close it and open a brand new session. Your AI tool will automatically load the master rule file — that is the experience agent, ready to run your first feature.
+>
+> Ready to start? I have one question before we begin.
+
+---
+
 ### Preliminary Step — Locate the Framework Home
 
 Before doing anything else, ask the engineer:
@@ -86,7 +117,7 @@ Run the nine-question interview defined in `process-onboarding-agent/setup-guide
 
 Once all nine questions are answered, execute Steps 1–9 of the setup guide in order. Create all files under `FRAMEWORK_ROOT`:
 1. Create the full `{FRAMEWORK_ROOT}/` folder structure with all template files.
-2. Write the master rule file (all 9 sections) using interview answers for Sections 1–5 and Section 9.
+2. Write the master rule file (all 9 sections) using interview answers for Sections 1–5 and Section 9. **Replace every `{FRAMEWORK_ROOT}` placeholder in the templates with the actual resolved path** (e.g. `docs/process/intent-execution-framework`). The master rule file must contain real paths — never the literal string `{FRAMEWORK_ROOT}`.
 3. Write all `rules/` files using interview answers and guide defaults.
 4. Copy all pre-built skills files from `process-onboarding-agent/skills/` into `{FRAMEWORK_ROOT}/skills/` verbatim (do not modify their content). Also copy `process-onboarding-agent/rules/engagement.md` to `{FRAMEWORK_ROOT}/rules/engagement.md` and all `process-onboarding-agent/ops/` template files into `{FRAMEWORK_ROOT}/ops/`.
 5. Write all `guidelines/` files (domain glossary pre-populated from interview question 6; others as stubs).
@@ -130,7 +161,7 @@ Phases to execute:
 
 ### Step 4-M — Repository overlay (Phase M2)
 
-1. Write the master rule file populated from archaeology output (Sections 1–5 from what you found; Sections 6–8 from guide defaults).
+1. Write the master rule file populated from archaeology output (Sections 1–5 from what you found; Sections 6–8 from guide defaults). **Replace every `{FRAMEWORK_ROOT}` placeholder in the templates with the actual resolved path** (e.g. `docs/process/intent-execution-framework`). The master rule file must contain real paths — never the literal string `{FRAMEWORK_ROOT}`.
 2. Create `{FRAMEWORK_ROOT}/guidelines/forbidden-zones.md` — ask the engineer: *"Which files, modules, or patterns must the AI never modify without senior engineer approval?"* Record their answer as the initial forbidden zones list.
 3. Create `{FRAMEWORK_ROOT}/guidelines/entry-points.md` — ask the engineer: *"Which modules or features should AI-DLC Bolts start with?"* Record their answer as the initial entry points list.
 4. Create `{FRAMEWORK_ROOT}/rules/code-standards.md` from extracted patterns.

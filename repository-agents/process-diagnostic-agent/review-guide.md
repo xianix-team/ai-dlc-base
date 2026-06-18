@@ -538,6 +538,24 @@ After the table, write a short paragraph (3–5 sentences) summarising the overa
 
 ---
 
+#### Trend Analysis
+
+Run the trend analysis skill defined in `process-diagnostic-agent/skills/trend-analysis.md` and insert the output here in full.
+
+The section contains four sub-sections:
+
+**Domain Score Timeline** — a table showing each domain's score across all past reviews and the current session, with a Change column (↑ Improved / → Stable / ↓ Declined) comparing the most recent past report to the current session.
+
+**Finding Trends** — a table classifying each current finding against its history: New (first occurrence), Recurring (seen before, still present), Entrenched (recurring for three or more consecutive reviews unchanged), Worsened (severity increased), Improved (severity decreased), or Resolved (was present, no longer found).
+
+**Patterns** — systemic signals identified across reviews: sustained decay (a domain declining across two or more consecutive reviews), entrenched issues (findings with no change across three or more reviews), significant improvements, emerging risks (new Critical or Important findings), and stalled recoveries (a domain that improved then declined again).
+
+**Trajectory Summary** — 2–3 sentences on the overall direction of the project's AI-DLC practice and the single most important trend (positive or negative) the team should act on.
+
+> **First review:** If no past reports exist in `REPORTS_PATH`, write: "This is the first review for this project. No historical comparison is available. This report will serve as the baseline for all future trend analysis." and omit the domain score timeline and finding trends table.
+
+---
+
 #### Remediation Plan
 
 > **Produce this section only if there are Critical or Important findings. If all findings are Advisory, write: "No remediation plan required — all gaps are advisory refinements. Address them at the next retro."**
