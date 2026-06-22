@@ -358,6 +358,8 @@ For teams already running AI-DLC, the `repository-agents/process-diagnostic-agen
 |---|---|
 | `repository-agents/process-diagnostic-agent/role-play.md` | Bootstrap trigger. Copy into the target repo and read it to the AI to start a review session. |
 | `repository-agents/process-diagnostic-agent/review-guide.md` | Full review protocol — eight domains, rubrics for every artifact type, scoring system, and report format. |
+| `repository-agents/process-migration-agent/migrate.md` | Bootstrap trigger for migrating a project from the old `ai-dlc/` structure to the new methodology. |
+| `repository-agents/process-migration-agent/migration-guide.md` | Full migration protocol — pre-flight scan, file classification, relocation steps, master rule file path updates, and cleanup. |
 
 **How to use:**
 
@@ -367,6 +369,32 @@ For teams already running AI-DLC, the `repository-agents/process-diagnostic-agen
 4. The AI adopts the reviewer persona and runs through eight review domains — Foundation, Inception, Build, Operate, Process Adherence, Organization & Structure, People (FDE skills), and Tools (SDLC automation posture) — requesting artifacts or conducting conversations per domain, scoring against rubrics, and delivering a comprehensive report with gap analysis, a People-Process-Tools Alignment section, and a prioritised remediation plan.
 
 The reviewer never generates code or creates files unprompted. It is a diagnostic tool, not an onboarding tool.
+
+---
+
+## Migrating from the Old Structure
+
+Projects that adopted AI-DLC before the June 2026 restructuring used an `ai-dlc/` folder that served as both the bootstrap agent and the installed framework, with the diagnostic agent in a separate `ai-dlc-reviewer/` folder. The new methodology separates the bootstrap agents from the installed framework and introduces the `process-onboarding-agent/` / `process-diagnostic-agent/` naming.
+
+The `repository-agents/process-migration-agent/` folder provides a guided migration agent for these projects. It migrates all three agents in one session:
+
+- **Onboarding agent** — `ai-dlc/` → `process-onboarding-agent/` (bootstrap only); all generated framework files moved to `intent-execution-framework/`
+- **Experience agent** — master rule file path references updated from `ai-dlc/...` to the new `intent-execution-framework/` location
+- **Diagnostic agent** — `ai-dlc-reviewer/` → `process-diagnostic-agent/` (with Trend Analysis capability added)
+
+**How to use:**
+
+1. Copy all three folders from `repository-agents/` in this repo into the root of the project being migrated:
+   - `process-migration-agent/`
+   - `process-onboarding-agent/`
+   - `process-diagnostic-agent/`
+
+2. Open your AI assistant inside the project repo.
+
+3. Say:
+   > "Read `process-migration-agent/migrate.md` and follow the instructions inside it."
+
+4. The agent will scan the old structure, confirm the migration plan with you, move all files, update the master rule file, and deliver a migration report. All operational data (intents, units, bolts, retros) is preserved.
 
 ---
 
