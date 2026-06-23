@@ -110,11 +110,15 @@ The experience agent compounds in quality over time — every retro tightens the
 
 ### 3. Diagnostics Agent
 
-**What it does:** Audits a project that is already running AI-DLC and identifies gaps between its current practice and AI-DLC principles.
+**What it does:** Audits a project against AI-DLC principles and delivers a structured gap report. Works whether or not AI-DLC is installed — the agent works with whatever process artifacts the team already has.
 
 **Mode:** Pull — the agent requests artifacts from the engineer, scores them against structured rubrics, and delivers a prioritised review report.
 
-**When to use:** Periodically on any active AI-DLC project — after the first few bolts to validate early practice, or whenever the team suspects the process has drifted.
+**When to use:**
+- **Before onboarding** — run it against your current process (Jira tickets, PR descriptions, retro notes, incident records) to get a gap report that shows exactly what is missing and why. The output becomes the brief for your onboarding session.
+- **After onboarding** — periodically, after the first few bolts to validate early practice, or whenever the team suspects the process has drifted.
+
+The `process-onboarding-agent/` folder does not need to be present. The agent never reads from it.
 
 **How it works:** The agent adopts the role of an AI-DLC Process Reviewer and runs through eight review domains:
 1. **Foundation** — is the master rule file a routing table or a wall of text? Are sections complete and accurate?
@@ -352,7 +356,7 @@ The onboarding agent first asks where your process documentation lives, then ins
 
 ## AI-DLC Reviewer (Diagnostics)
 
-For teams already running AI-DLC, the `repository-agents/process-diagnostic-agent/` folder provides a complementary **pull** mode — a structured role-playing audit session that validates an existing project's artifacts and practice against AI-DLC principles.
+The `repository-agents/process-diagnostic-agent/` folder provides a **pull** mode audit that works at any stage — whether the project is fully onboarded, partially adopted, or has no AI-DLC installation at all. The agent works with whatever process artifacts the team already has and scores them against AI-DLC principles, making it equally useful as a pre-onboarding readiness assessment or a periodic health check on a running project.
 
 | File | Purpose |
 |---|---|
@@ -367,6 +371,8 @@ For teams already running AI-DLC, the `repository-agents/process-diagnostic-agen
 2. Open your AI assistant inside that repo.
 3. Say: `"Read process-diagnostic-agent/role-play.md and follow the instructions inside it."`
 4. The AI adopts the reviewer persona and runs through eight review domains — Foundation, Inception, Build, Operate, Process Adherence, Organization & Structure, People (FDE skills), and Tools (SDLC automation posture) — requesting artifacts or conducting conversations per domain, scoring against rubrics, and delivering a comprehensive report with gap analysis, a People-Process-Tools Alignment section, and a prioritised remediation plan.
+
+The reviewer never asks for files by specific path — the engineer shares whatever they have from wherever they keep it. For teams without AI-DLC installed, that means sharing current-process artifacts (tickets, PRs, retro notes) and the agent scores those against AI-DLC principles. The resulting gap report is a practical brief for an onboarding session.
 
 The reviewer never generates code or creates files unprompted. It is a diagnostic tool, not an onboarding tool.
 
