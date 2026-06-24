@@ -698,6 +698,23 @@ Copy this file verbatim from `process-onboarding-agent/rules/engagement.md` to `
 ### `skills/mob-elab-prompts.md`
 
 The mob elaboration reference. Must include:
+- **Elaboration Mode Selection:** at the very start of every elaboration session, before Phase 0, ask the engineer which mode they prefer:
+
+  > "Before we begin — which elaboration mode would you like to use?
+  >
+  > **A — Interactive (turn-by-turn):** I'll propose one unit at a time, confirm the ACs with you, then move to edge cases and observability before proposing the next. Good for working through uncertain scope.
+  >
+  > **B — Plan-first:** I'll draft a complete elaboration plan — all proposed units with ACs, edge cases, and observability signals — as a single markdown document. You review it, mark changes, and we refine from there. Good when you have a clear picture and want to see everything at once."
+
+  Record the answer. **Mode A** follows the standard turn-by-turn protocol described below. **Mode B** follows the plan-first protocol:
+  1. Run Phase 0 (design session) as normal.
+  2. Produce the full draft plan as a markdown document written to `{FRAMEWORK_ROOT}/ops/inception/elaborations/YYYY-MM-DD-<unix_timestamp>-[intent-slug]-draft-plan.md`. The document contains: intent recap, all proposed units (each with context, ACs, scope boundaries, edge cases, and observability signals), and a unit summary table.
+  3. Ask the engineer to review and respond with any changes, additions, or removals.
+  4. Apply changes in a second pass — update the draft document and confirm the revised unit summary table with the engineer.
+  5. Proceed to sign-off and the Dependency Map update as normal once the engineer confirms the plan is complete.
+
+  The quality gate, ACs, and sign-off requirements are identical in both modes — Mode B compresses the back-and-forth into a document review cycle, it does not skip any step.
+
 - **Phase 0 — Design Session:** read `{FRAMEWORK_ROOT}/skills/design-session.md` and run it at the opening of every session before proposing any units. The design session scopes the intent's API surface, data model, and architectural patterns, then produces binding constraints that govern every unit and AC in the session. For simple intents with nothing new to design, Phase 0 concludes quickly and flows straight into unit decomposition.
 - The mandatory interactive protocol (turn structure + never-do rules)
 - Facilitation prompts for: proposing units, proposing ACs, edge case check, observability check (success signal / failure signal / alert threshold per unit), generating implementation scaffold, reviewing output
