@@ -107,11 +107,80 @@ The output is a comprehensive Review Report containing: a domain-by-domain score
 
 ---
 
+## Supporting Agents
+
+### 4. Skills Agent
+
+**What it does:** Installs individual skills from the 99x Intent Delivery Framework into a project that uses its own bespoke AI delivery process — without installing the full framework. No master rule file, no governance structure, no process change.
+
+**Mode:** Push — the agent interviews the team, presents a curated skills catalogue with dependency classifications, and copies the selected skills to a location of the team's choosing.
+
+**When to use:** When a team has a working AI-assisted delivery process and wants to add specific framework capabilities — design sessions, risk assessments, UAT, root cause analysis — without adopting the full governance layer.
+
+**How it works:**
+- Runs a five-question discovery interview about the team's current process, AI touchpoints, common failure modes, stakeholder communication, and capability gaps
+- Presents the full skills catalogue (13 skills grouped by delivery moment) with a dependency classification for each: **Standalone** (invoke directly), **Needs config** (one small configuration at invocation), or **Framework-only** (requires the full framework)
+- Flags skills most relevant to the team's answers with a ★ Recommended marker
+- Engineer selects skills; agent warns before installing any Framework-only skills
+- Copies selected skill files to the team's chosen path
+- Writes an Adoption Card — a single reference document listing each installed skill, how to invoke it, and what it produces
+
+**Entry point:** `process-skills-agent/onboard.md`
+
+---
+
+### 5. Migration Agent
+
+**What it does:** Migrates a project from the old `ai-dlc/` structure (used before June 2026) to the new methodology, moving all three agents in one session.
+
+**Mode:** Push — the agent scans the old structure, presents a pre-flight summary, confirms the plan with the engineer, moves all files, updates path references, and delivers a migration report. All operational data is preserved.
+
+**When to use:** When a project used the old `ai-dlc/` folder as both bootstrap agent and installed framework, with `ai-dlc-reviewer/` as the diagnostic agent.
+
+**How it works:**
+- Pre-flight scan detects old files and classifies them: **Generated** (project-specific, move and preserve), **Template** (move then refresh from new base), **Bootstrap-only** (discard, replaced by new agent), **Diagnostic bootstrap** (discard, replaced by new agent)
+- Confirms the new `FRAMEWORK_ROOT` path with the engineer
+- Moves generated framework files (rules, skills, guidelines, ops data) to the new `intent-execution-framework/` location
+- Updates the master rule file: replaces all `ai-dlc/rules/`, `ai-dlc/skills/`, `ai-dlc/guidelines/`, `ai-dlc/ops/` path references with the new `{FRAMEWORK_ROOT}/` equivalents
+- Replaces `ai-dlc-reviewer/` with the new `process-diagnostic-agent/` (which adds Trend Analysis capability)
+- Delivers a migration report; removes `ai-dlc/` and `ai-dlc-reviewer/` only after all conditions are verified
+
+**Entry point:** `process-migration-agent/migrate.md`
+
+---
+
+### 6. Estimation Agent
+
+**What it does:** Produces structured estimates for AI-assisted delivery projects. Operates in two modes depending on project stage — a ballpark mode for pre-sales and financial feasibility, and a delivery mode for bolt-level release and sprint planning.
+
+**Mode:** Depends on mode selected — Mode 1 is Push (agent structures requirements and computes ranges); Mode 2 is Pull (agent reads elaborated units from the backlog).
+
+**When to use:**
+- **Mode 1 — Ballpark:** before mob elaboration, when requirements are brief or draft and a client needs a range estimate for financial feasibility or launch window planning
+- **Mode 2 — Delivery:** after mob elaboration, when units are defined and the team needs bolt-level estimates for release planning and stakeholder communication
+
+**How it works:**
+
+*Mode 1:* The agent collects brief requirements and four context questions (deployment target, integration count, team AI experience, greenfield vs extension). It structures the requirements into 5–10 capability areas, classifies each as Tier A (AI-Accelerated), Tier B (Mixed), or Tier C (Human-Led), then applies modifiers for team experience and integration complexity. Output: min/expected/max hour ranges, a three-scenario delivery timeline (earliest/expected/latest) for one or more team sizes, a confidence level with reasoning, and the top three risk factors. Writes a ballpark estimate artifact to `estimates/` in the current working directory.
+
+*Mode 2:* The agent reads the project backlog and classifies each unit by effort tier — Simple (1–3 hrs), Standard (3–6 hrs), Complex (6–14 hrs), or Spike (2–5 hrs). It sums estimates per bolt, adds 20% overhead and a 10% QA buffer for Complex units, then maps bolt durations to a release timeline given team size and working capacity. As bolts close, the engineer records actual hours; after three bolts the agent computes a calibration modifier and adjusts all remaining open estimates. Writes a delivery estimate artifact to `{FRAMEWORK_ROOT}/ops/inception/estimates/`.
+
+**Entry point:** `process-estimation-agent/estimate.md`
+
+---
+
 ## How the Agents Work Together
 
 ```mermaid
 flowchart TD
-    START([Copy repository-agents/process-onboarding-agent/ to project repo])
+    subgraph EST1 ["Pre-project — Estimation Agent Mode 1"]
+        direction TB
+        BALLPARK["Ballpark Estimate\nCapability tiers · Hour ranges\nLaunch window · Confidence level"]
+    end
+
+    EST1 -. "If proceeding to onboarding" .-> START
+
+    START([Copy process-onboarding-agent/ + process-estimation-agent/ to project repo])
     START --> OA_ENTRY
 
     subgraph OA ["SESSION 1 — Onboarding Agent"]
@@ -139,6 +208,14 @@ flowchart TD
         UAT --> RETRO["Retro\nImprovement Workflow · Knowledge Promotion"]
         RETRO -->|Next feature| INCEPTION
     end
+
+    subgraph EST2 ["Post-elaboration — Estimation Agent Mode 2"]
+        direction TB
+        DELIVERY["Delivery Estimate\nUnit tiers · Bolt estimates\nRelease timeline · Calibration"]
+    end
+
+    ELABORATION -. "Units defined" .-> DELIVERY
+    RETRO -. "Bolt closed — record actual hours" .-> DELIVERY
 
     subgraph DIAG ["Periodically — Diagnostics Agent"]
         direction TB
