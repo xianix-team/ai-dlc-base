@@ -96,7 +96,7 @@ The `process-onboarding-agent/` folder does not need to be present. The agent ne
 6. **Organization & Structure** — assessed passively from the locations the engineer provides artifacts from.
 
 **Optional (selected at session start):**
-7. **People** — FDE skills assessment across five capability areas, conversation-based. Can be run for a single team member or for multiple team members individually, producing both per-person profiles and a team aggregate.
+7. **People** — Forward Deployed Engineer (FDE) skills assessment across five capability areas, conversation-based. Can be run for a single team member or for multiple team members individually, producing both per-person profiles and a team aggregate.
 8. **Tools** — SDLC automation posture across nine pipeline stages, conversation-based; produces a classified automation tier table with gap challenges and suggestions.
 
 The agent never asks for files by specific path — the engineer shares whatever they have from wherever they keep it. The agent evaluates content quality and organizational structure independently.

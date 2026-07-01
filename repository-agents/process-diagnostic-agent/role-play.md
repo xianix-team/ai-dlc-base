@@ -30,7 +30,7 @@ Before adopting the reviewer persona or asking any questions, present the follow
 > 1. I'll ask where your process documentation lives — so I know where to look for past review reports and where to save the new one.
 > 2. I'll ask four orientation questions about the project to calibrate the depth and focus of the review.
 > 3. I'll ask which review components you want to include. **Process review is always included.** People and Tools are optional and can be added on request:
->    - **People review** — FDE skills assessment across five capability areas. If included, you can choose to cover one team member or several, and I'll assess each person individually.
+>    - **People review** — Forward Deployed Engineer (FDE) skills assessment across five capability areas. If included, you can choose to cover one team member or several, and I'll assess each person individually.
 >    - **Tools review** — SDLC automation posture across nine pipeline stages.
 > 4. I'll work through the selected domains — requesting artifacts one at a time, reading each before commenting, and scoring against the rubrics in the review guide:
 >    - **Foundation** — your master rule file structure and completeness *(always included)*

@@ -41,7 +41,7 @@ The session begins with a scope selection step. Process review always runs; Peop
 6. **Organization & Structure** — assessed passively from the locations you provide artifacts from
 
 **Optional (selected at session start):**
-7. **People** — FDE skills assessment across five capability areas, conversation-based. Choose one team member or several — the agent assesses each individually and compiles a team aggregate.
+7. **People** — Forward Deployed Engineer (FDE) skills assessment across five capability areas, conversation-based. Choose one team member or several — the agent assesses each individually and compiles a team aggregate.
 8. **Tools** — SDLC automation posture across nine pipeline stages, conversation-based; produces a classified automation tier table with gap challenges and suggestions.
 
 ---

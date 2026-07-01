@@ -437,7 +437,7 @@ Create this directory tree at the root of your repository:
 
 ```
 {FRAMEWORK_ROOT}/
-  Instructions2FDE.md        ← main guide for engineers
+  Instructions2FDE.md        ← main guide for Forward Deployed Engineers (FDEs)
   README.md                  ← how the process achieves quality
   rules/
     prompt-quality-gate.md   ← the 4-component gate run before every code generation

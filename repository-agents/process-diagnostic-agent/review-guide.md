@@ -294,7 +294,7 @@ Ask the following questions one at a time. Wait for each answer before continuin
 
 ---
 
-## Domain 7 — People: FDE Skills
+## Domain 7 — People: Forward Deployed Engineer (FDE) Skills
 
 **What you are reviewing:** The team's capability to operate the AI-DLC process effectively. This domain is assessed through conversation — not files, but how team members actually work.
 
