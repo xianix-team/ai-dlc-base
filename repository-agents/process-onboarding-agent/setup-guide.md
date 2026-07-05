@@ -742,6 +742,11 @@ Key items that must be present:
 - Behavioral trade-offs confirmed before accepting output
 - For wrapper/layout components: existing files grepped for patterns the new component will duplicate before generation
 - Observability section of the unit file is complete — success signal, failure signal, and alert threshold are recorded; any that represent code behavior are expressed as ACs and implemented in the diff
+- Any AC asserting a page/route is "accessible" is verified by a rendered 200 (following redirects) with the expected content actually visible — text present and legible, images decoded (non-zero natural dimensions) — never a build pass or a 3xx redirect alone
+- After any deploy, a post-deploy smoke suite passes against the live deployed URL, asserting key pages render their actual content (text visible, images decoded, primary auth/entry reachable) rather than merely returning a 200 status — a deploy is not done until this passes
+- Before pushing changes that CI or any shared pipeline will check, the full local verification gate (typecheck, lint, format, tests, build, and any other CI step) passes — not just the command that changed
+- Unit-test coverage is reviewed for each bolt: pure/logic code (validators, helpers, transforms, formatters) has unit tests, or it is explicitly stated that the bolt added no unit-testable logic (integration/rendering/DB-backed code belongs in the project's E2E harness, not unit tests)
+- Verification gates (e.g. a post-deploy smoke suite) are run by whoever is driving the work — when an AI assistant is driving a deploy, the assistant runs the gate itself and reports the result, rather than handing a runnable check back to the engineer
 
 ### `skills/compact-docs.md`
 

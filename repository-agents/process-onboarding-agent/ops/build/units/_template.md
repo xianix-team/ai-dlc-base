@@ -48,6 +48,7 @@ Before generating code for this unit, the agent must run these checks:
 - [ ] Confirm the module entry point is listed in `process-onboarding-agent/guidelines/entry-points.md`
 - [ ] Confirm no files in scope appear in `process-onboarding-agent/guidelines/forbidden-zones.md`
 - [ ] Verify test coverage for affected module meets the gate threshold
+- [ ] If this unit configures a third-party library/plugin/adapter: confirm its REQUIRED configuration shape (required options, env vars) from its types or docs — do not assume the unit's listed config is complete
 
 ---
 
@@ -89,6 +90,7 @@ Before generating code for this unit, the agent must run these checks:
 ## Definition of Done
 
 - [ ] All ACs implemented and traceable to code
+- [ ] If this unit renders a page or component: the project's testing agent was invoked against its ACs and the generated tests pass — required, not optional
 - [ ] Unit tests written for each AC
 - [ ] Integration tests for affected module pass without modification *(or: all breaking changes listed in the Breaking Changes Register have updated tests and are approved)*
 - [ ] No secrets or hardcoded environment values
