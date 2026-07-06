@@ -90,7 +90,7 @@ Before generating code for this unit, the agent must run these checks:
 ## Definition of Done
 
 - [ ] All ACs implemented and traceable to code
-- [ ] If this unit renders a page or component: the project's testing agent was invoked against its ACs and the generated tests pass — required, not optional
+- [ ] If this unit renders a page or component: the generated tests were actually run against its ACs (via a dedicated testing agent/subagent if the project has one, otherwise the project's standard test runner) and pass — required, not optional
 - [ ] Unit tests written for each AC
 - [ ] Integration tests for affected module pass without modification *(or: all breaking changes listed in the Breaking Changes Register have updated tests and are approved)*
 - [ ] No secrets or hardcoded environment values
