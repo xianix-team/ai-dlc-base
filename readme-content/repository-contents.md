@@ -14,6 +14,7 @@ This repo is the **base template** — the source of truth that gets copied into
 | `repository-agents/process-onboarding-agent/onboard.md` | The bootstrap trigger. Drop this into a target repo and follow the instructions to start onboarding. |
 | `repository-agents/process-onboarding-agent/skills/compact-docs.md` | Engineer-triggered skill to archive operational documents older than the project's configured threshold. |
 | `repository-agents/process-onboarding-agent/skills/root-cause-analysis.md` | Skill to run 5-Whys analysis on incidents and improvements, classify root causes (Solution Design / Technology / Process), surface cross-cutting patterns, and produce linked intent or improvement artifacts. |
+| `repository-agents/process-onboarding-agent/skills/solution-shaping.md` | Pre-elaboration solution shaping. Decides generic vs feature-specific scope, expected usage, the simplest viable approach, extend-vs-build-vs-buy, and reversibility before any design work; records the signed-off shape on the intent as binding context for the design session. |
 | `repository-agents/process-onboarding-agent/skills/design-session.md` | Phase 0 of mob elaboration. Runs at the start of every elaboration session to lock down API contracts, data models, and architectural patterns before unit decomposition begins. |
 | `repository-agents/process-onboarding-agent/skills/bolt-risk-assessment.md` | Pre-bolt risk assessment. Analyzes blast radius, cross-unit sequencing risks, rollback options, and feature flag requirements before the first unit executes. Mandatory for mature projects. |
 | `repository-agents/process-onboarding-agent/skills/progress-digest.md` | Stakeholder communication artifact. Translates technical progress (units, bolts, statuses) into plain-language summaries for non-technical stakeholders. |
@@ -64,6 +65,7 @@ The onboarding agent first asks where your process documentation lives, then ins
         review-checklist.md
         compact-docs.md
         root-cause-analysis.md
+        solution-shaping.md
         design-session.md
         bolt-risk-assessment.md
         progress-digest.md

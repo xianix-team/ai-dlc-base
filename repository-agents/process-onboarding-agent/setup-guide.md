@@ -715,7 +715,7 @@ The mob elaboration reference. Must include:
 
   The quality gate, ACs, and sign-off requirements are identical in both modes — Mode B compresses the back-and-forth into a document review cycle, it does not skip any step.
 
-- **Phase 0 — Design Session:** read `{FRAMEWORK_ROOT}/skills/design-session.md` and run it at the opening of every session before proposing any units. The design session scopes the intent's API surface, data model, and architectural patterns, then produces binding constraints that govern every unit and AC in the session. For simple intents with nothing new to design, Phase 0 concludes quickly and flows straight into unit decomposition.
+- **Phase 0 — Design Session:** read `{FRAMEWORK_ROOT}/skills/design-session.md` and run it at the opening of every session before proposing any units. The design session scopes the intent's API surface, data model, and architectural patterns, then produces binding constraints that govern every unit and AC in the session. For simple intents with nothing new to design, Phase 0 concludes quickly and flows straight into unit decomposition. If the intent carries a `## Solution Shape` section (recorded by `{FRAMEWORK_ROOT}/skills/solution-shaping.md` before elaboration), Phase 0 treats those decisions as binding context and designs within them.
 - The mandatory interactive protocol (turn structure + never-do rules)
 - Facilitation prompts for: proposing units, proposing ACs, edge case check, observability check (success signal / failure signal / alert threshold per unit), generating implementation scaffold, reviewing output
 - **Post sign-off — Dependency Map update:** after the engineer confirms sign-off on the unit summary table and before writing any files, read `{FRAMEWORK_ROOT}/ops/inception/dependency-map.md` and update it: record any prerequisites this intent has on other intents, and any shared interfaces (API contracts, data entities) that cross intent boundaries. Add a row to the Update Log. If a dependency on an incomplete intent is found, flag it to the engineer before proceeding.
@@ -761,6 +761,14 @@ The root-cause-analysis skill applies structured 5-Whys analysis to resolved inc
 Can operate on a single file or across a batch to surface cross-cutting patterns and recurring vulnerabilities.
 
 Copy this file verbatim from `process-onboarding-agent/skills/root-cause-analysis.md` to `{FRAMEWORK_ROOT}/skills/root-cause-analysis.md`. No customisation is needed.
+
+### `skills/solution-shaping.md`
+
+The solution-shaping skill runs before mob elaboration to decide the shape of the solution — generic capability or feature-specific implementation, expected usage and scale, the simplest viable approach, extend-vs-build-vs-buy, and reversibility. The signed-off decision is recorded on the intent as a `## Solution Shape` section (plus a `Shape:` header field) and inherited by the design session as binding context, so Phase 0 designs within an agreed shape rather than an open field.
+
+It is engineer-invoked on intents where the shape isn't obvious — new capabilities, candidate platform features, or requests that may be better served by extending an existing module or adopting an existing service. It is not called by `mob-elab-prompts.md` automatically.
+
+Copy this file verbatim from `process-onboarding-agent/skills/solution-shaping.md` to `{FRAMEWORK_ROOT}/skills/solution-shaping.md`. No customization is needed.
 
 ### `skills/design-session.md`
 

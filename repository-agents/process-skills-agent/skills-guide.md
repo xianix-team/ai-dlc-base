@@ -57,6 +57,17 @@ Use this dependency classification key at the top of the catalogue:
 
 ### PLANNING & DESIGN
 
+**Solution Shaping** (`solution-shaping.md`) `◆ Standalone`
+
+Decides the shape of a solution before any design work begins: generic capability or feature-specific implementation, expected usage and scale, the simplest viable approach, extend-vs-build-vs-buy, and how reversible the choice is. The signed-off decision is recorded on the feature brief and constrains the design session that follows — so over-engineering and accidental platform-building are caught before any contract is drawn.
+
+- **When to invoke:** when a high-level feature request lands, before running a design session or breaking work into tasks
+- **How to invoke:** `"Read [skill-path]/solution-shaping.md and shape the solution for [feature name]."`
+- **What you get:** a signed-off Solution Shape record (generic vs specific, usage and scale, simplest viable option, extend/build/buy, reversibility) appended to your feature brief or intent
+- **Adapts to your process:** works against any written feature brief — if you don't keep intent files, state where the shape record should be written
+
+---
+
 **Design Session** (`design-session.md`) `◆ Standalone`
 
 Runs a structured Phase 0 design session before any building begins. Locks down API contracts, data model decisions, and architectural patterns through conversation, then produces a design artifact the team can reference during build.
