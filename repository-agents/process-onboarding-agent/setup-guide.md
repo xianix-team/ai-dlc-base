@@ -766,7 +766,7 @@ Copy this file verbatim from `process-onboarding-agent/skills/root-cause-analysi
 
 The solution-shaping skill runs before mob elaboration to decide the shape of the solution — generic capability or feature-specific implementation, expected usage and scale, the simplest viable approach, extend-vs-build-vs-buy, and reversibility. The signed-off decision is recorded on the intent as a `## Solution Shape` section (plus a `Shape:` header field) and inherited by the design session as binding context, so Phase 0 designs within an agreed shape rather than an open field.
 
-It is engineer-invoked on intents where the shape isn't obvious — new capabilities, candidate platform features, or requests that may be better served by extending an existing module or adopting an existing service. It is not called by `mob-elab-prompts.md` automatically.
+It runs **at the developer's discretion** — the engineer decides per intent whether to run it or go straight to elaboration, and skipping is a legitimate choice for work that doesn't need it. Invoke it on intents where the shape isn't obvious — new capabilities, candidate platform features, or requests that may be better served by extending an existing module or adopting an existing service. It is not called by `mob-elab-prompts.md` automatically.
 
 Copy this file verbatim from `process-onboarding-agent/skills/solution-shaping.md` to `{FRAMEWORK_ROOT}/skills/solution-shaping.md`. No customization is needed.
 

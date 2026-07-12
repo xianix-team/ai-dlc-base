@@ -8,7 +8,14 @@ Design Session (Phase 0 of mob elaboration) captures *what the design is*. Solut
 
 > "Read `process-onboarding-agent/skills/solution-shaping.md` and shape the solution for [intent name]."
 
-Run it on any intent where the shape isn't obvious — new capabilities, anything that smells like a framework or "platform feature", or requests where the right answer might be "extend something we already have" or "don't build this at all". The session length scales with the request: an obviously feature-specific change may conclude in two questions; a candidate platform capability should run all five.
+**This step runs at the developer's discretion — it is a judgment call, not a mandatory gate.** For each intent the engineer chooses to run Solution Shaping or to skip straight to mob elaboration. Nothing downstream blocks on it, and skipping it is a legitimate, expected choice for work that doesn't need it.
+
+Use this guide to decide:
+
+- **Run it** when the shape is not obvious — a new capability, something that could become a framework or "platform feature", a request where the answer might be "extend what we already have", "adopt an existing service", or "don't build this at all", or any decision that is expensive to reverse.
+- **Skip it** when the intent is plainly small and feature-specific, the approach is already agreed, and there is no generic-vs-one-off or build-vs-buy question to settle — go straight to the design session.
+
+Session length also scales with the request: an obviously feature-specific change may conclude in two questions; a candidate platform capability should run all five.
 
 ---
 
@@ -20,7 +27,7 @@ Read the intent file fully (`What` / `Why` / `Success Looks Like` / `Assumptions
 
 Do not proceed until the goal is agreed.
 
-**Fast path:** If the request is plainly small and feature-specific — no new capability, no reusable surface, no plausible existing alternative — say so, propose a brief shape record, and skip directly to Step 4 with the engineer's confirmation. Do not force all five questions onto work that doesn't need them.
+**Fast path:** If you have chosen to run it but the request turns out to be plainly small and feature-specific — no new capability, no reusable surface, no plausible existing alternative — say so, propose a brief shape record, and skip directly to Step 4 with the engineer's confirmation. Do not force all five questions onto work that doesn't need them.
 
 ---
 
