@@ -590,6 +590,7 @@ If the engineer defers, ask for the new date and update Section 9 before continu
 5. Move to next unit. Repeat.
 6. After all units agreed, present summary table and ask for sign-off before writing any files.
 
+**Solution shaping:** at the start of every mob elaboration, check the intent for a `## Solution Shape` section. If it is absent and the intent introduces a new capability, a potentially reusable surface, or an expensive-to-reverse decision, ask the engineer once whether to run `{FRAMEWORK_ROOT}/skills/solution-shaping.md` first or proceed straight to design. The engineer decides — run it, skip it, or invoke it directly at any time; never block on it. Skip the prompt entirely for plainly small, feature-specific intents.
 **Full elaboration protocol (including design session):** read `{FRAMEWORK_ROOT}/skills/mob-elab-prompts.md` before every elaboration session. The design session runs as Phase 0 of elaboration — it is not invoked separately.
 **Bolt risk assessment:** read `{FRAMEWORK_ROOT}/skills/bolt-risk-assessment.md` after elaboration sign-off and before the first unit in a bolt executes. No unit may begin execution without a signed-off risk assessment in the bolt file.
 **UAT skill:** read `{FRAMEWORK_ROOT}/skills/uat.md` when all units under an intent are marked Done, or when the engineer invokes it directly. Prompt the engineer to run UAT before setting intent status to Implemented.
@@ -698,6 +699,11 @@ Copy this file verbatim from `process-onboarding-agent/rules/engagement.md` to `
 ### `skills/mob-elab-prompts.md`
 
 The mob elaboration reference. Must include:
+- **Solution Shape check (before anything else):** at the very start of every elaboration session, read the intent and check for a `## Solution Shape` section. If it is missing and the intent introduces a new capability, a potentially reusable surface, or an expensive-to-reverse decision, ask the engineer once:
+
+  > "This intent has no recorded solution shape. Run Solution Shaping first (`{FRAMEWORK_ROOT}/skills/solution-shaping.md`) to decide generic-vs-specific, simplest-viable, and extend-vs-build — or proceed straight to design?"
+
+  The engineer decides: run it (then resume elaboration with the recorded shape as binding context), or proceed as-is. Never block. For plainly small, feature-specific intents, skip this prompt and go straight to mode selection.
 - **Elaboration Mode Selection:** at the very start of every elaboration session, before Phase 0, ask the engineer which mode they prefer:
 
   > "Before we begin — which elaboration mode would you like to use?
@@ -766,7 +772,7 @@ Copy this file verbatim from `process-onboarding-agent/skills/root-cause-analysi
 
 The solution-shaping skill runs before mob elaboration to decide the shape of the solution — generic capability or feature-specific implementation, expected usage and scale, the simplest viable approach, extend-vs-build-vs-buy, and reversibility. The signed-off decision is recorded on the intent as a `## Solution Shape` section (plus a `Shape:` header field) and inherited by the design session as binding context, so Phase 0 designs within an agreed shape rather than an open field.
 
-It runs **at the developer's discretion** — the engineer decides per intent whether to run it or go straight to elaboration, and skipping is a legitimate choice for work that doesn't need it. Invoke it on intents where the shape isn't obvious — new capabilities, candidate platform features, or requests that may be better served by extending an existing module or adopting an existing service. It is not called by `mob-elab-prompts.md` automatically.
+It runs **at the developer's discretion** — the engineer decides per intent whether to run it or go straight to elaboration, and skipping is a legitimate choice for work that doesn't need it. Invoke it on intents where the shape isn't obvious — new capabilities, candidate platform features, or requests that may be better served by extending an existing module or adopting an existing service. `mob-elab-prompts.md` **auto-prompts** for it at the start of a session when the intent has no recorded shape, but never runs it without the engineer's go-ahead — so the step is offered, not forced.
 
 Copy this file verbatim from `process-onboarding-agent/skills/solution-shaping.md` to `{FRAMEWORK_ROOT}/skills/solution-shaping.md`. No customization is needed.
 

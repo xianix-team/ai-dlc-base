@@ -4,7 +4,7 @@
 
 Design Session (Phase 0 of mob elaboration) captures *what the design is*. Solution Shaping decides *what kind of solution to design*. The two are complementary: shaping first, then design within the shape.
 
-**Trigger:** Runs after an intent is drafted and before mob elaboration is scheduled. It is never automatic and is not called by `mob-elab-prompts.md` — the engineer invokes it:
+**Trigger:** Runs after an intent is drafted and before mob elaboration. The engineer can invoke it directly at any time, and the elaboration workflow also **auto-prompts** for it at the start of a session when the intent has no recorded shape — but it is never run without the engineer's go-ahead (see the discretion note below). To invoke it directly:
 
 > "Read `process-onboarding-agent/skills/solution-shaping.md` and shape the solution for [intent name]."
 
