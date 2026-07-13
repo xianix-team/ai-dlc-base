@@ -25,6 +25,7 @@ project-root/
     skills/
       compact-docs.md          ← template (pre-built)
       root-cause-analysis.md   ← template (pre-built)
+      solution-shaping.md      ← template (pre-built)
       design-session.md        ← template (pre-built)
       bolt-risk-assessment.md  ← template (pre-built)
       progress-digest.md       ← template (pre-built)
@@ -115,6 +116,7 @@ Before migrating, understand which files are which:
 - `ai-dlc/rules/engagement.md`
 - `ai-dlc/skills/compact-docs.md`
 - `ai-dlc/skills/root-cause-analysis.md`
+- `ai-dlc/skills/solution-shaping.md`
 - `ai-dlc/skills/design-session.md`
 - `ai-dlc/skills/bolt-risk-assessment.md`
 - `ai-dlc/skills/progress-digest.md`
@@ -292,6 +294,7 @@ Files to refresh:
 |---|---|
 | `process-onboarding-agent/skills/compact-docs.md` | `{NEW_FRAMEWORK_ROOT}/skills/compact-docs.md` |
 | `process-onboarding-agent/skills/root-cause-analysis.md` | `{NEW_FRAMEWORK_ROOT}/skills/root-cause-analysis.md` |
+| `process-onboarding-agent/skills/solution-shaping.md` | `{NEW_FRAMEWORK_ROOT}/skills/solution-shaping.md` |
 | `process-onboarding-agent/skills/design-session.md` | `{NEW_FRAMEWORK_ROOT}/skills/design-session.md` |
 | `process-onboarding-agent/skills/bolt-risk-assessment.md` | `{NEW_FRAMEWORK_ROOT}/skills/bolt-risk-assessment.md` |
 | `process-onboarding-agent/skills/progress-digest.md` | `{NEW_FRAMEWORK_ROOT}/skills/progress-digest.md` |
