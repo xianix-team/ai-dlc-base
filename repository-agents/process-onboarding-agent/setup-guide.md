@@ -598,6 +598,7 @@ If the engineer defers, ask for the new date and update Section 9 before continu
 **Process health skill:** read `{FRAMEWORK_ROOT}/skills/process-health.md` when the engineer invokes it to audit how well the AI-DLC process is functioning.
 **New engineer induction skill:** read `{FRAMEWORK_ROOT}/skills/new-engineer-induction.md` when an engineer says they are new to the project or invokes it directly.
 **Knowledge promotion skill:** read `{FRAMEWORK_ROOT}/skills/knowledge-promotion.md` as Step 5 of the Post-Retro Improvement Workflow after all improvements are applied. A retro is not closed until every Applied improvement has a Knowledge Promotion status.
+**Process visualization skill:** offer to read `{FRAMEWORK_ROOT}/skills/process-visualization.md` at the start of every retro, before "What Went Well" is discussed. The engineer may accept, skip, or invoke it directly at any time. Never run it without the engineer's go-ahead.
 **Dependency audit skill:** read `{FRAMEWORK_ROOT}/skills/dependency-audit.md` when the engineer invokes it, or when the `Next dependency audit` date in Section 9 has been reached. Prompt at session start if the date is due.
 **Process health skill:** read `{FRAMEWORK_ROOT}/skills/process-health.md` when the engineer invokes it to audit how well the AI-DLC process is functioning.
 **Compact-docs skill:** read `{FRAMEWORK_ROOT}/skills/compact-docs.md` when the engineer invokes it.
@@ -850,6 +851,20 @@ Copy this file verbatim from `process-onboarding-agent/skills/knowledge-promotio
 
 ```markdown
 **Knowledge promotion skill:** read `{FRAMEWORK_ROOT}/skills/knowledge-promotion.md` as Step 5 of the Post-Retro Improvement Workflow, after all improvements are applied. A retro is not closed until every Applied improvement has a Knowledge Promotion status.
+```
+
+### `skills/process-visualization.md`
+
+The process-visualization skill reconstructs how a bolt (or a whole intent) actually got delivered and renders it as Mermaid diagrams — an actual delivery timeline (`gantt`) and an actual execution path (`flowchart`) — plus a plan-vs-actual deviation table comparing the bolt's recorded `Execution Order` against what really happened. When the project is a git repository, it mines commit history for each unit and bolt file to find the real dates a `Status:` field changed; otherwise it falls back to the dates already recorded in the artifacts and says so plainly.
+
+Offered at the start of every retro, before "What Went Well" is discussed, the same way `solution-shaping.md` is offered before design sessions — the engineer accepts, skips, or runs it later. Output is written into the retro file's "Delivery Flow (What Actually Happened)" section, so the rest of the retro discussion has a factual anchor instead of relying on memory.
+
+Copy this file verbatim from `process-onboarding-agent/skills/process-visualization.md` to `{FRAMEWORK_ROOT}/skills/process-visualization.md`. No customization is needed.
+
+**Wire into the master rule file Section 6** by adding one routing line:
+
+```markdown
+**Process visualization skill:** offer to read `{FRAMEWORK_ROOT}/skills/process-visualization.md` at the start of every retro, before "What Went Well" is discussed. The engineer may accept, skip, or invoke it directly at any time. Never run it without the engineer's go-ahead.
 ```
 
 ### `skills/dependency-audit.md`

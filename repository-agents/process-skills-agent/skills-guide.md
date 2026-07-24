@@ -124,6 +124,19 @@ Runs an emergency intake for a production incident: three questions (symptom, se
 
 ---
 
+### RETROSPECTIVE & REVIEW
+
+**Process Visualization** (`process-visualization.md`) `◈ Needs config`
+
+Reconstructs how a batch of work actually got delivered — not the plan, but what really happened — and renders it as Mermaid diagrams: an actual delivery timeline and an actual execution path, plus a plan-vs-actual deviation table. Mines git history for real status-change dates when the project is a git repo; falls back to whatever dates are recorded in your own artifacts otherwise, and says plainly which mode it used.
+
+- **When to invoke:** at the start of a retrospective, before discussing what went well — or any time you want a factual reconstruction of how a piece of work actually unfolded
+- **How to invoke:** `"Read [skill-path]/process-visualization.md and visualize how [bolt/feature name] actually went."`
+- **What you get:** two Mermaid diagrams (timeline + execution path) and a deviation table comparing the plan to reality
+- **Configuration needed:** point it at your equivalent planning and status artifacts (tickets, task files, a project board export) if you don't use AI-DLC bolt/unit files — it reads whatever you tell it holds the plan and the status history. Git-history mining works automatically in any git repo regardless of what planning system you use on top of it.
+
+---
+
 ### COMMUNICATION & REPORTING
 
 **Progress Digest** (`progress-digest.md`) `◆ Standalone`

@@ -6,6 +6,14 @@
 
 ---
 
+## Delivery Flow (What Actually Happened)
+
+> Populated by `process-onboarding-agent/skills/process-visualization.md`. Offered at the start of every retro, before the discussion below — running it first grounds "What Went Well" and "What Didn't Go Well" in the recorded delivery history rather than memory. Optional: the engineer may skip it and go straight to the discussion.
+
+[Reconstruction mode, actual delivery timeline diagram, actual execution path diagram, and plan-vs-actual deviation table — or "Not run for this retro."]
+
+---
+
 ## What Went Well
 
 - [Observation]
