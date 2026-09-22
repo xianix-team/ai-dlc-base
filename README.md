@@ -54,6 +54,12 @@ Each tool loads its master rule file automatically at the start of every session
 
 ---
 
+## Domain Packs — Embedded, RTOS, Linux, and FPGA
+
+Optional, additive extensions to onboarding for mid-to-large embedded and RTL engineering — **Embedded MCU** (bare-metal or RTOS), **Embedded Linux** (Yocto/Buildroot), and **FPGA/RTL**. Selected once during onboarding (multiple can be selected together for multi-domain systems); Software-only projects are completely unaffected. → [Domain packs guide](readme-content/domain-packs.md)
+
+---
+
 ## Optional Integrations
 
 Opt-in skills that connect the framework to an external service. Both are `◈ Needs config` — installed as part of onboarding (or adopted standalone, see *Installing skills for a bespoke process*), disabled by default, and controlled entirely through environment variables — no credential is ever committed.
@@ -125,6 +131,7 @@ Works with any project — no AI-DLC installation required. → [Full diagnostic
 
 ## Further Reading
 
+- [Domain packs](readme-content/domain-packs.md) — extending onboarding to Embedded MCU, Embedded Linux, and FPGA/RTL projects
 - [Agent descriptions and diagrams](readme-content/agents.md) — detailed behavior lists, how the agents work together, artifact lifecycle
 - [Repository contents reference](readme-content/repository-contents.md) — every file and folder in this repo with its purpose
 - [Diagnostics and review guide](readme-content/diagnostics-and-review.md) — full diagnostics guide including scope options, People and Tools review

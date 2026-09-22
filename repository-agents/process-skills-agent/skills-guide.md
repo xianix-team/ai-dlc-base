@@ -233,6 +233,113 @@ Computes four process health metrics — improvement adoption rate, quality gate
 
 ---
 
+### EMBEDDED, LINUX & FPGA
+
+*Relevant only to teams building MCU firmware, embedded Linux, or FPGA/RTL — skip this category entirely for web/backend/mobile teams.* Sourced from `process-onboarding-agent/domains/{embedded-mcu,embedded-linux,fpga}/skills/` rather than `process-onboarding-agent/skills/` — adjust the copy path in Step 5 accordingly for these entries.
+
+**Hardware Bring-up** (`embedded-mcu/skills/hardware-bring-up.md`) `◈ Needs config`
+
+First power-on and peripheral-by-peripheral checkout for a new board. Safety check before power, checkpoint-by-checkpoint power-on sequence, and a findings log distinguishing hardware defects from firmware-not-written-yet.
+
+- **When to invoke:** first power-on of a new board or board revision
+- **How to invoke:** `"Read [skill-path]/hardware-bring-up.md and run bring-up for [board name/revision]."`
+- **Configuration needed:** state where to log findings if you don't use a hardware revision log — the skill will ask if none is found.
+
+---
+
+**HIL Verification** (`embedded-mcu/skills/hil-verification.md`) `◆ Standalone`
+
+The bench/lab-equipment equivalent of UAT — generates a bench-test script from acceptance criteria, then requires a **measured value**, not a bare pass/fail, for each step before recording a result.
+
+- **When to invoke:** when a unit's acceptance criteria can only be confirmed against real hardware (a signal, a timing relationship, a measured output)
+- **How to invoke:** `"Read [skill-path]/hil-verification.md and run HIL verification for [feature/unit] using these acceptance criteria: [paste ACs]."`
+- **What you get:** a bench-test script, a recorded measurement per step, and a sign-off
+
+---
+
+**BOM / Component Audit** (`embedded-mcu/skills/bom-audit.md`) `◈ Needs config`
+
+The hardware equivalent of Dependency Audit — checks a bill of materials for end-of-life parts, single-source risk, and lead-time risk; converts findings into remediation items.
+
+- **When to invoke:** periodically, or before committing to a production run
+- **How to invoke:** `"Read [skill-path]/bom-audit.md and run a BOM audit on this project."`
+- **Configuration needed:** where the BOM lives (spreadsheet, ECAD export) and where to log remediation items if you don't use an AI-DLC backlog.
+
+---
+
+**Firmware Release Bolt** (`embedded-mcu/skills/firmware-release-bolt.md`) `◈ Needs config`
+
+Planned single-image field firmware release — mandates a rollback test before rollout and an explicit staged-rollout plan for larger fleets.
+
+- **When to invoke:** planning a field firmware update (not an emergency — see Hotfix Workflow for that)
+- **How to invoke:** `"Read [skill-path]/firmware-release-bolt.md and plan a release for [changes]."`
+
+---
+
+**Errata Bolt** (`embedded-mcu/skills/errata-bolt.md`) `◆ Standalone`
+
+Bug-bolt-style workflow for a silicon/peripheral errata workaround — mandates the workaround be annotated with the errata reference so a later "cleanup" doesn't remove it.
+
+- **When to invoke:** implementing a workaround for a known chip/peripheral defect
+- **How to invoke:** `"Read [skill-path]/errata-bolt.md and start an errata workaround for [description/reference]."`
+
+---
+
+**Linux Board Bring-up** (`embedded-linux/skills/board-bringup-linux.md`) `◈ Needs config`
+
+Bootloader → kernel → device tree → rootfs bring-up for embedded Linux, distinct from the MCU pack's register-level bring-up.
+
+- **When to invoke:** first boot of embedded Linux on a new board or BSP
+- **How to invoke:** `"Read [skill-path]/board-bringup-linux.md and run Linux bring-up for [board name]."`
+- **Configuration needed:** where to log device-tree corrections if you don't use the domain pack's `ops/device-tree-map/` location.
+
+---
+
+**OTA A/B Update Bolt** (`embedded-linux/skills/ota-ab-update-bolt.md`) `◈ Needs config`
+
+Planned field update over an A/B partition update mechanism (Mender/RAUC/SWUpdate) — mandates a simulated power-loss-during-update test before any rollout.
+
+- **When to invoke:** planning a field OTA release
+- **How to invoke:** `"Read [skill-path]/ota-ab-update-bolt.md and plan an OTA release for [changes]."`
+
+---
+
+**Kernel Driver Review** (`embedded-linux/skills/kernel-driver-review.md`) `◈ Needs config`
+
+An addition to your existing code review for kernel/driver code — locking correctness, error-path cleanup, reference-counting balance, and `checkpatch.pl` cleanliness.
+
+- **When to invoke:** reviewing any unit that touches kernel or driver code
+- **How to invoke:** `"Read [skill-path]/kernel-driver-review.md and review this kernel/driver change: [paste diff or description]."`
+
+---
+
+**FPGA Verification** (`fpga/skills/fpga-verification.md`) `◈ Needs config`
+
+An addition to code review for RTL — requires testbench/simulation/coverage evidence, not a diff read, before RTL is considered reviewable.
+
+- **When to invoke:** reviewing any unit that changes RTL
+- **How to invoke:** `"Read [skill-path]/fpga-verification.md and verify this RTL change: [paste diff or description]."`
+
+---
+
+**Timing Closure Check** (`fpga/skills/timing-closure-check.md`) `◆ Standalone`
+
+A gate on static timing analysis results and resource utilization after synthesis/place-and-route — distinct from functional simulation, which cannot catch a timing violation.
+
+- **When to invoke:** before considering an RTL milestone or release complete
+- **How to invoke:** `"Read [skill-path]/timing-closure-check.md and check timing closure for [build/milestone]."`
+
+---
+
+**Bitstream Release** (`fpga/skills/bitstream-release.md`) `◈ Needs config`
+
+Versions an FPGA bitstream release with full build provenance — RTL source, toolchain version, timing margin, target board revision.
+
+- **When to invoke:** releasing/tagging a bitstream build
+- **How to invoke:** `"Read [skill-path]/bitstream-release.md and release a bitstream for [version]."`
+
+---
+
 ### NEW TEAM MEMBERS
 
 **New Engineer Induction** (`new-engineer-induction.md`) `◇ Framework-only`

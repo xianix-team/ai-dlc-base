@@ -41,11 +41,14 @@ Locate and read all dependency manifest files in the repository. Common location
 | Java / Kotlin | `pom.xml`, `build.gradle`, `build.gradle.kts` |
 | .NET | `*.csproj`, `packages.lock.json` |
 | Rust | `Cargo.toml`, `Cargo.lock` |
+| Embedded Linux (Yocto) | `*.bb`, `*.bbappend` recipe files, `conf/local.conf` layer list, `bitbake -g` dependency graph output |
+| Embedded Linux (Buildroot) | `.config`, `package/*/Config.in` selections, `manifest.csv` if generated |
 
 Read every manifest found within the agreed scope. Extract:
 - Package name
 - Currently pinned version
 - Whether it is a production dependency or a development/test-only dependency
+- **For an Embedded Linux project only** (per master rule file Section 1 Hardware Profile): the package's license, where declared (Yocto recipe `LICENSE` field, Buildroot's `*_LICENSE` variable) — this feeds the license-classification pass in Step 4
 
 Produce an internal inventory list (do not present it to the engineer yet — it is input for Steps 3 and 4).
 
@@ -88,6 +91,12 @@ Using training knowledge, analyse the dependency inventory from Step 2 for the f
 
 **Development dependency risk:**
 - Flag any package that is listed as a dev dependency but is also resolvable from production code (a common misconfiguration that exposes dev tools in production builds).
+
+**License compliance (Embedded Linux projects only):** if the master rule file's Hardware Profile (Section 1) lists Embedded Linux, run this pass; otherwise skip it entirely — it does not apply to non-embedded-Linux projects. Read `{FRAMEWORK_ROOT}/rules/license-compliance.md` for this project's actual license policy, then check the package inventory from Step 2 against it:
+- Any package whose license matches the project's **Prohibited licenses** list — this is a Critical finding regardless of any other severity signal, since it's a legal/compliance issue, not a technical one.
+- Any GPL-licensed kernel module (including out-of-tree vendor modules) whose source is not already in the project's source tree or a documented upstream location.
+- Any statically linked LGPL dependency, since static linking carries different obligations than dynamic linking — flag it for the engineer to confirm the obligation is met, do not assume it is.
+- If the project requires an SBOM (per `license-compliance.md`), confirm one was generated for the last release and flag if it's missing or stale.
 
 ---
 

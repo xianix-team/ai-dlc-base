@@ -80,6 +80,7 @@ Every finding must be classified before it goes into the report.
 | **Review Behavior (Section 7)** | Routes to `skills/review-checklist.md` with a mandatory-run instruction | Checklist embedded inline | Missing |
 | **Reference Map (Section 8)** | Complete routing table covering all common needs | Partial | Missing |
 | **Process Configuration (Section 9)** | Archive threshold set; `Next dependency audit` date populated | Section present but one or both values not set | Missing section |
+| **Hardware Profile (Section 1 subsection)** *(only if the project has a hardware Domain Profile — Embedded MCU, Embedded Linux, or FPGA)* | Target/toolchain, timing/power/resource budget, and external interfaces are specific and accurate | Present but vague or incomplete | Project uses a hardware domain pack but this subsection is missing |
 | **Notifications (Section 10)** *(optional)* | Status set; event table lists both layers; turn-ended and needs-attention hooks present in the tool's hook config; send script approved in the tool's allowlist; no webhook URL committed anywhere — only a reference to it | Section present but events not tuned, hooks missing so only the best-effort layer fires, sends prompt on every notification, or the section is missing from the mirror rule file the team's tool actually loads | Section absent (treated as disabled — not a finding unless the team asked for notifications) |
 | **AI Hub Metrics (Section 11)** *(optional)* | Status set; event table lists the pushing events and their `correlationId` source; push script approved in the tool's allowlist; no API key, PAT, or workflow id committed anywhere — only references to them | Section present but events not tuned, pushes prompt on every send, or a credential or workflow id is written into a committed file | Section absent (treated as disabled — not a finding unless the team asked for AI Hub reporting) |
 
@@ -157,6 +158,7 @@ Note the location each file comes from in the Artifact Log. Review the planning 
 | **Execution order** | Dependencies between units are documented | Implied but not stated | Missing — units executed in arbitrary order |
 | **Risk Assessment** | Blast radius table present; rollback assessment and feature flag decision recorded (mandatory for mature projects) | "Risks and Assumptions" present but no blast radius or rollback analysis | Missing entirely |
 | **Retrospective link** | Links to completed retro for Done bolts | Missing on Done bolts | — |
+| **Hardware/RTL verification** *(only for a hardware Domain Profile)* | HIL verification, timing-closure check, or Linux board bring-up sign-off present where the bolt's units touch hardware/RTL behavior — matching whichever domain pack(s) the project has installed | Sign-off present but incomplete (e.g. no measured values in a HIL result, no STA numbers in a timing-closure record) | Bolt touches hardware/RTL behavior with no domain-pack verification artifact at all |
 
 ### Unit File Rubric
 

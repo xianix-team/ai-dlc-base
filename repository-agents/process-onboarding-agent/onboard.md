@@ -37,7 +37,8 @@ Before asking any questions or taking any action, present the following overview
 > 1. I'll ask where your process documentation lives so I know where to install the framework.
 > 2. I'll check whether AI-DLC is already set up in this repo.
 > 3. I'll ask which AI coding tool you're using (Claude Code, Cursor, or GitHub Copilot).
-> 4. I'll ask whether this is a fresh project or a mature one with existing code — then run one of two paths:
+> 4. I'll ask what kind of system this governs — software, or one or more hardware domains (embedded MCU, embedded Linux, FPGA). Software-only is the default and changes nothing else below; a hardware answer layers additional governance on top of the same process.
+> 5. I'll ask whether this is a fresh project or a mature one with existing code — then run one of two paths:
 >    - **Fresh project:** A structured nine-question interview to capture your product identity, technology stack, domain language, and constraints — then I generate all framework files from your answers.
 >    - **Mature project:** A phased codebase archaeology (architecture mapping, pattern extraction, due diligence audit, debt classification) before generating a framework that inherits your existing conventions rather than overwriting them.
 >
@@ -86,6 +87,7 @@ Use `FRAMEWORK_ROOT` as the base path for every framework file created during th
 
    **Do not treat the following as evidence of existing setup** — they are part of the base repo and are present in every fresh copy:
    - `process-onboarding-agent/ops/` and all files inside it (including `process-onboarding-agent/ops/inception/dependency-map.md`)
+   - `process-onboarding-agent/domains/` and all files inside it
    - `process-onboarding-agent/rules/engagement.md`
    - `process-onboarding-agent/skills/compact-docs.md`
    - `process-onboarding-agent/skills/root-cause-analysis.md`
@@ -115,6 +117,13 @@ Ask the engineer:
 
 Record the answer. Use it to determine the master rule file name and path (see the table in `process-onboarding-agent/setup-guide.md` — Before You Begin).
 
+### Step 1.5 — Identify the domain profile(s)
+
+Ask the engineer the Question 2 (Domain Profile) prompt from `process-onboarding-agent/setup-guide.md` — Before You Begin. Record the answer as `DOMAIN_PROFILES`.
+
+- If the answer is Software only, or the engineer has no hardware component, proceed to Step 2 exactly as below — nothing else in this document changes.
+- If the answer includes Embedded MCU, Embedded Linux, and/or FPGA, note that the **Domain Overlay** section of `setup-guide.md` will apply once Step 2 (below) is answered — carry `DOMAIN_PROFILES` forward into Step 3-F / Step 3-M.
+
 ### Step 2 — Identify the project type
 
 Ask the engineer:
@@ -130,7 +139,9 @@ Ask the engineer:
 
 ### Step 3-F — Run the structured interview
 
-Run the nine-question interview defined in `process-onboarding-agent/setup-guide.md` under **Fresh Project — Structured Interview**. Ask one question at a time. Wait for each answer before continuing. Do not skip questions.
+If `DOMAIN_PROFILES` (Step 1.5) selected one or more hardware profiles, apply the **Domain Overlay → Interview substitution** step from `setup-guide.md` first: read each selected pack's `interview.md` and use it in place of Questions 2–8 below. Question 1 (product identity) and Question 9 (documentation archive threshold) are still asked once, generically, regardless of domain.
+
+Otherwise, run the nine-question interview defined in `process-onboarding-agent/setup-guide.md` under **Fresh Project — Structured Interview**. Ask one question at a time. Wait for each answer before continuing. Do not skip questions.
 
 ### Step 4-F — Create all files
 
@@ -145,6 +156,7 @@ Once all nine questions are answered, execute Steps 1–9 of the setup guide in 
 8. Write `{FRAMEWORK_ROOT}/README.md`.
 9. Create the backlog and the first intent from interview question 8.
 10. Create mirror files for any additional tools the engineer wants to support.
+11. If `DOMAIN_PROFILES` (Step 1.5) selected one or more hardware profiles, apply the setup guide's **Domain Overlay** for each selected pack whose folder exists under `process-onboarding-agent/domains/` — master rule additions merged into item 2, and rules/skills/ops files copied alongside items 3, 4, and 6 — plus the Integration Overlay if more than one profile was selected. If a selected pack's folder does not exist, tell the engineer per the Domain Overlay's fallback instruction and skip it.
 
 ### Step 5-F — Deliver the completion report and hand off
 
@@ -161,6 +173,8 @@ After presenting the report, add this note:
 ## Path M — Mature Project
 
 ### Step 3-M — Codebase archaeology (Phase M1)
+
+If `DOMAIN_PROFILES` (Step 1.5) selected one or more hardware profiles, read each selected pack's `interview.md` first — it extends Phase M1's Architecture Mapping and Pattern Extraction for firmware/RTL/kernel code before you begin M1.1 on any segment in that domain.
 
 Execute Phase M1 from the setup guide. Start with **M1.0 — Scope Agreement** to define the analysis segments, then offer the engineer the **parallel archaeology option (M1.0-P)**:
 
@@ -188,6 +202,7 @@ Phases to execute:
 5. Create the full `{FRAMEWORK_ROOT}/` folder structure with all remaining files and templates. Copy all pre-built skills files from `process-onboarding-agent/skills/` into `{FRAMEWORK_ROOT}/skills/` verbatim. Also copy `process-onboarding-agent/rules/engagement.md` to `{FRAMEWORK_ROOT}/rules/engagement.md` and all `process-onboarding-agent/ops/` template files into `{FRAMEWORK_ROOT}/ops/`.
 6. Seed `{FRAMEWORK_ROOT}/ops/inception/codebase-findings/` with one finding file per segment analyzed in Phase M1 (per setup-guide.md M2.5), so the archaeology already performed for this onboarding session is not lost — future intents touching the same code check these files before re-analyzing it.
 7. Run the skills that require a setup conversation of their own — copying a skill file installs the *file*, not the configuration. Currently this means the notifications skill and the ai-hub-metrics skill: run the *Onboarding setup* steps inside `{FRAMEWORK_ROOT}/skills/notifications.md` and `{FRAMEWORK_ROOT}/skills/ai-hub-metrics.md` (see setup guide Step 4), then write Section 10 and Section 11 of the master rule file with the answers. Each skill ends by showing the engineer a status summary — do not skip that step. If the engineer declines either, leave its section as `Status: Disabled`.
+8. If `DOMAIN_PROFILES` (Step 1.5) selected one or more hardware profiles, apply the setup guide's **Domain Overlay** for each selected pack whose folder exists under `process-onboarding-agent/domains/` — master rule additions merged into item 1, and rules/skills/ops files copied alongside items 4 and 5 — plus the Integration Overlay if more than one profile was selected. If a selected pack's folder does not exist, tell the engineer per the Domain Overlay's fallback instruction and skip it.
 
 ### Step 5-M — Blast radius controls (Phase M3)
 
