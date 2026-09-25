@@ -155,6 +155,7 @@ Note the location each file comes from in the Artifact Log. Review the planning 
 | **Goal is bounded** | One clear outcome; maps to one intent | Multiple intents mixed | Vague or missing goal |
 | **Units table** | All units listed with status and links | Present but incomplete | Missing |
 | **Execution order** | Dependencies between units are documented | Implied but not stated | Missing — units executed in arbitrary order |
+| **Artifact handoff** | Marked Complete; every unit has a materialized file, owning bolt, intent link, and backlog link | Field present but handoff evidence is incomplete | Missing or still Pending |
 | **Risk Assessment** | Blast radius table present; rollback assessment and feature flag decision recorded (mandatory for mature projects) | "Risks and Assumptions" present but no blast radius or rollback analysis | Missing entirely |
 | **Retrospective link** | Links to completed retro for Done bolts | Missing on Done bolts | — |
 

@@ -7,6 +7,7 @@
 **Target date:** YYYY-MM-DD
 **Completed date:** —
 **Retrospective:** [ops/operate/retros/YYYY-MM-DD-<unix_timestamp>-[bolt-slug].md](../../operate/retros/YYYY-MM-DD-<unix_timestamp>-[bolt-slug].md)
+**Artifact handoff:** Pending | Complete — verified before the first unit executes
 
 ---
 
@@ -44,6 +45,8 @@
 ## Definition of Done
 
 - [ ] All units in this bolt have status Done
+- [ ] Artifact handoff is marked Complete and every unit is linked from the intent and backlog
+- [ ] Risk assessment is signed off before the first unit executes
 - [ ] Integration tests for all affected modules pass
 - [ ] No regressions in modules outside this bolt's scope
 - [ ] Retrospective file created and filed
