@@ -21,7 +21,7 @@ What AI-DLC *does* provide is the **master guideline** — a structured process 
 
 The result is a governance layer that is genuinely native to your project — written in your team's language, calibrated to your stack, and tightened by your own retros.
 
-> **Note on bolt-type skills:** The skill files `bug-bolt.md`, `hotfix-bolt.md`, and `nfr-bolt.md` are bolt-type variants within the framework — not standalone tools. They abbreviate the elaboration ceremony for specific work types (bugs, production incidents, non-functional improvements) while keeping all quality gates active. They require the full AI-DLC framework to be installed and are routed from the master rule file. Do not use them in isolation.
+> **Note on bolt-type skills:** The skill files `bug-bolt.md`, `hotfix-bolt.md`, and `nfr-bolt.md` are bolt-type variants within the framework — not standalone tools. They abbreviate the elaboration ceremony for specific work types (bugs, production incidents, non-functional improvements) while keeping all quality gates active. They require the full AI-DLC framework to be installed and are routed from the master rule file. Do not use them in isolation. A hardware Domain Profile adds further bolt-type variants the same way — hardware/Linux board bring-up, HIL verification, firmware/OTA release, and errata bolts — installed only for the selected domain pack(s); see [Domain packs](domain-packs.md).
 
 ---
 
@@ -38,6 +38,7 @@ The result is a governance layer that is genuinely native to your project — wr
 **How it works:**
 - For **fresh projects**: runs a nine-question structured interview to extract the project's identity, stack, domain language, and constraints, then generates all framework files from those answers.
 - For **mature projects**: performs a phased codebase archaeology (architecture mapping, pattern extraction, due diligence audit, debt classification) before generating the framework, ensuring the AI inherits the existing project's conventions rather than overwriting them.
+- For **hardware projects**: an additional Domain Profile question (Software / Embedded MCU / Embedded Linux / FPGA — multiple selectable) layers a matching domain pack on top of either path above, adding domain-specific interview questions, master rule sections, rules, and skills without changing anything in a Software-only project. See [Domain packs](domain-packs.md).
 
 The output is a fully configured `intent-execution-framework/` folder (placed inside the team's existing docs folder, or at `docs/process/intent-execution-framework/` if none exists) with a master rule file, rules, skills, guidelines, ops templates, and a completion report flagging anything that still needs engineer input. This is the installed 99x Intent Delivery Framework for the project.
 

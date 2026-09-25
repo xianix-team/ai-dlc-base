@@ -46,7 +46,24 @@ All subsequent steps in this guide refer to the "master rule file." Substitute t
 
 ---
 
-### Question 2 — Fresh or Mature Project?
+### Question 2 — Domain Profile
+
+Before following this guide, the AI must ask the engineer one more question:
+
+> **"What kind of system are we building process governance for? You can pick more than one:**
+> **(a) Software — web, backend, mobile, services** *(the default — pick this alone unless another applies)*
+> **(b) Embedded/IoT firmware — MCU-based (bare-metal or RTOS)**
+> **(c) Embedded Linux — Yocto/Buildroot, kernel and userspace**
+> **(d) FPGA / RTL"**
+
+Record the answer as **`DOMAIN_PROFILES`** — the set of selected letters, excluding (a) if any of (b)/(c)/(d) is also selected (software-only governance is implied whenever no hardware profile is picked, so (a) is never combined with the others).
+
+- **`DOMAIN_PROFILES` = {Software} only, or the engineer does not answer / the question is not relevant to this session** → this is the default case. Proceed through the rest of this guide exactly as written below — nothing in this guide changes, and no file under `process-onboarding-agent/domains/` is read or referenced.
+- **`DOMAIN_PROFILES` contains one or more of {Embedded MCU, Embedded Linux, FPGA}** → after Question 3 (Fresh or Mature) is answered, apply the **Domain Overlay** (defined later in this guide, after the Mature Project Onboarding section) for each selected profile, in addition to — never instead of — the rest of this guide. The overlay only ever adds files and adds sections; it does not remove or rewrite anything the base guide produces.
+
+---
+
+### Question 3 — Fresh or Mature Project?
 
 Before following this guide, the AI must ask the engineer one question:
 
@@ -54,6 +71,8 @@ Before following this guide, the AI must ask the engineer one question:
 
 - **Fresh project** → proceed directly to Step 1 below.
 - **Mature project** → complete the Mature Project Onboarding phases (Phase M1–M3) first, then continue to Step 1.
+
+If `DOMAIN_PROFILES` selected one or more hardware profiles, the Domain Overlay applies regardless of which answer is given here — a hardware project can be Fresh or Mature exactly like a software project.
 
 ---
 
@@ -389,6 +408,41 @@ Add both forms to the master rule file Section 6 (AI-DLC Workflow) and to `{FRAM
 - [ ] Default AC for existing-code Bolts added to the master rule file and `code-standards.md`
 
 Once all items above are checked, continue to **Step 1** of this guide to create the full folder structure and remaining artifacts.
+
+---
+
+## Domain Overlay
+
+*Applies only when Question 2 (Domain Profile) selected one or more of Embedded MCU, Embedded Linux, or FPGA. Skip this entire section for Software — the guide above is unchanged and unaffected by anything below.*
+
+This overlay adds hardware/firmware/RTL governance on top of the base guide — it never replaces or rewrites Steps 1–9, the Fresh interview, or the Mature archaeology phases. Everything the overlay produces is either an added file under `{FRAMEWORK_ROOT}/` or an added section inside a file the base guide already creates.
+
+### Available domain packs
+
+| Selected profile | Pack folder | Covers |
+|---|---|---|
+| Embedded MCU | `process-onboarding-agent/domains/embedded-mcu/` | Bare-metal and RTOS firmware on microcontrollers |
+| Embedded Linux | `process-onboarding-agent/domains/embedded-linux/` | Yocto/Buildroot, kernel and userspace, OTA update |
+| FPGA / RTL | `process-onboarding-agent/domains/fpga/` | RTL design, simulation, timing closure |
+
+**If a selected profile's pack folder does not exist** in this copy of the repository, tell the engineer: *"Domain support for [profile] is not yet available in this copy of the framework — proceeding with the Software default for that profile. You'll need a newer version of the base repo to onboard it as a hardware profile."* Do not fabricate pack content. Proceed with the rest of onboarding as if that profile had not been selected.
+
+### What the overlay does, per selected pack
+
+Run the following once for **each** selected profile whose pack folder exists, after Question 3 is answered and before Step 3-F / Step 3-M of the base guide begins:
+
+1. **Interview substitution.** Read `domains/{pack}/interview.md`. For a Fresh project, its questions replace Questions 2–8 of the Fresh Project — Structured Interview (Question 1 — Product identity — and Question 9 — Documentation archive threshold — stay generic and are asked once, not once per pack). For a Mature project, its guidance extends Phase M1 (Architecture Mapping and Pattern Extraction look different for firmware/RTL/kernel code than for application code) — read it before starting M1.1 for any segment in that domain.
+2. **Master rule additions.** Read `domains/{pack}/master-rule-additions.md` and merge its content into the relevant numbered sections of the master rule file (Section 1 gains a Hardware Profile subsection, Section 3 gains domain-specific hard-stops, Section 6 gains routing lines for the pack's skills, Section 9 gains any pack-specific scheduled audit). Merge — never overwrite — anything the base guide already wrote into those sections.
+3. **Rules, skills, and ops files.** Copy every file under `domains/{pack}/rules/`, `domains/{pack}/skills/`, and `domains/{pack}/ops/` into the matching subfolder of `{FRAMEWORK_ROOT}/`, alongside the standard files Step 3, Step 4, and Step 6 of the base guide already write there. Nothing in the base guide's own `rules/`, `skills/`, or `ops/` output is removed or renamed.
+4. **Hardware track opt-in.** Ask the engineer once per pack: *"Should the hardware track (schematic/PCB review, BOM sourcing and component-lifecycle tracking) be part of this project, or is hardware treated as a fixed interface the firmware/RTL works against?"* Hardware-track files (e.g. `bom-audit.md`, the hardware revision log) are copied only if the engineer opts in. Default is out.
+5. **Compliance — opt-in only, never automatic.** Do not run or reference any compliance checklist (MISRA-C, IEC 61508, ISO 26262, DO-178C, etc.) unless the engineer explicitly asks for one. If they ask without naming a specific standard, use the relevant open/publicly-available standard for that context (e.g. SEI CERT C for general embedded coding safety) rather than assuming a specific paid or proprietary certification scheme.
+
+### Integration overlay (2 or more profiles selected)
+
+If `DOMAIN_PROFILES` contains more than one hardware profile, run the following in addition to the per-pack steps above, once, after all selected packs have been applied:
+
+- Note in the master rule file's Hardware Profile subsection (Section 1) that this is a multi-domain system, listing every selected profile and which physical processor/fabric each one governs.
+- Flag, for the Phase 0 design session (`skills/design-session.md`) and the bolt risk assessment (`skills/bolt-risk-assessment.md`), that an inter-processor Interface Control Document and a domain-tagged blast-radius column are required from this project's first hardware-touching intent onward. The concrete steps for both live in the design-session and bolt-risk-assessment updates themselves — this overlay only turns them on.
 
 ---
 
@@ -1286,7 +1340,7 @@ The quality of the framework depends entirely on two things:
 When the agent has finished executing this guide, it must output a structured completion report before handing back to the engineer. The report must contain:
 
 ### 1. Files Created
-A table of every file written during onboarding, grouped by folder.
+A table of every file written during onboarding, grouped by folder. If one or more Domain Overlay packs applied, include their files too, grouped under a `Domain Overlay — [pack name]` heading.
 
 | File | Status | Notes |
 |---|---|---|

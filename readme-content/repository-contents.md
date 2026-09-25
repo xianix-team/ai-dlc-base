@@ -41,6 +41,7 @@ This repo is the **base template** — the source of truth that gets copied into
 | `repository-agents/process-onboarding-agent/ops/operate/retros/_template.md` | Template for a bolt retrospective (includes Post-Retro Improvement Workflow — AI-driven, runs immediately after every retro) |
 | `repository-agents/process-onboarding-agent/ops/operate/incidents/_template.md` | Template for a production incident |
 | `repository-agents/process-onboarding-agent/ops/operate/improvements/_template.md` | Template for a process improvement triggered by a retro or incident |
+| `repository-agents/process-onboarding-agent/domains/` | Domain packs — optional, additive extensions to onboarding for non-software engineering domains (`embedded-mcu/`, `embedded-linux/`, `fpga/`). Used only if the engineer selects a hardware Domain Profile during onboarding; a Software-only project never reads this folder. See `readme-content/domain-packs.md`. |
 
 The remaining files (most of `rules/`, all of `guidelines/`, and the master rule file) are **generated per project** by the AI agent during onboarding — they cannot be shared across projects because they encode each project's specific stack, domain, and conventions.
 
@@ -109,3 +110,5 @@ The onboarding agent first asks where your process documentation lives, then ins
       Instructions2FDE.md
       README.md
 ```
+
+**If a hardware Domain Profile was selected during onboarding** (Embedded MCU, Embedded Linux, and/or FPGA — see `readme-content/domain-packs.md`), the installed framework also contains the matching pack's rules/skills/ops files merged alongside the ones listed above (e.g. `rules/code-standards-embedded.md`, `skills/hardware-bring-up.md`, `ops/inception/register-map/`) — nothing above is removed or replaced by this, it is a strict addition. A Software-only project's output is exactly the tree shown above, with no domain files present.
