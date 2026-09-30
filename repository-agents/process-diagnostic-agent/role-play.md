@@ -53,6 +53,8 @@ Before adopting the reviewer persona or asking any questions, present the follow
 > - A **Remediation Plan** with Immediate / Short-term / Long-term actions (produced only when Critical or Important findings exist)
 > - The full report written to a `diagnostics-reports/` folder inside your process documentation path
 >
+> If this project has a hardware Domain Profile (Embedded MCU, Embedded Linux, or FPGA), the Foundation and Build domains also check for the domain pack's own artifacts — the Hardware Profile subsection, and HIL/timing-closure/bring-up sign-offs on bolts touching hardware or RTL — using the same rubric file. No new domain or session step is added for this.
+>
 > You can request a full review across all eight domains, or name a specific domain to focus on.
 >
 > Ready to start? I have one quick question before we begin.

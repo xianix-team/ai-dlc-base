@@ -22,12 +22,14 @@ Wait for the engineer to confirm or correct the understanding. Do not proceed un
 
 ## Step 2 — Scope the Design
 
-Ask the engineer three questions to determine which design areas are relevant. Ask all three together — this is the one exception to the one-question-per-turn rule, because the answers are interdependent:
+Ask the engineer three questions to determine which design areas are relevant — four if this project's Domain Profile (master rule file Section 1) includes a hardware profile (Embedded MCU, Embedded Linux, or FPGA). Ask them all together — this is the one exception to the one-question-per-turn rule, because the answers are interdependent:
 
 > "Before we design, I need to scope the work:
 > 1. Does this feature expose or consume API endpoints or external interfaces?
 > 2. Does it introduce new data entities or change the shape of existing ones?
 > 3. Does it require an architectural pattern not already established in this codebase?"
+> *(Hardware-domain projects only, asked as a fourth question:)*
+> 4. Does it introduce or change a hardware interface (register map, pinout, timing contract), an RTOS task/thread, or an interface to another processor/domain in this system (e.g. Linux↔MCU, Linux↔FPGA)?
 
 Record the answers. Use this to decide which steps to run:
 
@@ -36,12 +38,13 @@ Record the answers. Use this to decide which steps to run:
 | API: yes or unsure | Step 3 |
 | Data model: yes or unsure | Step 4 |
 | Architectural pattern: yes or unsure | Step 5 |
+| Hardware/RTOS/inter-domain interface: yes or unsure | Step 3.5 |
 
 Skip any step answered definitively "no". For any "unsure", include the step and mark the relevant section as provisional in the design artifact.
 
-If all three are "no", confirm with the engineer:
+If all applicable questions are "no", confirm with the engineer:
 
-> "This intent doesn't appear to introduce new interfaces, data entities, or architectural patterns — the design foundation is inherited from existing conventions. Shall I move straight to unit decomposition?"
+> "This intent doesn't appear to introduce new interfaces, data entities, architectural patterns, or hardware/RTOS changes — the design foundation is inherited from existing conventions. Shall I move straight to unit decomposition?"
 
 If confirmed, skip to Step 6 (no design artifact is needed).
 
@@ -74,6 +77,44 @@ After each endpoint, ask:
 **Domain term check:** Read `process-onboarding-agent/guidelines/domain-glossary.md` if it exists. If any field name is a synonym or informal variant of a glossary term, flag it before moving on:
 
 > "The field [name] looks like a synonym for [glossary term]. Should I use [glossary term] to stay consistent with the domain language?"
+
+---
+
+## Step 3.5 — Hardware / RTOS / Inter-Domain Interface
+
+*Run only if Step 2 scoped in a hardware, RTOS, or inter-domain interface, and only for projects whose Domain Profile includes a hardware profile.*
+
+Work through whichever of the following apply to this intent, one at a time — **never more than one register block, task set, or inter-domain interface per turn.**
+
+**If this intent touches a register map or pinout (Embedded MCU or FPGA):**
+
+1. > "Which peripheral or register block does this intent touch — existing or new?"
+2. > "For a new or changed register: name, address/offset, bit-fields, access (R/W/RW), and reset value?"
+3. > "For a new or changed pin: name, function, direction, and any electrical notes (voltage domain, pull-up/down, drive strength)?"
+4. > "What is the timing contract — setup/hold requirements, maximum response latency, or protocol timing this interface must meet?"
+
+Write confirmed entries to `{FRAMEWORK_ROOT}/ops/inception/register-map/` (Embedded MCU) or the project's equivalent hardware ICD location.
+
+**If this intent introduces or changes RTOS tasks/threads (Embedded MCU with RTOS selected):**
+
+1. > "Does this introduce a new task/thread, or change an existing one's priority, stack size, or period?"
+2. > "What is this task's priority relative to existing tasks, and why? Could it invert priority with a lower-priority task holding a shared resource?"
+3. > "What is the worst-case stack usage, and what margin is budgeted above it?"
+4. > "How does this task communicate with others — queue, semaphore, mutex, event flag? Could it block unboundedly?"
+
+Read `{FRAMEWORK_ROOT}/rules/rtos-design-rules.md` before finalizing — flag any conflict with its priority-inversion or unbounded-blocking rules before moving on.
+
+**If this intent crosses a domain/processor boundary (2+ hardware profiles selected, or hardware talking to the software stack):**
+
+1. > "Which two domains does this interface connect (e.g. Linux application ↔ MCU coprocessor, Linux ↔ FPGA fabric)?"
+2. > "What is the transport (UART/SPI/I2C/shared memory/AXI/DMA) and the message or register framing?"
+3. > "What is the failure behavior if one side of this interface is unavailable or resets independently of the other?"
+
+Record confirmed inter-domain interfaces in an Interface Control Document at `{FRAMEWORK_ROOT}/ops/inception/interface-control-documents/YYYY-MM-DD-<unix_timestamp>-[slug]-icd.md` and link it from the design artifact.
+
+After each block/task/interface, ask:
+
+> "Is there another hardware, RTOS, or inter-domain element to design, or is this step complete?"
 
 ---
 
@@ -148,6 +189,7 @@ Design Foundation — [Intent name]
 API Contract:    [N endpoint(s): list METHOD /path]
 Data Model:      [N entity/entities: list names]
 Patterns:        [N pattern(s): list names and ADR numbers]
+Hardware/RTOS/Inter-domain: [N item(s): list, or "not applicable"]
 Provisional:     [anything marked unsure, or "none"]
 
 Shall I record this as the design artifact and move to unit decomposition?
@@ -208,6 +250,18 @@ The artifact uses this structure:
 
 [description and trade-off]
 **ADR:** [ADR-N, or "no ADR created"]
+
+---
+
+## Hardware / RTOS / Inter-Domain Interface
+
+*(Omit this section entirely for projects with no hardware domain profile, or if Step 3.5 was skipped.)*
+
+### [Register block / task set / inter-domain interface name]
+
+[description]
+**Details:** [register/pin table, task priority/stack/IPC summary, or inter-domain transport and failure behavior — whichever applies]
+**Reference:** [link to register-map file / rtos-design-rules.md conflict check / ICD file]
 
 ---
 

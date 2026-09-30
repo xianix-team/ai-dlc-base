@@ -41,6 +41,12 @@ This repo is the **base template** — the source of truth that gets copied into
 | `repository-agents/process-onboarding-agent/ops/operate/retros/_template.md` | Template for a bolt retrospective (includes Post-Retro Improvement Workflow — AI-driven, runs immediately after every retro) |
 | `repository-agents/process-onboarding-agent/ops/operate/incidents/_template.md` | Template for a production incident |
 | `repository-agents/process-onboarding-agent/ops/operate/improvements/_template.md` | Template for a process improvement triggered by a retro or incident |
+| `repository-agents/process-onboarding-agent/domains/` | Domain packs — optional, additive extensions to onboarding for non-software engineering domains (`embedded-mcu/`, `embedded-linux/`, `fpga/`). Used only if the engineer selects a hardware Domain Profile during onboarding; a Software-only project never reads this folder. See `readme-content/domain-packs.md`. |
+| `repository-agents/process-onboarding-agent/domains/embedded-mcu/skills/hardware-bring-up.md` | Embedded MCU domain-pack skill. Bolt workflow for first power-on and peripheral-by-peripheral checkout of a new board. Skips elaboration and design session; logs findings distinguishing hardware defects from firmware not yet written. |
+| `repository-agents/process-onboarding-agent/domains/embedded-mcu/skills/hil-verification.md` | Embedded MCU domain-pack skill. Bench/lab-equipment equivalent of UAT. Generates a bench-test script from acceptance criteria and requires a measured value, not a bare pass/fail, for every step. |
+| `repository-agents/process-onboarding-agent/domains/embedded-mcu/skills/bom-audit.md` | Embedded MCU domain-pack skill. Hardware equivalent of dependency audit. Checks a bill of materials for end-of-life parts, single-source and lead-time risk; converts findings into remediation bolts. Hardware track only (opt-in). |
+| `repository-agents/process-onboarding-agent/domains/embedded-mcu/skills/firmware-release-bolt.md` | Embedded MCU domain-pack skill. Planned single-image field firmware release. Mandates a rollback test before rollout and a staged-rollout plan for larger fleets. |
+| `repository-agents/process-onboarding-agent/domains/embedded-mcu/skills/errata-bolt.md` | Embedded MCU domain-pack skill. Bug-bolt-style workflow for silicon/peripheral errata workarounds; mandates annotating the workaround with the errata reference so later cleanup does not remove it. |
 
 The remaining files (most of `rules/`, all of `guidelines/`, and the master rule file) are **generated per project** by the AI agent during onboarding — they cannot be shared across projects because they encode each project's specific stack, domain, and conventions.
 
@@ -109,3 +115,5 @@ The onboarding agent first asks where your process documentation lives, then ins
       Instructions2FDE.md
       README.md
 ```
+
+**If a hardware Domain Profile was selected during onboarding** (Embedded MCU, Embedded Linux, and/or FPGA — see `readme-content/domain-packs.md`), the installed framework also contains the matching pack's rules/skills/ops files merged alongside the ones listed above (e.g. `rules/code-standards-embedded.md`, `skills/hardware-bring-up.md`, `ops/inception/register-map/`) — nothing above is removed or replaced by this, it is a strict addition. A Software-only project's output is exactly the tree shown above, with no domain files present.

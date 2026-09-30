@@ -32,6 +32,7 @@ For everything else — fixing an unclear instruction, adding a new skill, corre
 | Fix or clarification to a rule (e.g. engagement monitoring) | `repository-agents/process-onboarding-agent/rules/` |
 | Template change (intent, unit, bolt, retro, etc.) | `repository-agents/*/ops/**/_template.md` |
 | Onboarding, diagnostics, migration, skills, or estimation agent protocol | The relevant `repository-agents/process-*-agent/*.md` |
+| New or improved domain pack (interview, master-rule additions, ops templates, rules, skills for a hardware discipline) | `repository-agents/process-onboarding-agent/domains/<pack-name>/`, wired into the Domain Overlay in `setup-guide.md` |
 | Documentation | `README.md`, `readme-content/*.md` |
 | Framework rationale (informational only — see `RULES.md` §1) | `framework-values.md` |
 | Repository governance (cross-reference rules, PR review checklist) | `RULES.md`, `pr-review.md` |
