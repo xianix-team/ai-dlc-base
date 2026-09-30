@@ -37,6 +37,9 @@ Both modes reference this rate model. All ranges reflect AI-assisted delivery by
 | Extending an existing codebase (not greenfield) | +20% overall |
 | 4–10 external integration points | +15% to Tier B and C items |
 | 10+ external integration points | +25% to Tier B and C items |
+| Project has a hardware Domain Profile and this is a first bring-up (no working board/BSP/bitstream yet) | +30% overall — bring-up uncertainty is not comparable to greenfield software risk |
+| Project has an FPGA Domain Profile | +20% to Tier B and C items — timing closure is iterative and its iteration count is not knowable up front |
+| Project requires bench/lab equipment time (HIL verification, oscilloscope/logic-analyzer work) not otherwise captured above | +10% overall |
 
 ### Mode 2 Tier Table (unit level)
 
@@ -50,6 +53,9 @@ Both modes reference this rate model. All ranges reflect AI-assisted delivery by
 **Overhead applied to each bolt:**
 - Base overhead: +20% of sum of unit estimates (covers retro, review, integration testing, bolt report)
 - QA buffer: +10% of Complex unit hours if any Complex units are present in the bolt
+- **Hardware verification buffer** (only if the project has a hardware Domain Profile): +15% of unit hours for any bolt containing units gated by `hil-verification.md`, `timing-closure-check.md`, or a bring-up skill — these gates commonly require a re-run after the first attempt (a failed timing close, a bench measurement out of tolerance), which a pure-software QA buffer does not account for
+
+When classifying units on a hardware-domain project, treat a unit gated by hardware bring-up, HIL verification, or timing closure as at least **Complex** by default, even if its AC count is low — the effort driver for these units is verification against physical reality or synthesis/timing closure, not AC count, and the Simple/Standard tiers assume neither applies.
 
 ---
 
