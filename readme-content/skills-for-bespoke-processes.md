@@ -24,7 +24,9 @@ Skills are classified by dependency so teams can make informed choices:
 
 **Standalone and needs-config skills** (usable immediately): Product Engineering Essentials, Solution Shaping, Design Session, Risk Assessment, UAT Sign-off, Release Readiness Checklist, Root Cause Analysis, Process Visualization, Progress Digest, Knowledge Promotion, Dependency Audit, Compact Docs, Process Health, Hotfix Workflow, Notifications, and AI Hub Metrics.
 
-**Framework-only skills** (Bug Bolt, NFR Bolt, New Engineer Induction) can be installed as reference material for future use if your team plans to adopt AI-DLC fully later.
+**Domain-pack standalone and needs-config skills** (Embedded MCU and Embedded Linux — relevant only to hardware teams; see [Domain packs](domain-packs.md)): Hardware Bring-up, HIL Verification, BOM/Component Audit, Firmware Release Bolt, Errata Bolt, Linux Board Bring-up, and OTA A/B Update Bolt.
+
+**Framework-only skills** (Bug Bolt, NFR Bolt, New Engineer Induction, and the Embedded Linux additions Kernel Driver Review and Dependency Audit — Embedded Linux Addition) can be installed as reference material for future use if your team plans to adopt AI-DLC fully later.
 
 ---
 
@@ -47,13 +49,13 @@ Skills are classified by dependency so teams can make informed choices:
 
 **Step 1 — Process discovery interview.** Five questions about how your team currently works, where AI assistance already helps, common failure modes, stakeholder communication, and what gap you want to fill. The agent uses your answers to flag relevant skills with a ★ Recommended marker.
 
-**Step 2 — Skills catalogue.** The full catalogue of 19 skills, grouped by delivery moment (Product & Engineering Foundations, Planning & Design, Quality & Acceptance, Incident & Root Cause, Retrospective & Review, Communication & Reporting, Observability & Metrics, Maintenance & Health, New Team Members, Workflow Shortcuts), with dependency classification for each.
+**Step 2 — Skills catalogue.** The full catalogue of 28 skills, grouped by delivery moment (Product & Engineering Foundations, Planning & Design, Quality & Acceptance, Incident & Root Cause, Retrospective & Review, Communication & Reporting, Observability & Metrics, Maintenance & Health, Embedded & Linux, New Team Members, Workflow Shortcuts), with dependency classification for each.
 
 **Step 3 — Selection.** You choose which skills to install. The agent warns before installing any ◇ Framework-only skills.
 
 **Step 4 — Installation location.** You choose where the skill files live in your project (e.g. `docs/ai-skills/`, `process/skills/`, or any path that fits your structure).
 
-**Step 5 — Installation.** Selected skill files are copied from `process-onboarding-agent/skills/` to your chosen location.
+**Step 5 — Installation.** Selected skill files are copied to your chosen location — from `process-onboarding-agent/skills/` for base catalogue skills, or from `process-onboarding-agent/domains/{embedded-mcu,embedded-linux}/skills/` for the domain-pack skills.
 
 **Step 6 — Adoption Card.** The agent writes `ai-dlc-skills-adoption-card.md` at your chosen location — a single reference listing every installed skill, its invocation phrase, what it produces, and any configuration needed.
 

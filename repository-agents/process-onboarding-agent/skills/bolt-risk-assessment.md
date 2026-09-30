@@ -38,15 +38,16 @@ For each unit in the bolt, work through the following — internally, without as
 | What is the worst-case impact if this unit introduces a defect? | Data loss, broken auth, degraded UI, silent failure, cascading failure in downstream modules |
 | Does this unit touch any boundary defined in architecture.md? | API contracts, service boundaries, data ownership rules |
 | Does this unit touch a forbidden zone? | Check forbidden-zones.md if it exists |
+| Which domain/processor does this unit run on, and does a defect there require a different recovery path? | Only for projects with 2+ hardware profiles selected (master rule file Section 1 Hardware Profile) — SSH/OTA rollback (Embedded Linux) vs. JTAG/SWD re-flash (Embedded MCU) vs. bitstream reload (FPGA) are not equivalent-cost recoveries, and treating them as such under-states risk on the domain with the harder recovery path |
 
-After assessing all units, produce a blast radius table:
+After assessing all units, produce a blast radius table. Add a **Domain** column only if this project's Hardware Profile (master rule file Section 1) lists more than one domain/processor — otherwise omit it:
 
 ```
 Blast Radius — [Bolt name]
 
-| Unit | Modules touched | Existing behavior at risk | Worst-case impact |
-|---|---|---|---|
-| [unit name] | [files/modules] | [behavior description] | [impact level: High / Med / Low] |
+| Unit | Modules touched | Existing behavior at risk | Worst-case impact | Domain (multi-domain projects only) |
+|---|---|---|---|---|
+| [unit name] | [files/modules] | [behavior description] | [impact level: High / Med / Low] | [e.g. Linux app core / MCU coprocessor / FPGA fabric] |
 ```
 
 Flag any unit rated High immediately before presenting the full table:
@@ -93,6 +94,8 @@ Assess each of the following:
 **Data rollback:** Does any unit write to a database schema or seed data in a way that cannot be undone by reverting the code? If yes, a data rollback script or migration must be part of the unit's Definition of Done.
 
 **Partial rollback:** If only some units in the bolt are merged when a problem is found, can those units be reverted independently, or do they form an atomic group that must be reverted together?
+
+**Hardware recovery path** (only if this project has a hardware domain profile): for each domain touched by this bolt, state the actual recovery mechanism if a defect ships — OTA/A-B rollback (Embedded Linux, if configured), JTAG/SWD re-flash requiring physical device access (Embedded MCU, or Embedded Linux with no OTA configured), or bitstream reload (FPGA). A domain with no remote recovery path (physical access required) raises the bar for what "safe to ship" means for units touching it — call this out explicitly rather than folding it into the generic code-rollback assessment above.
 
 Produce a rollback summary:
 
