@@ -99,6 +99,7 @@ Use `FRAMEWORK_ROOT` as the base path for every framework file created during th
    - `process-onboarding-agent/skills/knowledge-promotion.md`
    - `process-onboarding-agent/skills/notifications.md`
    - `process-onboarding-agent/skills/process-visualization.md`
+   - `process-onboarding-agent/skills/governance-map.md`
    - `process-onboarding-agent/skills/new-engineer-induction.md`
    - `process-onboarding-agent/skills/product-engineering-essentials.md`
    - `process-onboarding-agent/skills/release-readiness-checklist.md`

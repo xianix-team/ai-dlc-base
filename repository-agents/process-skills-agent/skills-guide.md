@@ -255,6 +255,15 @@ Walks a new team member through the project's governance framework, explains eac
 
 ---
 
+**Governance Map** (`governance-map.md`) `◇ Framework-only`
+
+Draws a one-page map of how the installed framework governs delivery — the governance layer, each phase's steps, every sign-off gate, the bolt variants and the feedback loops — built only from the project's own framework files, as a Mermaid Markdown file and a self-contained HTML blueprint.
+
+- **Framework dependency:** the map is built from the AI-DLC master rule file, `rules/`, `guidelines/`, `skills/` and ops templates. Without them there is nothing to map, and the skill stops.
+- **If you still want it:** install the full framework first, or use it as reference material for drawing your own process from your own process documents.
+
+---
+
 ### WORKFLOW SHORTCUTS
 
 The following three skills are bolt-type workflow shortcuts designed to operate within a fully installed AI-DLC framework. They reference the quality gate, review checklist, unit/bolt templates, and ops folder structure.

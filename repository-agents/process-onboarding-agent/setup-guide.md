@@ -471,6 +471,7 @@ Create this directory tree at the root of your repository:
     notifications.md         ← Slack alerts at delivery moments that need a human
     ai-hub-metrics.md        ← pushes usage/activity events to 99x AI Hub
     process-visualization.md ← reconstructs how a bolt actually got delivered as Mermaid diagrams
+    governance-map.md        ← draws how the installed framework governs delivery (Mermaid + HTML blueprint)
     new-engineer-induction.md ← walks a new team member through the project's framework
     bug-bolt.md               ← lightweight bolt workflow for fixing a specific, reproducible bug
     hotfix-bolt.md            ← emergency bolt for production incidents
@@ -635,6 +636,7 @@ If the engineer defers, ask for the new date and update Section 9 before continu
 **Release readiness checklist skill:** read `{FRAMEWORK_ROOT}/skills/release-readiness-checklist.md` when the engineer invokes it directly before a UAT or production release ("run the release checklist", "check release readiness", "pre-release checklist for [version]"). Never run automatically or on a schedule — it is a self-attestation record, not a gate.
 **Knowledge promotion skill:** read `{FRAMEWORK_ROOT}/skills/knowledge-promotion.md` as Step 5 of the Post-Retro Improvement Workflow after all improvements are applied. A retro is not closed until every Applied improvement has a Knowledge Promotion status.
 **Process visualization skill:** offer to read `{FRAMEWORK_ROOT}/skills/process-visualization.md` at the start of every retro, before "What Went Well" is discussed. The engineer may accept, skip, or invoke it directly at any time. Never run it without the engineer's go-ahead.
+**Governance map skill:** read `{FRAMEWORK_ROOT}/skills/governance-map.md` when the engineer asks to draw, show or regenerate the governance map. Offer it once at the end of a new engineer induction, and once after the Post-Retro Improvement Workflow applies an improvement that adds, removes or changes a gate, a ceremony or a skill routing line. Never run it without the engineer's go-ahead.
 **Dependency audit skill:** read `{FRAMEWORK_ROOT}/skills/dependency-audit.md` when the engineer invokes it, or when the `Next dependency audit` date in Section 9 has been reached. Prompt at session start if the date is due.
 **Compact-docs skill:** read `{FRAMEWORK_ROOT}/skills/compact-docs.md` when the engineer invokes it.
 **Root-cause-analysis skill:** read `{FRAMEWORK_ROOT}/skills/root-cause-analysis.md` when the engineer invokes it, or when an incident is marked Resolved and no RCA has been run on it.
@@ -1040,6 +1042,20 @@ Copy this file verbatim from `process-onboarding-agent/skills/process-visualizat
 
 ```markdown
 **Process visualization skill:** offer to read `{FRAMEWORK_ROOT}/skills/process-visualization.md` at the start of every retro, before "What Went Well" is discussed. The engineer may accept, skip, or invoke it directly at any time. Never run it without the engineer's go-ahead.
+```
+
+### `skills/governance-map.md`
+
+The governance-map skill draws a one-page map of how the project's installed framework governs delivery: the governance layer (master rule file, `rules/`, `guidelines/`), the steps of each phase, every gate the engineer must sign off, the bolt variants, the scheduled and on-demand skills, and the feedback loops through which retros and RCAs rewrite the rules. It builds the map only from the project's own files. Every element must cite the file and section it came from, and anything the files do not support is left off. It also reports "map gaps": skills installed but not routed in Section 6, and routing lines that point to missing files.
+
+Output is written to the framework root as `governance-map.md` (a Mermaid flowchart plus reference tables, renders in Git hosts and IDEs) and `governance-map.html` (a self-contained blueprint page with inline SVG and no external resources). Both are overwritten on regeneration. It is distinct from `process-visualization.md`, which reconstructs what actually happened in one bolt; this skill draws what the framework requires for every bolt.
+
+Copy this file verbatim from `process-onboarding-agent/skills/governance-map.md` to `{FRAMEWORK_ROOT}/skills/governance-map.md`. No customization is needed — the skill reads the project's own files to build the map.
+
+**Wire into the master rule file Section 6** by adding one routing line:
+
+```markdown
+**Governance map skill:** read `{FRAMEWORK_ROOT}/skills/governance-map.md` when the engineer asks to draw, show or regenerate the governance map. Offer it once at the end of a new engineer induction, and once after the Post-Retro Improvement Workflow applies an improvement that adds, removes or changes a gate, a ceremony or a skill routing line. Never run it without the engineer's go-ahead.
 ```
 
 ### `skills/dependency-audit.md`

@@ -36,6 +36,7 @@ project-root/
       knowledge-promotion.md   ← template (pre-built)
       ai-hub-metrics.md        ← template (pre-built)
       process-visualization.md ← template (pre-built)
+      governance-map.md        ← template (pre-built)
       notifications.md         ← template (pre-built)
       new-engineer-induction.md ← template (pre-built)
       bug-bolt.md              ← template (pre-built)
@@ -315,6 +316,7 @@ Files to refresh:
 | `process-onboarding-agent/skills/knowledge-promotion.md` | `{NEW_FRAMEWORK_ROOT}/skills/knowledge-promotion.md` |
 | `process-onboarding-agent/skills/ai-hub-metrics.md` | `{NEW_FRAMEWORK_ROOT}/skills/ai-hub-metrics.md` |
 | `process-onboarding-agent/skills/process-visualization.md` | `{NEW_FRAMEWORK_ROOT}/skills/process-visualization.md` |
+| `process-onboarding-agent/skills/governance-map.md` | `{NEW_FRAMEWORK_ROOT}/skills/governance-map.md` |
 | `process-onboarding-agent/skills/notifications.md` | `{NEW_FRAMEWORK_ROOT}/skills/notifications.md` |
 | `process-onboarding-agent/skills/new-engineer-induction.md` | `{NEW_FRAMEWORK_ROOT}/skills/new-engineer-induction.md` |
 | `process-onboarding-agent/skills/bug-bolt.md` | `{NEW_FRAMEWORK_ROOT}/skills/bug-bolt.md` |
