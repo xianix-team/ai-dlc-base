@@ -69,12 +69,23 @@ Opt-in skills that connect the framework to an external service. Both are `◈ N
 
 ## Getting Started
 
+There are two ways to get the agent folders into your project:
+
+| Method | Command | When to use |
+|---|---|---|
+| **npm package** | `npm install ai-dlc` | Copies all agent folders automatically via postinstall |
+| **npx (profile)** | `npx ai-dlc-init <profile>` or `npx ai-dlc <profile>` | Copy only the folders you need for one flow |
+
+Both work without cloning this repo. `npx ai-dlc-init` fetches from GitHub via sparse checkout (requires git). `npm install ai-dlc` and `npx ai-dlc` read from the bundled package (no git needed).
+
+---
+
 ### Onboarding a new project
 
 This is a two-session process: the onboarding agent installs the framework in session 1; the experience agent is live from session 2 onward.
 
 **Session 1:**
-1. Copy `process-onboarding-agent/` from `repository-agents/` into your project root.
+1. Run `npm install ai-dlc` in your project root — or `npx ai-dlc-init onboarding` — to copy `process-onboarding-agent/` and `process-estimation-agent/` into your project.
 2. Open your AI assistant inside the project repo.
 3. Say: `"Read process-onboarding-agent/onboard.md and follow the instructions inside it."`
 4. The agent runs a structured interview (fresh projects) or codebase archaeology (mature projects), creates all framework files, and delivers a completion report.
@@ -87,7 +98,7 @@ This is a two-session process: the onboarding agent installs the framework in se
 
 ### Running a diagnostic review
 
-1. Copy `process-diagnostic-agent/` from `repository-agents/` into your project root.
+1. Run `npx ai-dlc diagnostic` (or `npx ai-dlc-init diagnostic`) in your project root to copy `process-diagnostic-agent/`.
 2. Open your AI assistant inside the project repo.
 3. Say: `"Read process-diagnostic-agent/role-play.md and follow the instructions inside it."`
 
@@ -95,7 +106,7 @@ Works with any project — no AI-DLC installation required. → [Full diagnostic
 
 ### Installing skills for a bespoke process
 
-1. Copy both `process-skills-agent/` and `process-onboarding-agent/` from `repository-agents/` into your project root.
+1. Run `npx ai-dlc skills` (or `npx ai-dlc-init skills`) in your project root to copy `process-skills-agent/` and `process-onboarding-agent/`.
 2. Open your AI assistant inside the project repo.
 3. Say: `"Read process-skills-agent/onboard.md and follow the instructions inside it."`
 
@@ -103,7 +114,7 @@ Works with any project — no AI-DLC installation required. → [Full diagnostic
 
 ### Migrating from the old `ai-dlc/` structure
 
-1. Copy `process-migration-agent/`, `process-onboarding-agent/`, and `process-diagnostic-agent/` from `repository-agents/` into the project root.
+1. Run `npx ai-dlc migration` (or `npx ai-dlc-init migration`) in your project root to copy `process-migration-agent/`, `process-onboarding-agent/`, and `process-diagnostic-agent/`.
 2. Open your AI assistant inside the project repo.
 3. Say: `"Read process-migration-agent/migrate.md and follow the instructions inside it."`
 
@@ -112,13 +123,13 @@ Works with any project — no AI-DLC installation required. → [Full diagnostic
 ### Producing an estimate
 
 **Ballpark (pre-sales / feasibility):**
-1. Copy `process-estimation-agent/` from `repository-agents/` into your working folder.
+1. Run `npx ai-dlc estimation` (or `npx ai-dlc-init estimation`) in your working folder to copy `process-estimation-agent/`.
 2. Open your AI assistant.
 3. Say: `"Read process-estimation-agent/estimate.md and follow the instructions inside it."` — select **Mode 1** when prompted.
 
 **Delivery (bolt-level / release planning):**
 1. The framework must already be installed and mob elaboration complete.
-2. Copy `process-estimation-agent/` from `repository-agents/` into your project root.
+2. Run `npx ai-dlc estimation` (or `npx ai-dlc-init estimation`) in your project root to copy `process-estimation-agent/`.
 3. Say: `"Read process-estimation-agent/estimate.md and follow the instructions inside it."` — select **Mode 2** when prompted.
 
 → [Full estimation guide](readme-content/estimation.md)
