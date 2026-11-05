@@ -2,23 +2,15 @@
 'use strict';
 
 // Runs automatically after `npm install ai-dlc`.
+// Copies all AI-DLC agent folders from the bundled repository-agents/
+// into the project root (INIT_CWD, set by npm to the installing project's root).
 //
-// Default: copies all agent folders.
-// Profile: set AIDLC_PROFILE=<profile> to copy only that profile's folders.
-// Overwrite: set AIDLC_FORCE=1 to overwrite existing folders.
+// Override: AIDLC_FORCE=1 to overwrite existing folders.
 // Skip entirely: npm install ai-dlc --ignore-scripts
-//   (use `npx ai-dlc <profile>` manually instead)
+//   (postinstall never runs; use `npx ai-dlc <profile>` manually instead)
 
 const fs = require('fs');
 const path = require('path');
-
-const PROFILES = {
-  onboarding: ['process-onboarding-agent', 'process-estimation-agent'],
-  diagnostic:  ['process-diagnostic-agent'],
-  migration:   ['process-migration-agent', 'process-onboarding-agent', 'process-diagnostic-agent'],
-  skills:      ['process-skills-agent', 'process-onboarding-agent'],
-  estimation:  ['process-estimation-agent'],
-};
 
 const TRIGGERS = {
   'process-onboarding-agent':  'Read process-onboarding-agent/onboard.md and follow the instructions inside it.',
@@ -29,9 +21,9 @@ const TRIGGERS = {
 };
 
 function main() {
+  // npm sets INIT_CWD to the root of the project running `npm install`
   const dest = process.env.INIT_CWD || process.cwd();
   const force = process.env.AIDLC_FORCE === '1';
-  const profileName = process.env.AIDLC_PROFILE || null;
   const agentsDir = path.join(__dirname, '..', 'repository-agents');
 
   if (!fs.existsSync(agentsDir)) {
@@ -42,24 +34,13 @@ function main() {
     return;
   }
 
-  // Resolve agent list: profile or all
-  let agents;
-  if (profileName) {
-    const resolved = PROFILES[profileName];
-    if (!resolved) {
-      console.error(
-        `[ai-dlc] Unknown profile "${profileName}". ` +
-        `Valid profiles: ${Object.keys(PROFILES).join(', ')}`
-      );
-      process.exit(1);
-    }
-    agents = resolved;
-    console.log(`[ai-dlc] Profile: ${profileName} — copying ${agents.join(', ')} ...`);
-  } else {
-    agents = fs.readdirSync(agentsDir, { withFileTypes: true })
-      .filter((e) => e.isDirectory())
-      .map((e) => e.name);
-    console.log(`[ai-dlc] No AIDLC_PROFILE set — copying all agent folders to ${dest} ...`);
+  const agents = fs.readdirSync(agentsDir, { withFileTypes: true })
+    .filter((e) => e.isDirectory())
+    .map((e) => e.name);
+
+  if (agents.length === 0) {
+    console.warn('[ai-dlc] No agent folders found in bundled repository-agents/.');
+    return;
   }
 
   const conflicts = agents.filter((a) => fs.existsSync(path.join(dest, a)));
@@ -71,6 +52,7 @@ function main() {
     process.exit(1);
   }
 
+  console.log(`[ai-dlc] Copying agent folders to ${dest} ...`);
   for (const agent of agents) {
     const src = path.join(agentsDir, agent);
     const target = path.join(dest, agent);
