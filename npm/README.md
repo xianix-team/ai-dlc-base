@@ -8,40 +8,24 @@ Installs the [99x Intent Delivery Framework](https://github.com/99x-Projects/ai-
 npm install ai-dlc
 ```
 
-This copies **all agent folders** into your project root automatically via `postinstall`:
-
-```
-process-onboarding-agent/
-process-diagnostic-agent/
-process-estimation-agent/
-process-migration-agent/
-process-skills-agent/
-```
-
-Then open your AI assistant and say the trigger phrase for the agent you want to use (printed after install).
-
-### Overwrite existing folders
+This makes the `ai-dlc` command available. No files are copied automatically — run the command for the flow you need:
 
 ```sh
-AIDLC_FORCE=1 npm install ai-dlc
+npx ai-dlc onboarding    # process-onboarding-agent/ + process-estimation-agent/
+npx ai-dlc diagnostic    # process-diagnostic-agent/
+npx ai-dlc migration     # process-migration-agent/ + process-onboarding-agent/ + process-diagnostic-agent/
+npx ai-dlc skills        # process-skills-agent/ + process-onboarding-agent/
+npx ai-dlc estimation    # process-estimation-agent/
 ```
 
-### Skip postinstall, copy manually
+Then open your AI assistant and say the trigger phrase printed after the command completes.
 
-```sh
-npm install ai-dlc --ignore-scripts
-npx ai-dlc onboarding          # copy only the onboarding profile
-npx ai-dlc --list              # see all profiles
-```
-
-## `npx ai-dlc` (manual profile copy)
+## `npx ai-dlc`
 
 ```sh
 npx ai-dlc <profile> [options]
 npx ai-dlc --agents <name>[,<name>...] [options]
 ```
-
-Profiles mirror the [Getting Started](https://github.com/99x-Projects/ai-dlc-base#getting-started) flows:
 
 | Profile | Copies |
 |---|---|
