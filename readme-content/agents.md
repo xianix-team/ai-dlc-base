@@ -39,6 +39,8 @@ The result is a governance layer that is genuinely native to your project — wr
 - For **fresh projects**: runs a nine-question structured interview to extract the project's identity, stack, domain language, and constraints, then generates all framework files from those answers.
 - For **mature projects**: performs a phased codebase archaeology (architecture mapping, pattern extraction, due diligence audit, debt classification) before generating the framework, ensuring the AI inherits the existing project's conventions rather than overwriting them.
 
+For both paths, it also offers any **external skills** — skills maintained in other repositories, described by adapters in `process-onboarding-agent/external-skills/` — that support the project's AI tool, and records each one's status (Installed / Offer at stage / Declined) in Section 9 of the master rule file. Skills marked Offer at stage are offered again at the point in delivery their adapter names.
+
 The output is a fully configured `intent-execution-framework/` folder (placed inside the team's existing docs folder, or at `docs/process/intent-execution-framework/` if none exists) with a master rule file, rules, skills, guidelines, ops templates, and a completion report flagging anything that still needs engineer input. This is the installed 99x Intent Delivery Framework for the project.
 
 **Entry point:** `process-onboarding-agent/onboard.md`
@@ -123,7 +125,7 @@ The output is a comprehensive Review Report containing: a domain-by-domain score
 - Presents the full skills catalogue (20 skills grouped by delivery moment) with a dependency classification for each: **Standalone** (invoke directly), **Needs config** (one small configuration at invocation), or **Framework-only** (requires the full framework)
 - Flags skills most relevant to the team's answers with a ★ Recommended marker
 - Engineer selects skills; agent warns before installing any Framework-only skills
-- Copies selected skill files to the team's chosen path
+- Copies selected skill files to the team's chosen path, and installs any selected **external skills** (marked ⬡ External in the catalogue) by running their adapter's install steps
 - Writes an Adoption Card — a single reference document listing each installed skill, how to invoke it, and what it produces
 
 **Entry point:** `process-skills-agent/onboard.md`

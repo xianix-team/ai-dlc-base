@@ -22,6 +22,7 @@ Every file in this repo belongs to exactly one category. Before editing, confirm
 |---|---|---|
 | Skill file | `repository-agents/process-onboarding-agent/skills/*.md` | One installable capability, copied verbatim into every project |
 | Rule file | `repository-agents/process-onboarding-agent/rules/*.md` | A generic rule copied verbatim into every project |
+| External skill adapter | `repository-agents/process-onboarding-agent/external-skills/*.md` | One external skill — where it lives (pinned), which tools run it, when it is offered, how it installs, and how its outputs feed the framework. `README.md` in the same folder defines the adapter format and runtime protocol. Copied verbatim into a project only when the adapter supports the project's AI tool; the external skill's own content is never copied into this repo. |
 | Ops template | `repository-agents/*/ops/**/_template.md` | The shape of an artifact (intent, unit, bolt, retro, etc.) generated in every project |
 | Agent entry point | `repository-agents/process-*-agent/{onboard,migrate,estimate,role-play}.md` | The bootstrap trigger for one agent |
 | Agent protocol/guide | `repository-agents/process-*-agent/*-guide.md` | The full protocol an entry point runs |
@@ -86,12 +87,32 @@ Source: `repository-agents/process-onboarding-agent/rules/*.md`
 3. `repository-agents/process-onboarding-agent/setup-guide.md` — where the rule is referenced or generated
 4. `repository-agents/process-diagnostic-agent/review-guide.md` — if the diagnostics agent audits this rule's presence or quality
 
+### Sync Set F — Adding, re-pinning, or removing an external skill adapter
+
+Source: `repository-agents/process-onboarding-agent/external-skills/<name>.md`
+
+The onboarding and skills agents read this folder at runtime, so no agent protocol lists adapters by name. Only the human-facing references do:
+
+1. `readme-content/repository-contents.md` — the file/folder reference table (one row per adapter)
+2. `readme-content/skills-for-bespoke-processes.md` — the External list under Skill Dependency Classifications
+
+A **re-pin** (changing `Pinned ref`) touches only the adapter, but the PR description must summarise the upstream changes between the old and new ref — new hooks, changed install steps, and new instructions that could conflict with the master rule file — and update the adapter's Precedence section if any were found.
+
+**Changing the mechanism itself** — `external-skills/README.md` (statuses, offer points, runtime protocol, precedence) — must stay consistent with:
+
+1. `repository-agents/process-onboarding-agent/setup-guide.md` — the Step 1 tree entry, the Section 6 **External skills** line, the Section 9 `External skills` row, the `mob-elab-prompts.md` offer-point bullet, and the Step 4 **External skills** setup
+2. `repository-agents/process-onboarding-agent/onboard.md` — the External skills step in Step 4-F and Step 4-M
+3. `repository-agents/process-skills-agent/skills-guide.md` — the `⬡ External` key, the EXTERNAL SKILLS catalogue group, and the Step 3/5/6 handling
+
+Adding an offer point touches all three, plus the skill that hosts it.
+
 ---
 
 ## 3. Naming & structural conventions
 
 - Agent folders: `repository-agents/process-<name>-agent/`.
 - Skill and rule files: `kebab-case.md`, named after the capability, not the ticket or author.
+- External skill adapters: `kebab-case.md`, named after the external project (e.g. `ux-os.md`).
 - Every agent has one bootstrap entry point (verb-named: `onboard.md`, `migrate.md`, `estimate.md`, `role-play.md`) and, where the protocol is long, a companion `*-guide.md` the entry point routes to — don't inline a long protocol into the entry point itself.
 - An "How to invoke" phrase quoted anywhere in the repo must match the file's actual path exactly. If you move a file, grep the whole repo for its old path and old invoke phrase before you're done — an orphaned instruction is worse than no instruction, because it fails silently in front of a user.
 - Skill files under `process-onboarding-agent/skills/` are copied **verbatim** into every project — don't add project-specific branches or TODOs inside them.
