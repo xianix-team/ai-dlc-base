@@ -46,3 +46,5 @@ Options: `--dest <path>`, `--force`, `--list`, `-h/--help`
 ## Maintenance note
 
 `repository-agents/` inside this package is bundled from the base repo at publish time via `npm run prepublishOnly` (`scripts/sync-agents.js`). If agent folder contents change in the base repo, bump the package version and publish a new release.
+
+`PROFILES` and `TRIGGERS` in [`bin/ai-dlc.js`](bin/ai-dlc.js) are a copy of the same tables in `cli/bin/ai-dlc-init.js` and mirror the per-flow steps in the main `README.md` "Getting Started" section. If a flow's required folders or trigger phrase change in any of those three places, update all three.

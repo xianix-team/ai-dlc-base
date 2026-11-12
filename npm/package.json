@@ -7,11 +7,10 @@
     "ai-dlc": "bin/ai-dlc.js"
   },
   "scripts": {
-    "prepublishOnly": "node scripts/sync-agents.js"
+    "prepack": "node scripts/sync-agents.js"
   },
   "files": [
     "bin",
-    "scripts",
     "repository-agents"
   ],
   "engines": {

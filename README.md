@@ -69,14 +69,14 @@ Opt-in skills that connect the framework to an external service. Both are `◈ N
 
 ## Getting Started
 
-There are two ways to get the agent folders into your project:
+Use `npx` to copy the agent folders you need — no cloning required:
 
-| Method | Command | When to use |
-|---|---|---|
-| **npm package** | `npm install ai-dlc` | Copies all agent folders automatically via postinstall |
-| **npx (profile)** | `npx ai-dlc-init <profile>` or `npx ai-dlc <profile>` | Copy only the folders you need for one flow |
+| Command | When to use |
+|---|---|
+| `npx ai-dlc <profile>` | Reads from the bundled npm package — no git needed |
+| `npx ai-dlc-init <profile>` | Fetches from GitHub via sparse checkout — requires git, always latest |
 
-Both work without cloning this repo. `npx ai-dlc-init` fetches from GitHub via sparse checkout (requires git). `npm install ai-dlc` and `npx ai-dlc` read from the bundled package (no git needed).
+`npm install ai-dlc` is optional — it makes `npx ai-dlc` available offline and pins a version in `package.json`, but copies nothing on its own.
 
 ---
 
@@ -85,7 +85,7 @@ Both work without cloning this repo. `npx ai-dlc-init` fetches from GitHub via s
 This is a two-session process: the onboarding agent installs the framework in session 1; the experience agent is live from session 2 onward.
 
 **Session 1:**
-1. Run `npm install ai-dlc` in your project root — or `npx ai-dlc-init onboarding` — to copy `process-onboarding-agent/` and `process-estimation-agent/` into your project.
+1. Run `npx ai-dlc onboarding` (or `npx ai-dlc-init onboarding`) in your project root to copy `process-onboarding-agent/` and `process-estimation-agent/`.
 2. Open your AI assistant inside the project repo.
 3. Say: `"Read process-onboarding-agent/onboard.md and follow the instructions inside it."`
 4. The agent runs a structured interview (fresh projects) or codebase archaeology (mature projects), creates all framework files, and delivers a completion report.
