@@ -4,6 +4,10 @@
 // `npx ai-dlc <profile>` — copies a specific profile from the bundled
 // repository-agents/ into the target directory, without fetching from GitHub.
 // Same interface as `npx ai-dlc-init` in cli/, but reads local bundled files.
+//
+// PROFILES and TRIGGERS below must stay in sync with:
+//   cli/bin/ai-dlc-init.js  — same tables, fetch-based variant
+//   README.md "Getting Started" — the per-flow steps reference these profiles
 
 const fs = require('fs');
 const path = require('path');
@@ -75,12 +79,18 @@ function parseArgs(argv) {
       case '--force':
         opts.force = true;
         break;
-      case '--agents':
-        opts.agents = (argv[++i] || '').split(',').map((s) => s.trim()).filter(Boolean);
+      case '--agents': {
+        const val = argv[++i];
+        if (!val || val.startsWith('-')) throw new Error(`--agents requires a value`);
+        opts.agents = val.split(',').map((s) => s.trim()).filter(Boolean);
         break;
-      case '--dest':
-        opts.dest = argv[++i];
+      }
+      case '--dest': {
+        const val = argv[++i];
+        if (!val || val.startsWith('-')) throw new Error(`--dest requires a path`);
+        opts.dest = val;
         break;
+      }
       default:
         if (arg.startsWith('-')) throw new Error(`Unknown option: ${arg}`);
         if (opts.profile) throw new Error(`Unexpected extra argument: ${arg}`);

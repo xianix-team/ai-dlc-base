@@ -81,18 +81,24 @@ function parseArgs(argv) {
       case '--force':
         opts.force = true;
         break;
-      case '--agents':
-        opts.agents = (argv[++i] || '').split(',').map((s) => s.trim()).filter(Boolean);
+      case '--agents': {
+        const val = argv[++i];
+        if (!val || val.startsWith('-')) throw new Error(`--agents requires a value`);
+        opts.agents = val.split(',').map((s) => s.trim()).filter(Boolean);
         break;
+      }
       case '--repo':
         opts.repo = argv[++i];
         break;
       case '--ref':
         opts.ref = argv[++i];
         break;
-      case '--dest':
-        opts.dest = argv[++i];
+      case '--dest': {
+        const val = argv[++i];
+        if (!val || val.startsWith('-')) throw new Error(`--dest requires a path`);
+        opts.dest = val;
         break;
+      }
       default:
         if (arg.startsWith('-')) {
           throw new Error(`Unknown option: ${arg}`);
