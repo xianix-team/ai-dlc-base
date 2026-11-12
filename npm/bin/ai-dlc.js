@@ -31,11 +31,11 @@ const TRIGGERS = {
 };
 
 function printHelp() {
-  console.log(`ai-dlc — copy AI-DLC agent folders from the installed package into a project
+  console.log(`@99x-ai-dlc/ai-dlc — copy AI-DLC agent folders from the installed package into a project
 
 Usage:
-  npx ai-dlc <profile> [options]
-  npx ai-dlc --agents <name>[,<name>...] [options]
+  npx @99x-ai-dlc/ai-dlc <profile> [options]
+  npx @99x-ai-dlc/ai-dlc --agents <name>[,<name>...] [options]
 
 Profiles:
 ${Object.entries(PROFILES)
@@ -50,9 +50,9 @@ Options:
   -h, --help        Show this help
 
 Examples:
-  npx ai-dlc onboarding
-  npx ai-dlc diagnostic --dest ./my-project
-  npx ai-dlc --agents process-diagnostic-agent
+  npx @99x-ai-dlc/ai-dlc onboarding
+  npx @99x-ai-dlc/ai-dlc diagnostic --dest ./my-project
+  npx @99x-ai-dlc/ai-dlc --agents process-diagnostic-agent
 `);
 }
 
