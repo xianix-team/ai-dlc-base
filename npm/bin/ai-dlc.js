@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-// `npx ai-dlc <profile>` — copies a specific profile from the bundled
+// `npx @99x-ai-dlc/idf-installer <profile>` — copies a specific profile from the bundled
 // repository-agents/ into the target directory, without fetching from GitHub.
 // Same interface as `npx ai-dlc-init` in cli/, but reads local bundled files.
 //
@@ -31,11 +31,11 @@ const TRIGGERS = {
 };
 
 function printHelp() {
-  console.log(`@99x-ai-dlc/ai-dlc — copy AI-DLC agent folders from the installed package into a project
+  console.log(`@99x-ai-dlc/idf-installer — copy AI-DLC agent folders from the installed package into a project
 
 Usage:
-  npx @99x-ai-dlc/ai-dlc <profile> [options]
-  npx @99x-ai-dlc/ai-dlc --agents <name>[,<name>...] [options]
+  npx @99x-ai-dlc/idf-installer <profile> [options]
+  npx @99x-ai-dlc/idf-installer --agents <name>[,<name>...] [options]
 
 Profiles:
 ${Object.entries(PROFILES)
@@ -50,9 +50,9 @@ Options:
   -h, --help        Show this help
 
 Examples:
-  npx @99x-ai-dlc/ai-dlc onboarding
-  npx @99x-ai-dlc/ai-dlc diagnostic --dest ./my-project
-  npx @99x-ai-dlc/ai-dlc --agents process-diagnostic-agent
+  npx @99x-ai-dlc/idf-installer onboarding
+  npx @99x-ai-dlc/idf-installer diagnostic --dest ./my-project
+  npx @99x-ai-dlc/idf-installer --agents process-diagnostic-agent
 `);
 }
 

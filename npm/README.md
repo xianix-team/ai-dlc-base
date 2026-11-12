@@ -1,30 +1,30 @@
-# @99x-ai-dlc/ai-dlc
+# @99x-ai-dlc/idf-installer
 
 Installs the [99x Intent Delivery Framework](https://github.com/99x-Projects/ai-dlc-base) agent folders into your project. Works with Claude Code, Cursor, and GitHub Copilot.
 
 ## Install
 
 ```sh
-npm install @99x-ai-dlc/ai-dlc
+npm install @99x-ai-dlc/idf-installer
 ```
 
 This makes the `ai-dlc` command available. No files are copied automatically — run the command for the flow you need:
 
 ```sh
-npx @99x-ai-dlc/ai-dlc onboarding    # process-onboarding-agent/ + process-estimation-agent/
-npx @99x-ai-dlc/ai-dlc diagnostic    # process-diagnostic-agent/
-npx @99x-ai-dlc/ai-dlc migration     # process-migration-agent/ + process-onboarding-agent/ + process-diagnostic-agent/
-npx @99x-ai-dlc/ai-dlc skills        # process-skills-agent/ + process-onboarding-agent/
-npx @99x-ai-dlc/ai-dlc estimation    # process-estimation-agent/
+npx @99x-ai-dlc/idf-installer onboarding    # process-onboarding-agent/ + process-estimation-agent/
+npx @99x-ai-dlc/idf-installer diagnostic    # process-diagnostic-agent/
+npx @99x-ai-dlc/idf-installer migration     # process-migration-agent/ + process-onboarding-agent/ + process-diagnostic-agent/
+npx @99x-ai-dlc/idf-installer skills        # process-skills-agent/ + process-onboarding-agent/
+npx @99x-ai-dlc/idf-installer estimation    # process-estimation-agent/
 ```
 
 Then open your AI assistant and say the trigger phrase printed after the command completes.
 
-## `npx @99x-ai-dlc/ai-dlc`
+## `npx @99x-ai-dlc/idf-installer`
 
 ```sh
-npx @99x-ai-dlc/ai-dlc <profile> [options]
-npx @99x-ai-dlc/ai-dlc --agents <name>[,<name>...] [options]
+npx @99x-ai-dlc/idf-installer <profile> [options]
+npx @99x-ai-dlc/idf-installer --agents <name>[,<name>...] [options]
 ```
 
 | Profile | Copies |
@@ -36,9 +36,9 @@ npx @99x-ai-dlc/ai-dlc --agents <name>[,<name>...] [options]
 | `estimation` | `process-estimation-agent/` |
 
 ```sh
-npx @99x-ai-dlc/ai-dlc onboarding
-npx @99x-ai-dlc/ai-dlc diagnostic --dest ./my-project
-npx @99x-ai-dlc/ai-dlc --agents process-diagnostic-agent --force
+npx @99x-ai-dlc/idf-installer onboarding
+npx @99x-ai-dlc/idf-installer diagnostic --dest ./my-project
+npx @99x-ai-dlc/idf-installer --agents process-diagnostic-agent --force
 ```
 
 Options: `--dest <path>`, `--force`, `--list`, `-h/--help`

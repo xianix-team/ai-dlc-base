@@ -73,10 +73,10 @@ Use `npx` to copy the agent folders you need — no cloning required:
 
 | Command | When to use |
 |---|---|
-| `npx @99x-ai-dlc/ai-dlc <profile>` | Reads from the bundled npm package — no git needed |
+| `npx @99x-ai-dlc/idf-installer <profile>` | Reads from the bundled npm package — no git needed |
 | `npx ai-dlc-init <profile>` | Fetches from GitHub via sparse checkout — requires git, always latest |
 
-`npm install @99x-ai-dlc/ai-dlc` is optional — it makes the command available offline and pins a version in `package.json`, but copies nothing on its own.
+`npm install @99x-ai-dlc/idf-installer` is optional — it makes the command available offline and pins a version in `package.json`, but copies nothing on its own.
 
 ---
 
@@ -85,7 +85,7 @@ Use `npx` to copy the agent folders you need — no cloning required:
 This is a two-session process: the onboarding agent installs the framework in session 1; the experience agent is live from session 2 onward.
 
 **Session 1:**
-1. Run `npx ai-dlc onboarding` (or `npx ai-dlc-init onboarding`) in your project root to copy `process-onboarding-agent/` and `process-estimation-agent/`.
+1. Run `npx @99x-ai-dlc/idf-installer onboarding` (or `npx ai-dlc-init onboarding`) in your project root to copy `process-onboarding-agent/` and `process-estimation-agent/`.
 2. Open your AI assistant inside the project repo.
 3. Say: `"Read process-onboarding-agent/onboard.md and follow the instructions inside it."`
 4. The agent runs a structured interview (fresh projects) or codebase archaeology (mature projects), creates all framework files, and delivers a completion report.
@@ -98,7 +98,7 @@ This is a two-session process: the onboarding agent installs the framework in se
 
 ### Running a diagnostic review
 
-1. Run `npx ai-dlc diagnostic` (or `npx ai-dlc-init diagnostic`) in your project root to copy `process-diagnostic-agent/`.
+1. Run `npx @99x-ai-dlc/idf-installer diagnostic` (or `npx ai-dlc-init diagnostic`) in your project root to copy `process-diagnostic-agent/`.
 2. Open your AI assistant inside the project repo.
 3. Say: `"Read process-diagnostic-agent/role-play.md and follow the instructions inside it."`
 
@@ -106,7 +106,7 @@ Works with any project — no AI-DLC installation required. → [Full diagnostic
 
 ### Installing skills for a bespoke process
 
-1. Run `npx ai-dlc skills` (or `npx ai-dlc-init skills`) in your project root to copy `process-skills-agent/` and `process-onboarding-agent/`.
+1. Run `npx @99x-ai-dlc/idf-installer skills` (or `npx ai-dlc-init skills`) in your project root to copy `process-skills-agent/` and `process-onboarding-agent/`.
 2. Open your AI assistant inside the project repo.
 3. Say: `"Read process-skills-agent/onboard.md and follow the instructions inside it."`
 
@@ -114,7 +114,7 @@ Works with any project — no AI-DLC installation required. → [Full diagnostic
 
 ### Migrating from the old `ai-dlc/` structure
 
-1. Run `npx ai-dlc migration` (or `npx ai-dlc-init migration`) in your project root to copy `process-migration-agent/`, `process-onboarding-agent/`, and `process-diagnostic-agent/`.
+1. Run `npx @99x-ai-dlc/idf-installer migration` (or `npx ai-dlc-init migration`) in your project root to copy `process-migration-agent/`, `process-onboarding-agent/`, and `process-diagnostic-agent/`.
 2. Open your AI assistant inside the project repo.
 3. Say: `"Read process-migration-agent/migrate.md and follow the instructions inside it."`
 
@@ -123,13 +123,13 @@ Works with any project — no AI-DLC installation required. → [Full diagnostic
 ### Producing an estimate
 
 **Ballpark (pre-sales / feasibility):**
-1. Run `npx ai-dlc estimation` (or `npx ai-dlc-init estimation`) in your working folder to copy `process-estimation-agent/`.
+1. Run `npx @99x-ai-dlc/idf-installer estimation` (or `npx ai-dlc-init estimation`) in your working folder to copy `process-estimation-agent/`.
 2. Open your AI assistant.
 3. Say: `"Read process-estimation-agent/estimate.md and follow the instructions inside it."` — select **Mode 1** when prompted.
 
 **Delivery (bolt-level / release planning):**
 1. The framework must already be installed and mob elaboration complete.
-2. Run `npx ai-dlc estimation` (or `npx ai-dlc-init estimation`) in your project root to copy `process-estimation-agent/`.
+2. Run `npx @99x-ai-dlc/idf-installer estimation` (or `npx ai-dlc-init estimation`) in your project root to copy `process-estimation-agent/`.
 3. Say: `"Read process-estimation-agent/estimate.md and follow the instructions inside it."` — select **Mode 2** when prompted.
 
 → [Full estimation guide](readme-content/estimation.md)
