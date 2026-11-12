@@ -73,10 +73,10 @@ Use `npx` to copy the agent folders you need — no cloning required:
 
 | Command | When to use |
 |---|---|
-| `npx ai-dlc <profile>` | Reads from the bundled npm package — no git needed |
+| `npx @99x-ai-dlc/ai-dlc <profile>` | Reads from the bundled npm package — no git needed |
 | `npx ai-dlc-init <profile>` | Fetches from GitHub via sparse checkout — requires git, always latest |
 
-`npm install ai-dlc` is optional — it makes `npx ai-dlc` available offline and pins a version in `package.json`, but copies nothing on its own.
+`npm install @99x-ai-dlc/ai-dlc` is optional — it makes the command available offline and pins a version in `package.json`, but copies nothing on its own.
 
 ---
 

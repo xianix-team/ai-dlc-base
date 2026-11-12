@@ -1,30 +1,30 @@
-# ai-dlc
+# @99x-ai-dlc/ai-dlc
 
 Installs the [99x Intent Delivery Framework](https://github.com/99x-Projects/ai-dlc-base) agent folders into your project. Works with Claude Code, Cursor, and GitHub Copilot.
 
 ## Install
 
 ```sh
-npm install ai-dlc
+npm install @99x-ai-dlc/ai-dlc
 ```
 
 This makes the `ai-dlc` command available. No files are copied automatically — run the command for the flow you need:
 
 ```sh
-npx ai-dlc onboarding    # process-onboarding-agent/ + process-estimation-agent/
-npx ai-dlc diagnostic    # process-diagnostic-agent/
-npx ai-dlc migration     # process-migration-agent/ + process-onboarding-agent/ + process-diagnostic-agent/
-npx ai-dlc skills        # process-skills-agent/ + process-onboarding-agent/
-npx ai-dlc estimation    # process-estimation-agent/
+npx @99x-ai-dlc/ai-dlc onboarding    # process-onboarding-agent/ + process-estimation-agent/
+npx @99x-ai-dlc/ai-dlc diagnostic    # process-diagnostic-agent/
+npx @99x-ai-dlc/ai-dlc migration     # process-migration-agent/ + process-onboarding-agent/ + process-diagnostic-agent/
+npx @99x-ai-dlc/ai-dlc skills        # process-skills-agent/ + process-onboarding-agent/
+npx @99x-ai-dlc/ai-dlc estimation    # process-estimation-agent/
 ```
 
 Then open your AI assistant and say the trigger phrase printed after the command completes.
 
-## `npx ai-dlc`
+## `npx @99x-ai-dlc/ai-dlc`
 
 ```sh
-npx ai-dlc <profile> [options]
-npx ai-dlc --agents <name>[,<name>...] [options]
+npx @99x-ai-dlc/ai-dlc <profile> [options]
+npx @99x-ai-dlc/ai-dlc --agents <name>[,<name>...] [options]
 ```
 
 | Profile | Copies |
@@ -36,15 +36,15 @@ npx ai-dlc --agents <name>[,<name>...] [options]
 | `estimation` | `process-estimation-agent/` |
 
 ```sh
-npx ai-dlc onboarding
-npx ai-dlc diagnostic --dest ./my-project
-npx ai-dlc --agents process-diagnostic-agent --force
+npx @99x-ai-dlc/ai-dlc onboarding
+npx @99x-ai-dlc/ai-dlc diagnostic --dest ./my-project
+npx @99x-ai-dlc/ai-dlc --agents process-diagnostic-agent --force
 ```
 
 Options: `--dest <path>`, `--force`, `--list`, `-h/--help`
 
 ## Maintenance note
 
-`repository-agents/` inside this package is bundled from the base repo at publish time via `npm run prepublishOnly` (`scripts/sync-agents.js`). If agent folder contents change in the base repo, bump the package version and publish a new release.
+`repository-agents/` inside this package is bundled from the base repo at publish time via `npm run prepack` (`scripts/sync-agents.js`). If agent folder contents change in the base repo, bump the package version and publish a new release.
 
 `PROFILES` and `TRIGGERS` in [`bin/ai-dlc.js`](bin/ai-dlc.js) are a copy of the same tables in `cli/bin/ai-dlc-init.js` and mirror the per-flow steps in the main `README.md` "Getting Started" section. If a flow's required folders or trigger phrase change in any of those three places, update all three.
