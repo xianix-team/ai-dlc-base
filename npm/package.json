@@ -1,0 +1,24 @@
+{
+  "name": "@99x-ai-dlc/idf-installer",
+  "version": "0.1.0",
+  "description": "Install the 99x Intent Delivery Framework agent folders into your project",
+  "license": "MIT",
+  "bin": {
+    "ai-dlc": "bin/ai-dlc.js"
+  },
+  "scripts": {
+    "prepack": "node scripts/sync-agents.js"
+  },
+  "files": [
+    "bin",
+    "repository-agents"
+  ],
+  "engines": {
+    "node": ">=16.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/99x-Projects/ai-dlc-base.git",
+    "directory": "npm"
+  }
+}

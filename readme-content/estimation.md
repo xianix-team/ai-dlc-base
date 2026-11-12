@@ -18,7 +18,7 @@ The Estimation Agent produces structured, AI-assisted delivery estimates at two 
 ## How to Use
 
 **Ballpark (Mode 1):**
-1. Copy `process-estimation-agent/` from `repository-agents/` into your working folder.
+1. Run `npx @99x-ai-dlc/idf-installer estimation` (or `npx ai-dlc-init estimation`) in your working folder to copy `process-estimation-agent/`.
 2. Open your AI assistant.
 3. Say: `"Read process-estimation-agent/estimate.md and follow the instructions inside it."` — select **Mode 1** when prompted.
 4. Paste or describe the requirements. The agent structures them into capability areas, classifies each by delivery tier, and produces a range estimate with confidence level and risk factors.
@@ -26,7 +26,7 @@ The Estimation Agent produces structured, AI-assisted delivery estimates at two 
 
 **Delivery (Mode 2):**
 1. The 99x Intent Delivery Framework must already be installed and mob elaboration complete.
-2. Copy `process-estimation-agent/` from `repository-agents/` into your project root.
+2. Run `npx @99x-ai-dlc/idf-installer estimation` (or `npx ai-dlc-init estimation`) in your project root to copy `process-estimation-agent/`.
 3. Say: `"Read process-estimation-agent/estimate.md and follow the instructions inside it."` — select **Mode 2** when prompted.
 4. The agent reads your backlog, classifies each unit by effort tier, sums estimates per bolt, and maps bolts to a release timeline.
 5. The agent writes the estimate artifact to `{FRAMEWORK_ROOT}/ops/inception/estimates/`.
