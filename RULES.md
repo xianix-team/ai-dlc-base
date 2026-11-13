@@ -22,7 +22,7 @@ Every file in this repo belongs to exactly one category. Before editing, confirm
 |---|---|---|
 | Skill file | `repository-agents/process-onboarding-agent/skills/*.md` | One installable capability, copied verbatim into every project |
 | Rule file | `repository-agents/process-onboarding-agent/rules/*.md` | A generic rule copied verbatim into every project |
-| External skill adapter | `repository-agents/process-onboarding-agent/external-skills/*.md` | One external skill — where it lives (pinned), which tools run it, when it is offered, how it installs, and how its outputs feed the framework. `README.md` in the same folder defines the adapter format and runtime protocol. Copied verbatim into a project only when the adapter supports the project's AI tool; the external skill's own content is never copied into this repo. |
+| External skill adapter | `repository-agents/process-onboarding-agent/external-skills/*.md` | One external skill — where it lives (pinned to an exact package version), which tools run it, what a project needs before it is offered, when it is offered, how its MCP server is launched, and how its outputs feed the framework. `README.md` in the same folder defines the adapter format and runtime protocol. Copied verbatim into a project only when the adapter supports the project's AI tool; the external skill's own content is never copied into this repo. |
 | Ops template | `repository-agents/*/ops/**/_template.md` | The shape of an artifact (intent, unit, bolt, retro, etc.) generated in every project |
 | Agent entry point | `repository-agents/process-*-agent/{onboard,migrate,estimate,role-play}.md` | The bootstrap trigger for one agent |
 | Agent protocol/guide | `repository-agents/process-*-agent/*-guide.md` | The full protocol an entry point runs |
@@ -96,9 +96,9 @@ The onboarding and skills agents read this folder at runtime, so no agent protoc
 1. `readme-content/repository-contents.md` — the file/folder reference table (one row per adapter)
 2. `readme-content/skills-for-bespoke-processes.md` — the External list under Skill Dependency Classifications
 
-A **re-pin** (changing `Pinned ref`) touches only the adapter, but the PR description must summarise the upstream changes between the old and new ref — new hooks, changed install steps, and new instructions that could conflict with the master rule file — and update the adapter's Precedence section if any were found.
+A **re-pin** (changing `Pinned version`) touches only the adapter, but the PR description must summarise the upstream changes between the old and new version — changed launch options or requirements, new or renamed outputs, and new server instructions that could conflict with the master rule file — and update the adapter's Precedence section if any were found.
 
-**Changing the mechanism itself** — `external-skills/README.md` (statuses, offer points, runtime protocol, precedence) — must stay consistent with:
+**Changing the mechanism itself** — `external-skills/README.md` (statuses, readiness, offer points, runtime protocol, connecting and removing a server, precedence) — must stay consistent with:
 
 1. `repository-agents/process-onboarding-agent/setup-guide.md` — the Step 1 tree entry, the Section 6 **External skills** line, the Section 9 `External skills` row, the `mob-elab-prompts.md` offer-point bullet, and the Step 4 **External skills** setup
 2. `repository-agents/process-onboarding-agent/onboard.md` — the External skills step in Step 4-F and Step 4-M

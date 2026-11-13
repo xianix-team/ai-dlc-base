@@ -125,7 +125,7 @@ The output is a comprehensive Review Report containing: a domain-by-domain score
 - Presents the full skills catalogue (20 skills grouped by delivery moment) with a dependency classification for each: **Standalone** (invoke directly), **Needs config** (one small configuration at invocation), or **Framework-only** (requires the full framework)
 - Flags skills most relevant to the team's answers with a ★ Recommended marker
 - Engineer selects skills; agent warns before installing any Framework-only skills
-- Copies selected skill files to the team's chosen path, and installs any selected **external skills** (marked ⬡ External in the catalogue) by running their adapter's install steps
+- Copies selected skill files to the team's chosen path, and installs any selected **external skills** (marked ⬡ External in the catalogue) by adding their MCP server to the project's MCP configuration
 - Writes an Adoption Card — a single reference document listing each installed skill, how to invoke it, and what it produces
 
 **Entry point:** `process-skills-agent/onboard.md`

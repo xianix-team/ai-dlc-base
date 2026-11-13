@@ -95,9 +95,10 @@ Read any diff output rather than treating it as automatically Blocking. `CLAUDE.
 ```
 grep -n "external-skills/<name>.md" readme-content/repository-contents.md
 grep -n "<Name from the adapter heading>" readme-content/skills-for-bespoke-processes.md
-grep -n "Pinned ref:" repository-agents/process-onboarding-agent/external-skills/<name>.md
+grep -n "Pinned version:" repository-agents/process-onboarding-agent/external-skills/<name>.md
+grep -n "^\*\*stdio:\*\*\|^\*\*HTTP:\*\*" repository-agents/process-onboarding-agent/external-skills/<name>.md
 ```
-Both readme greps must hit for an addition and return zero for a removal. The `Pinned ref` must be a tag or full commit SHA — a branch name is Blocking. On a re-pin, a PR description with no summary of the upstream changes between the old and new ref is Blocking. If the diff changes `external-skills/README.md`, check every mechanism member listed under Sync Set F in RULES.md §2.
+Both readme greps must hit for an addition and return zero for a removal. The `Pinned version` must be an exact package version, and every launch command in the adapter's Server section must name that same version — a range, `latest`, a dist-tag, or a launch command without a version is Blocking. On a re-pin, a PR description with no summary of the upstream changes between the old and new version is Blocking. If the diff changes `external-skills/README.md`, check every mechanism member listed under Sync Set F in RULES.md §2.
 
 Record each check's result in a table:
 

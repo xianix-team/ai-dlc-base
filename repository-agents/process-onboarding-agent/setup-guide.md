@@ -513,7 +513,7 @@ Create this directory tree at the root of your repository:
         _template.md
 ```
 
-**Files created outside `{FRAMEWORK_ROOT}`.** Almost everything this framework creates lives under `{FRAMEWORK_ROOT}`. The notifications and AI Hub metrics skills are the exceptions: if the team enables either in Step 4, artifacts are created at the **repository root** instead — `scripts/notify.sh` / `scripts/ai-hub-push.sh` (the send scripts) and the AI tool's hook or allowlist config (`.claude/settings.json`, `.cursor/hooks.json`, or `.github/hooks/notify.json`). These must be at the root, not nested under `{FRAMEWORK_ROOT}`, or the allowlist rule will not match and the scripts will not load. Installing an external skill (Step 4, **External skills**) may also write the AI tool's project configuration at the repository root — for example `.claude/settings.json` — as its adapter's Install section specifies.
+**Files created outside `{FRAMEWORK_ROOT}`.** Almost everything this framework creates lives under `{FRAMEWORK_ROOT}`. The notifications and AI Hub metrics skills are the exceptions: if the team enables either in Step 4, artifacts are created at the **repository root** instead — `scripts/notify.sh` / `scripts/ai-hub-push.sh` (the send scripts) and the AI tool's hook or allowlist config (`.claude/settings.json`, `.cursor/hooks.json`, or `.github/hooks/notify.json`). These must be at the root, not nested under `{FRAMEWORK_ROOT}`, or the allowlist rule will not match and the scripts will not load. Installing an external skill (Step 4, **External skills**) also writes the AI tool's project MCP configuration at the repository root — `.mcp.json`, `.cursor/mcp.json`, or `.vscode/mcp.json` — as `external-skills/README.md` specifies.
 
 ---
 
@@ -678,7 +678,7 @@ A single table of project-level process settings that govern AI-DLC behaviour. P
 | **Archive threshold** | [X] months | Documents older than this qualify for archiving via the compact-docs skill |
 | **Last dependency audit** | — | Updated automatically each time the dependency-audit skill runs |
 | **Next dependency audit** | YYYY-MM-DD | AI prompts at session start on or after this date; default interval is 30 days |
-| **External skills** | [name]: Installed ([ref]) / Offer at stage / Declined | One entry per adapter in `{FRAMEWORK_ROOT}/external-skills/`; see its README for what each status does |
+| **External skills** | [name]: Installed ([version]) / Offer at stage / Declined | One entry per adapter in `{FRAMEWORK_ROOT}/external-skills/`; see its README for what each status does |
 ```
 
 The archive threshold is read by the `compact-docs` skill at runtime. If this section is absent, the skill will ask the engineer for the value before proceeding.
@@ -1150,7 +1150,7 @@ Copy this file verbatim from `process-onboarding-agent/skills/nfr-bolt.md` to `{
 
 ### External skills (`external-skills/`)
 
-External skills live in other repositories. Each is described by an adapter in `process-onboarding-agent/external-skills/` — every `.md` file there except `README.md`. The adapter says which AI tools the skill supports, whether to offer it during onboarding, when to offer it during delivery, how to install it, and how its outputs feed the framework. The skill's own content is never copied into `{FRAMEWORK_ROOT}`.
+External skills live in other repositories and reach the project through an MCP server their maintainers publish. Each is described by an adapter in `process-onboarding-agent/external-skills/` — every `.md` file there except `README.md`. The adapter says which AI tools the skill supports, what the project needs before it can be offered, whether to offer it during onboarding, when to offer it during delivery, how its MCP server is launched, and how its outputs feed the framework. The skill's own content is never copied into `{FRAMEWORK_ROOT}`.
 
 Run this setup after the notifications and ai-hub-metrics setup conversations. Never block onboarding on it.
 
@@ -1158,7 +1158,7 @@ Run this setup after the notifications and ai-hub-metrics setup conversations. N
 2. If none remain, skip the rest of this setup: do not create `{FRAMEWORK_ROOT}/external-skills/`, and omit the Section 6 **External skills** line and the Section 9 `External skills` row.
 3. Copy `process-onboarding-agent/external-skills/README.md` and every remaining adapter verbatim to `{FRAMEWORK_ROOT}/external-skills/`.
 4. For each remaining adapter, read its **Onboarding Offer**:
-   - If this project's type (Fresh or Mature) is listed under `Project types`, ask its question. On *install now*, run the adapter's **Install** section and its verification step; if installation fails, tell the engineer and record `Offer at stage` instead. Map every other answer as the adapter's table says.
+   - If this project's type (Fresh or Mature) is listed under `Project types`, check the adapter's **Requirements** first, as **Readiness** in `external-skills/README.md` describes. If they are met, ask its question. On *install now*, follow **Connecting a Server** in that README, including its verification step; if the server does not connect, tell the engineer and record `Offer at stage` instead. Map every other answer as the adapter's table says. If a requirement is not met, record `Offer at stage` without asking and tell the engineer what is missing.
    - If this project's type is not listed, record `Offer at stage` without asking.
 5. Write the Section 9 `External skills` row with one entry per copied adapter, and add the **External skills** routing line to Section 6.
 6. Show the engineer a one-line status per external skill — name, status, and the offer point at which it will next appear.

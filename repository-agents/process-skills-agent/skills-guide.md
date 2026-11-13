@@ -51,7 +51,7 @@ Use this dependency classification key at the top of the catalogue:
 ◆ Standalone      — works without any other AI-DLC files
 ◈ Needs config    — works after one small piece of information is provided (explained below)
 ◇ Framework-only  — requires the full AI-DLC framework to be installed first
-⬡ External        — lives in another repository; installed through an adapter, not copied from this repo
+⬡ External        — lives in another repository; connected as an MCP server through an adapter, not copied from this repo
 ```
 
 ---
@@ -284,9 +284,9 @@ Non-functional improvement workflow — measurable threshold AC, before/after ba
 Build this group at runtime from `process-onboarding-agent/external-skills/` — one entry per `.md` file except `README.md`. If there are none, omit the group. For each adapter, present:
 
 **[Name from the adapter heading]** (`external-skills/[filename].md`) `⬡ External`
-[The adapter's **Scope**.] Runs on: [the adapter's **Supported tools**]. Source: [**Source**] at [**Pinned ref**].
+[The adapter's **Scope**.] Runs on: [the adapter's **Supported tools**]. Needs: [the adapter's **Requirements**]. Source: [**Source**], package [**Package**]@[**Pinned version**].
 
-> External skills are maintained outside AI-DLC. Installing one runs its adapter's Install steps — usually adding a plugin or package to your AI tool's project configuration — rather than copying a file.
+> External skills are maintained outside AI-DLC. Installing one adds its MCP server to your AI tool's project MCP configuration rather than copying a file; the skill's procedures are read from the server when you use it.
 
 ---
 
@@ -303,6 +303,10 @@ Record the selections. If the engineer selects any `◇ Framework-only` skills, 
 If the engineer selects any `⬡ External` skill, ask which AI tool the team uses (Claude Code, Cursor, or GitHub Copilot) unless they already said so in the discovery interview. If the adapter's `Supported tools` does not include it, say so and drop the selection:
 
 > "[Skill name] only runs on [Supported tools], so I can't install it for [tool]. I'll leave it out."
+
+Then check the adapter's **Requirements**. If one is not met, say what is missing and drop the selection:
+
+> "[Skill name] needs [requirement], which isn't set up here yet. I'll leave it out — run me again once it is."
 
 ---
 
@@ -327,7 +331,7 @@ Record the answer. Set **`SKILLS_ROOT`** to the path the engineer provides.
 
 Copy each selected skill file from `process-onboarding-agent/skills/[filename].md` to `{SKILLS_ROOT}/[filename].md`. Do not modify the skill file content.
 
-For each selected `⬡ External` skill, copy `process-onboarding-agent/external-skills/README.md` and the adapter verbatim to `{SKILLS_ROOT}/external-skills/`, then run the adapter's **Install** section and its verification step. If installation fails, tell the engineer, keep the copied adapter so they can retry later, and list the skill under Skills Not Installed in the Adoption Card. The adapter's Onboarding Offer and Stage Offer sections do not apply here — this project has no master rule file to host them; the engineer invokes the skill directly.
+For each selected `⬡ External` skill, copy `process-onboarding-agent/external-skills/README.md` and the adapter verbatim to `{SKILLS_ROOT}/external-skills/`, then follow **Connecting a Server** in that README for the team's AI tool, including its verification step. If the server does not connect, tell the engineer, keep the copied adapter so they can retry later, and list the skill under Skills Not Installed in the Adoption Card. The adapter's Onboarding Offer and Stage Offer sections do not apply here — this project has no master rule file to host them; the engineer invokes the skill directly.
 
 After copying and installing, list every installed file and external skill and confirm the count with the engineer before proceeding to Step 6.
 
@@ -376,7 +380,7 @@ Each skill file contains its full protocol. The AI follows it for that session o
 
 [List any ◈ Needs config skills that were installed, with the specific configuration step the engineer needs to provide at invocation time]
 
-[For each ⬡ External skill installed: its Source and Pinned ref, its Scope, how its outputs feed your process (from the adapter's Integration Contract), any conflicts listed in the adapter's Precedence section, and the adapter path `{SKILLS_ROOT}/external-skills/[filename].md` for upgrade and Remove steps]
+[For each ⬡ External skill installed: its Source, Package, and Pinned version, the project MCP configuration file it was added to, its Scope, how its outputs feed your process (from the adapter's Integration Contract), any conflicts listed in the adapter's Precedence section, and the adapter path `{SKILLS_ROOT}/external-skills/[filename].md` for upgrade and Remove steps]
 
 ---
 

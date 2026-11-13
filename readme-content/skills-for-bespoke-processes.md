@@ -21,7 +21,7 @@ Skills are classified by dependency so teams can make informed choices:
 | **◆ Standalone** | Works without any other AI-DLC files — invoke directly |
 | **◈ Needs config** | Works after one small piece of information is provided at invocation (e.g. archive threshold, output path) |
 | **◇ Framework-only** | Requires the full AI-DLC framework to be installed first |
-| **⬡ External** | Lives in another repository and is installed through an adapter (see `repository-agents/process-onboarding-agent/external-skills/README.md`); only offered if it supports your AI tool |
+| **⬡ External** | Lives in another repository and is connected as an MCP server through an adapter (see `repository-agents/process-onboarding-agent/external-skills/README.md`); only offered if it supports your AI tool |
 
 **Standalone and needs-config skills** (usable immediately): Product Engineering Essentials, Solution Shaping, Design Session, Risk Assessment, UAT Sign-off, Release Readiness Checklist, Root Cause Analysis, Process Visualization, Progress Digest, Knowledge Promotion, Dependency Audit, Compact Docs, Process Health, Hotfix Workflow, Notifications, and AI Hub Metrics.
 
