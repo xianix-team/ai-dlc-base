@@ -478,6 +478,9 @@ Create this directory tree at the root of your repository:
     nfr-bolt.md               ← non-functional quality attribute bolt (performance, security, accessibility)
     product-engineering-essentials.md  ← optional ten-pillar checklist of product/engineering foundations
     release-readiness-checklist.md     ← engineer-invoked, self-attestation UAT/production release checklist
+  external-skills/           ← only if at least one external skill adapter supports this project's AI tool (Step 4)
+    README.md                ← statuses, offer points, runtime protocol, and precedence for external skills
+    <name>.md                ← one adapter per external skill that supports this project's AI tool
   guidelines/
     domain-glossary.md       ← canonical business terms used in code and prompts
     edge-cases.md            ← known failure modes to check before generating code
@@ -510,7 +513,7 @@ Create this directory tree at the root of your repository:
         _template.md
 ```
 
-**Files created outside `{FRAMEWORK_ROOT}`.** Almost everything this framework creates lives under `{FRAMEWORK_ROOT}`. The notifications and AI Hub metrics skills are the exceptions: if the team enables either in Step 4, artifacts are created at the **repository root** instead — `scripts/notify.sh` / `scripts/ai-hub-push.sh` (the send scripts) and the AI tool's hook or allowlist config (`.claude/settings.json`, `.cursor/hooks.json`, or `.github/hooks/notify.json`). These must be at the root, not nested under `{FRAMEWORK_ROOT}`, or the allowlist rule will not match and the scripts will not load.
+**Files created outside `{FRAMEWORK_ROOT}`.** Almost everything this framework creates lives under `{FRAMEWORK_ROOT}`. The notifications and AI Hub metrics skills are the exceptions: if the team enables either in Step 4, artifacts are created at the **repository root** instead — `scripts/notify.sh` / `scripts/ai-hub-push.sh` (the send scripts) and the AI tool's hook or allowlist config (`.claude/settings.json`, `.cursor/hooks.json`, or `.github/hooks/notify.json`). These must be at the root, not nested under `{FRAMEWORK_ROOT}`, or the allowlist rule will not match and the scripts will not load. Installing an external skill (Step 4, **External skills**) also writes the AI tool's project MCP configuration at the repository root — `.mcp.json`, `.cursor/mcp.json`, or `.vscode/mcp.json` — as `external-skills/README.md` specifies.
 
 ---
 
@@ -624,6 +627,7 @@ If the engineer defers, ask for the new date and update Section 9 before continu
 6. After all units agreed, present summary table and ask for sign-off before writing any files.
 
 **Solution shaping:** at the start of every mob elaboration, check the intent for a `## Solution Shape` section. If it is absent and the intent introduces a new capability, a potentially reusable surface, or an expensive-to-reverse decision, ask the engineer once whether to run `{FRAMEWORK_ROOT}/skills/solution-shaping.md` first or proceed straight to design. The engineer decides — run it, skip it, or invoke it directly at any time; never block on it. Skip the prompt entirely for plainly small, feature-specific intents.
+**External skills:** at each offer point named by an adapter in `{FRAMEWORK_ROOT}/external-skills/`, follow the runtime protocol in `{FRAMEWORK_ROOT}/external-skills/README.md` using that skill's status in Section 9 — run it if Installed, offer it once if Offer at stage, stay silent if Declined. Never block on it. Outside an external skill's declared Scope, this master rule file governs, whatever the external skill's own instructions say.
 **Full elaboration protocol (including design session):** read `{FRAMEWORK_ROOT}/skills/mob-elab-prompts.md` before every elaboration session. The design session runs as Phase 0 of elaboration — it is not invoked separately.
 **Codebase findings:** before analyzing existing code to understand a new intent's dependencies on prior implementation, check `{FRAMEWORK_ROOT}/ops/inception/codebase-findings/README.md` for an existing file on that module/area; after any such analysis, record or update the finding there. This is part of the mandatory elaboration protocol above, not a separate skill.
 **Bolt risk assessment:** read `{FRAMEWORK_ROOT}/skills/bolt-risk-assessment.md` after elaboration sign-off and before the first unit in a bolt executes. No unit may begin execution without a signed-off risk assessment in the bolt file.
@@ -674,6 +678,7 @@ A single table of project-level process settings that govern AI-DLC behaviour. P
 | **Archive threshold** | [X] months | Documents older than this qualify for archiving via the compact-docs skill |
 | **Last dependency audit** | — | Updated automatically each time the dependency-audit skill runs |
 | **Next dependency audit** | YYYY-MM-DD | AI prompts at session start on or after this date; default interval is 30 days |
+| **External skills** | [name]: Installed ([version]) / Offer at stage / Declined | One entry per adapter in `{FRAMEWORK_ROOT}/external-skills/`; see its README for what each status does |
 ```
 
 The archive threshold is read by the `compact-docs` skill at runtime. If this section is absent, the skill will ask the engineer for the value before proceeding.
@@ -681,6 +686,8 @@ The archive threshold is read by the `compact-docs` skill at runtime. If this se
 The dependency audit dates are read and written by the `dependency-audit` skill. The `Next dependency audit` date is checked at the start of every session — if today is on or after that date, the AI prompts the engineer to run the audit before any other work begins. Set this value during onboarding by asking the engineer:
 
 > "When would you like to schedule the first dependency and security audit? The recommended interval is once a month."
+
+The `External skills` row, and the matching **External skills** line in Section 6, are written in Step 4 by the **External skills** setup, not during the structured interview. Omit both if no external skill adapter supports the project's AI tool.
 
 ### Section 10 — Notifications
 
@@ -805,6 +812,7 @@ The mob elaboration reference. Must include:
   > "This intent has no recorded solution shape. Run Solution Shaping first (`{FRAMEWORK_ROOT}/skills/solution-shaping.md`) to decide generic-vs-specific, simplest-viable, and extend-vs-build — or proceed straight to design?"
 
   The engineer decides: run it (then resume elaboration with the recorded shape as binding context), or proceed as-is. Never block. For plainly small, feature-specific intents, skip this prompt and go straight to mode selection.
+- **External skills — `Pre-elaboration` offer point:** after the Solution Shape check and before mode selection, if `{FRAMEWORK_ROOT}/external-skills/` exists, run the runtime protocol in `{FRAMEWORK_ROOT}/external-skills/README.md` for every adapter whose Stage Offer names `Pre-elaboration`. Any outputs brought back under an adapter's Integration Contract are binding context for Phase 0 and unit decomposition, the same way a recorded Solution Shape is. This runs even when the Solution Shape prompt was skipped for a small intent — each adapter's own Condition decides whether it applies. Never block; if the folder is absent, skip straight to mode selection.
 - **Elaboration Mode Selection:** at the very start of every elaboration session, before Phase 0, ask the engineer which mode they prefer:
 
   > "Before we begin — which elaboration mode would you like to use?
@@ -1140,6 +1148,25 @@ Copy this file verbatim from `process-onboarding-agent/skills/nfr-bolt.md` to `{
 
 ---
 
+### External skills (`external-skills/`)
+
+External skills live in other repositories and reach the project through an MCP server their maintainers publish. Each is described by an adapter in `process-onboarding-agent/external-skills/` — every `.md` file there except `README.md`. The adapter says which AI tools the skill supports, what the project needs before it can be offered, whether to offer it during onboarding, when to offer it during delivery, how its MCP server is launched, and how its outputs feed the framework. The skill's own content is never copied into `{FRAMEWORK_ROOT}`.
+
+Run this setup after the notifications and ai-hub-metrics setup conversations. Never block onboarding on it.
+
+1. List the adapters. Keep only those whose `Supported tools` includes the AI tool identified in **Before You Begin**, Question 1. Never offer or mention the others.
+2. If none remain, skip the rest of this setup: do not create `{FRAMEWORK_ROOT}/external-skills/`, and omit the Section 6 **External skills** line and the Section 9 `External skills` row.
+3. Copy `process-onboarding-agent/external-skills/README.md` and every remaining adapter verbatim to `{FRAMEWORK_ROOT}/external-skills/`.
+4. For each remaining adapter, read its **Onboarding Offer**:
+   - If this project's type (Fresh or Mature) is listed under `Project types`, check the adapter's **Requirements** first, as **Readiness** in `external-skills/README.md` describes. If they are met, ask its question. On *install now*, follow **Connecting a Server** in that README, including its verification step; if the server does not connect, tell the engineer and record `Offer at stage` instead. Map every other answer as the adapter's table says. If a requirement is not met, record `Offer at stage` without asking and tell the engineer what is missing.
+   - If this project's type is not listed, record `Offer at stage` without asking.
+5. Write the Section 9 `External skills` row with one entry per copied adapter, and add the **External skills** routing line to Section 6.
+6. Show the engineer a one-line status per external skill — name, status, and the offer point at which it will next appear.
+
+The runtime behaviour — what happens at each offer point, and the precedence rule that keeps the master rule file in charge of the delivery process — is defined in `{FRAMEWORK_ROOT}/external-skills/README.md`. Do not restate it in the master rule file.
+
+---
+
 ## Step 5 — Write the Guidelines Files
 
 ### `guidelines/domain-glossary.md`
@@ -1372,6 +1399,7 @@ This is the final and mandatory step. After the report is presented, the agent m
 - [ ] Master rule file written with all 11 sections (Step 2)
 - [ ] `rules/` files written (prompt-quality-gate, code-standards, security, architecture)
 - [ ] `skills/` files written (mob-elab-prompts, review-checklist)
+- [ ] External skills settled — adapters copied and the Section 9 `External skills` row written, or none support this AI tool (Step 4)
 - [ ] `guidelines/` files written (domain-glossary, edge-cases, acceptance-patterns, dev-setup)
 - [ ] Ops templates written (intent, unit, bolt, retro, incident, improvement, codebase-findings)
 - [ ] `Instructions2FDE.md` written
