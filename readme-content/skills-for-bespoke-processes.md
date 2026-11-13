@@ -27,7 +27,7 @@ Skills are classified by dependency so teams can make informed choices:
 
 **Framework-only skills** (Bug Bolt, NFR Bolt, New Engineer Induction, Governance Map) can be installed as reference material for future use if your team plans to adopt AI-DLC fully later.
 
-**External skills:** none yet.
+**External skills** (⬡): UX-OS (needs Node.js 20 or later).
 
 ---
 
