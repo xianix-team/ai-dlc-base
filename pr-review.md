@@ -53,7 +53,7 @@ Look at the categories touched in the inventory.
 
 ## Step 4 — Sync Set verification
 
-For each changed file that is a **Skill file**, **Rule file**, **Ops template**, or **Agent entry point/folder** (per RULES.md §1), identify its Sync Set (A/B/C/D) and verify every sibling location. Use these concrete checks — run them, don't reason about them abstractly:
+For each changed file that is a **Skill file**, **Rule file**, **Ops template**, **External skill adapter**, or **Agent entry point/folder** (per RULES.md §1), identify its Sync Set (A/B/C/D/F) and verify every sibling location. Use these concrete checks — run them, don't reason about them abstractly:
 
 **Sync Set A (skill added/renamed/removed)** — for a skill named `<name>`:
 ```
@@ -90,6 +90,15 @@ grep -rn "<rule-name>" repository-agents/process-onboarding-agent/setup-guide.md
 diff CLAUDE.md .github/copilot-instructions.md
 ```
 Read any diff output rather than treating it as automatically Blocking. `CLAUDE.md`, `.github/copilot-instructions.md`, and `.cursor/rules/ai-dlc-base-governance.mdc`'s body (everything after its `---` frontmatter block, modulo that frontmatter and its `../../`-prefixed relative links) must stay **behaviorally equivalent** — same sections, same triggers, same routing targets — not byte-identical. A tool-specific wording change that leaves the routing behavior unchanged is a Pass. A diff that adds, removes, or changes a section, a routing target, or a trigger in only one file is Blocking, even if the other two still read fine on their own — because the three tools would then behave differently on the same repo.
+
+**Sync Set F (external skill adapter added/re-pinned/removed)** — for an adapter named `<name>`:
+```
+grep -n "external-skills/<name>.md" readme-content/repository-contents.md
+grep -n "<Name from the adapter heading>" readme-content/skills-for-bespoke-processes.md
+grep -n "Pinned version:" repository-agents/process-onboarding-agent/external-skills/<name>.md
+grep -n "^\*\*stdio:\*\*\|^\*\*HTTP:\*\*" repository-agents/process-onboarding-agent/external-skills/<name>.md
+```
+Both readme greps must hit for an addition and return zero for a removal. The `Pinned version` must be an exact package version, and every launch command in the adapter's Server section must name that same version — a range, `latest`, a dist-tag, or a launch command without a version is Blocking. On a re-pin, a PR description with no summary of the upstream changes between the old and new version is Blocking. If the diff changes `external-skills/README.md`, check every mechanism member listed under Sync Set F in RULES.md §2.
 
 Record each check's result in a table:
 

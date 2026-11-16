@@ -30,6 +30,7 @@ For everything else — fixing an unclear instruction, adding a new skill, corre
 |---|---|
 | New or improved skill | `repository-agents/process-onboarding-agent/skills/` |
 | Fix or clarification to a rule (e.g. engagement monitoring) | `repository-agents/process-onboarding-agent/rules/` |
+| External skill adapter (a skill maintained in another repository — see the acceptance criteria in its `README.md`) | `repository-agents/process-onboarding-agent/external-skills/` |
 | Template change (intent, unit, bolt, retro, etc.) | `repository-agents/*/ops/**/_template.md` |
 | Onboarding, diagnostics, migration, skills, or estimation agent protocol | The relevant `repository-agents/process-*-agent/*.md` |
 | Documentation | `README.md`, `readme-content/*.md` |
