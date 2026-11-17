@@ -4,10 +4,15 @@ This agent installs individual AI-DLC skills into a project that uses its own de
 
 ---
 
-## Prerequisites — copy these folders from the AI-DLC base repo before starting
+## Prerequisites — copy these folders into your project root before starting
 
-Copy both of the following from `repository-agents/` in the base repo into your **project root**:
+Run the following in your project root:
 
+```sh
+npx @99x-ai-dlc/idf-installer skills
+```
+
+This copies:
 ```
 process-skills-agent/       ← this agent (the trigger and guide)
 process-onboarding-agent/   ← the source of the skill files

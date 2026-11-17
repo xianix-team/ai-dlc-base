@@ -30,6 +30,7 @@ Every file in this repo belongs to exactly one category. Before editing, confirm
 | Informational / rationale doc | `framework-values.md` | Explains the framework's design rationale for a contributor — **informational only**: not authoritative, not enforced by any agent or skill, not copied to consumer projects, and carries no Sync Set obligations. If it and an authoritative file (any other row in this table) ever conflict, the authoritative file governs. |
 | Root doc | `README.md`, `CONTRIBUTING.md`, `RULES.md`, `pr-review.md` | Entry points for a human landing on the repo |
 | Base repo's own master rule file | `CLAUDE.md`, `.cursor/rules/ai-dlc-base-governance.mdc`, `.github/copilot-instructions.md` | Auto-loaded routing into RULES.md/pr-review.md/CONTRIBUTING.md when working *on* ai-dlc-base itself — all three must route an assistant to the same places and trigger the same behavior; name, location, frontmatter, and tool-specific wording may differ (see Sync Set E). **Not** the master rule file template the onboarding agent generates for consumer projects (that's `repository-agents/process-onboarding-agent/setup-guide.md`'s subject, a different artifact entirely). |
+| Installer package | `cli/bin/ai-dlc-init.js`, `npm/bin/idf-installer.js`, `npm/scripts/sync-agents.js`, `npm/package.json`, `npm/README.md` | The CLI (`npx ai-dlc-init`) and npm package (`npx @99x-ai-dlc/idf-installer`) that copy agent folders into a consumer project. The PROFILES and TRIGGERS tables in both bin scripts, and the per-flow steps in `README.md` "Getting Started", encode the same facts and must stay in sync (see Sync Set G). |
 
 If a change doesn't fit any row — you're proposing a new category. Say so explicitly in the PR description; don't force it into an existing folder.
 
@@ -105,6 +106,18 @@ A **re-pin** (changing `Pinned version`) touches only the adapter, but the PR de
 3. `repository-agents/process-skills-agent/skills-guide.md` — the `⬡ External` key, the EXTERNAL SKILLS catalogue group, and the Step 3/5/6 handling
 
 Adding an offer point touches all three, plus the skill that hosts it.
+
+### Sync Set G — Adding, renaming, or removing an installer profile or trigger phrase
+
+Source: `cli/bin/ai-dlc-init.js` or `npm/bin/idf-installer.js` — the `PROFILES` or `TRIGGERS` tables
+
+These three locations encode the same facts and must change together:
+
+1. `cli/bin/ai-dlc-init.js` — the `PROFILES` table (which agent folders each profile copies) and the `TRIGGERS` table (the phrase to say to the AI assistant after copying)
+2. `npm/bin/idf-installer.js` — the same `PROFILES` and `TRIGGERS` tables (bundled variant, reads local files instead of fetching from GitHub)
+3. `README.md` "Getting Started" — the per-flow numbered steps (each step names the profile and lists the agent folders copied, matching `PROFILES`; the trigger phrase in each step must match `TRIGGERS`)
+
+A profile addition or removal touches all three. A trigger-phrase change touches all three. A change to which agents a profile copies touches all three plus any docs that name those folders (e.g. `readme-content/estimation.md` lists the `estimation` profile's copied folders).
 
 ---
 

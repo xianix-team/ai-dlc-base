@@ -40,7 +40,7 @@ All operational data (intents, units, bolts, retros) is preserved throughout the
 
 ## How to Use
 
-1. Copy all three folders from `repository-agents/` in this repo into the root of the project being migrated:
+1. Run `npx @99x-ai-dlc/idf-installer migration` in the root of the project being migrated to copy:
    - `process-migration-agent/`
    - `process-onboarding-agent/`
    - `process-diagnostic-agent/`

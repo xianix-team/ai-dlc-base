@@ -126,8 +126,15 @@ function ensureGitAvailable() {
   }
 }
 
+const ALLOWED_AGENTS = new Set(Object.values(PROFILES).flat());
+
 function resolveAgents(opts) {
   if (opts.agents) {
+    const invalid = opts.agents.filter((a) => !ALLOWED_AGENTS.has(a));
+    if (invalid.length) {
+      console.error(`Unknown agent folder(s): ${invalid.join(', ')}. Run with --list to see valid names.`);
+      process.exit(1);
+    }
     return opts.agents;
   }
   if (!opts.profile) {
