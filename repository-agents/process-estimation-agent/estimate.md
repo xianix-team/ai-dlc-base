@@ -4,10 +4,15 @@ This agent produces structured estimates for AI-assisted delivery projects under
 
 ---
 
-## Prerequisites — copy this folder from the AI-DLC base repo before starting
+## Prerequisites — copy this folder into your project root before starting
 
-Copy the following from `repository-agents/` in the base repo into your **project root** (or a working folder if estimating pre-project):
+Run the following in your project root (or a working folder if estimating pre-project):
 
+```sh
+npx @99x-ai-dlc/idf-installer estimation
+```
+
+This copies:
 ```
 process-estimation-agent/       ← this agent (the trigger and guide)
 ```

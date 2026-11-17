@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 'use strict';
 
-// Run via `prepublishOnly` to bundle repository-agents/ into the package.
+// Run via `prepack` to bundle repository-agents/ into the package.
 // Source: ../repository-agents/ (sibling of npm/ in the base repo)
 // Destination: ./repository-agents/ (bundled inside the package)
 

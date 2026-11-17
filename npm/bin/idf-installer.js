@@ -3,7 +3,6 @@
 
 // `npx @99x-ai-dlc/idf-installer <profile>` — copies a specific profile from the bundled
 // repository-agents/ into the target directory, without fetching from GitHub.
-// Same interface as `npx ai-dlc-init` in cli/, but reads local bundled files.
 //
 // PROFILES and TRIGGERS below must stay in sync with:
 //   cli/bin/ai-dlc-init.js  — same tables, fetch-based variant
@@ -101,8 +100,17 @@ function parseArgs(argv) {
   return opts;
 }
 
+const ALLOWED_AGENTS = new Set(Object.values(PROFILES).flat());
+
 function resolveAgents(opts) {
-  if (opts.agents) return opts.agents;
+  if (opts.agents) {
+    const invalid = opts.agents.filter((a) => !ALLOWED_AGENTS.has(a));
+    if (invalid.length) {
+      console.error(`Unknown agent folder(s): ${invalid.join(', ')}. Run with --list to see valid names.`);
+      process.exit(1);
+    }
+    return opts.agents;
+  }
   if (!opts.profile) return null;
   const agents = PROFILES[opts.profile];
   if (!agents) {
