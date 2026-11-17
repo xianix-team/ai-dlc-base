@@ -1,9 +1,14 @@
 # AI-DLC Onboarding Prompt
 
-## Prerequisites — copy these folders from the AI-DLC base repo before starting
+## Prerequisites — copy these folders into your project root before starting
 
-Copy both of the following from `repository-agents/` in the base repo into your **project root**:
+Run the following in your project root:
 
+```sh
+npx @99x-ai-dlc/idf-installer onboarding
+```
+
+This copies:
 ```
 process-onboarding-agent/       ← this agent (the trigger and setup guide)
 process-estimation-agent/       ← delivery estimation for release planning (keep after onboarding)
