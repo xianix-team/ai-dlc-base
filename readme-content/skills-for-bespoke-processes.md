@@ -33,7 +33,7 @@ Skills are classified by dependency so teams can make informed choices:
 
 ## How to Use
 
-1. Copy both folders from `repository-agents/` in this repo into your project root:
+1. Run `npx @99x-ai-dlc/idf-installer skills` in your project root to copy:
    - `process-skills-agent/`
    - `process-onboarding-agent/` (source of the skill files)
 

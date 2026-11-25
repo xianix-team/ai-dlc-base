@@ -1,0 +1,20 @@
+{
+  "name": "ai-dlc-init",
+  "version": "0.1.0",
+  "description": "Fetch AI-DLC agent folders from the 99x Intent Delivery Framework base repo into a project, without cloning the whole repo",
+  "license": "MIT",
+  "bin": {
+    "ai-dlc-init": "bin/ai-dlc-init.js"
+  },
+  "files": [
+    "bin"
+  ],
+  "engines": {
+    "node": ">=16.7.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/99x-Projects/ai-dlc-base.git",
+    "directory": "cli"
+  }
+}

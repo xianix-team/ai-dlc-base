@@ -17,7 +17,7 @@ The `repository-agents/process-diagnostic-agent/` folder provides a **pull** mod
 
 ## How to Use
 
-1. Copy the `process-diagnostic-agent/` folder from `repository-agents/` in this repo into the root of the project repo being audited.
+1. Run `npx @99x-ai-dlc/idf-installer diagnostic` in the root of the project repo being audited to copy `process-diagnostic-agent/`.
 2. Open your AI assistant inside that repo.
 3. Say: `"Read process-diagnostic-agent/role-play.md and follow the instructions inside it."`
 4. The AI adopts the reviewer persona and runs through the selected review domains — requesting artifacts or conducting conversations per domain, scoring against rubrics, and delivering a comprehensive report with gap analysis, a People-Process-Tools Alignment section, and a prioritised remediation plan.
