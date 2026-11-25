@@ -4,10 +4,15 @@ This file migrates a project from the **old AI-DLC structure** (where everything
 
 ---
 
-## Prerequisites — copy these folders from the AI-DLC base repo before starting
+## Prerequisites — copy these folders into your project root before starting
 
-Before reading this file to your AI assistant, copy all three of the following from `repository-agents/` in the base repo into your **project root**:
+Run the following in your project root:
 
+```sh
+npx @99x-ai-dlc/idf-installer migration
+```
+
+This copies:
 ```
 process-migration-agent/     ← the migration agent (this folder)
 process-onboarding-agent/    ← the new onboarding agent
