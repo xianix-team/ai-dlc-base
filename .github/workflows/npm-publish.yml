@@ -19,6 +19,20 @@ jobs:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
 
+      - name: Set version from tag
+        working-directory: npm
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          VERSION="${TAG#npm/v}"
+          if [ "$VERSION" = "$TAG" ] || [ -z "$VERSION" ]; then
+            echo "Tag '$TAG' does not match npm/v<version>"
+            exit 1
+          fi
+          # Tag is the only version source. Overwrite package.json in the
+          # runner; do not read or keep the committed version.
+          npm version "$VERSION" --no-git-tag-version --allow-same-version
+          echo "Publishing $VERSION from tag $TAG"
+
       - name: Publish @99x-ai-dlc/idf-installer
         run: npm publish --access public --provenance
         working-directory: npm

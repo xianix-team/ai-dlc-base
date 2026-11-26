@@ -47,6 +47,6 @@ Options: `--dest <path>`, `--force`, `--list`, `-h/--help`
 
 ## Maintenance note
 
-`repository-agents/` inside this package is bundled from the base repo at publish time via `npm run prepack` (`scripts/sync-agents.js`). If agent folder contents change in the base repo, bump the package version and publish a new release.
+`repository-agents/` inside this package is bundled from the base repo at publish time via `npm run prepack` (`scripts/sync-agents.js`). To publish, push a tag named `npm/v<version>` (for example `npm/v0.1.2`). The publish workflow uses that tag as the package version and ignores the `version` field in `package.json`.
 
 `PROFILES` and `TRIGGERS` in [`bin/idf-installer.js`](bin/idf-installer.js) are a copy of the same tables in `cli/bin/ai-dlc-init.js` and mirror the per-flow steps in the main `README.md` "Getting Started" section. If a flow's required folders or trigger phrase change in any of those three places, update all three.
