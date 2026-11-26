@@ -1,6 +1,6 @@
 {
-  "name": "@99x-ai-dlc/idf-install",
-  "version": "0.1.1",
+  "name": "@99x-ai-dlc/idf-installer",
+  "version": "0.2.5",
   "description": "Install the 99x Intent Delivery Framework agent folders into your project",
   "license": "MIT",
   "bin": {
