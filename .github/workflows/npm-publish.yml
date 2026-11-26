@@ -3,7 +3,7 @@ name: Publish npm package
 on:
   push:
     tags:
-      - 'npm/v*'
+      - 'v*'
 
 jobs:
   publish:
@@ -23,9 +23,9 @@ jobs:
         working-directory: npm
         run: |
           TAG="${GITHUB_REF_NAME}"
-          VERSION="${TAG#npm/v}"
+          VERSION="${TAG#v}"
           if [ "$VERSION" = "$TAG" ] || [ -z "$VERSION" ]; then
-            echo "Tag '$TAG' does not match npm/v<version>"
+            echo "Tag '$TAG' does not match v<version>"
             exit 1
           fi
           # Tag is the only version source. Overwrite package.json in the
